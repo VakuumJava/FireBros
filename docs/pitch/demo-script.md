@@ -1,27 +1,27 @@
-# Сценарий демо (тайминг: 90 секунд)
+# Demo Script (90 Seconds)
 
-**Перед стартом записи:**
-- Открыто приложение `Ala-Too Fire Calendar`, в футере видна атрибуция `NASA FIRMS — MODIS/VIIRS active fire data (2000–2026)`.
-- Проверить индикатор источника данных (`parquet` или `mock`).
+**Pre-recording checklist:**
+- Open `Ala-Too Fire Calendar` with the footer attribution `NASA FIRMS — MODIS/VIIRS active fire data (2000–2026)` clearly visible.
+- Verify the active data source badge (`parquet` or `mock`).
 
 ---
 
-### 0:00 – 0:15 | Проблема и карта региона
-- **Экран:** Главный экран с картой Кыргызстана и пояса соседей (`bbox = [68.5, 38.4, 80.7, 43.7]`).
-- **Текст:** «Спутниковые ряды пожаров разорваны в 2012 году: переход с MODIS (1 км) на VIIRS (375 м) даёт ложный скачок активности почти вдвое. Ala-Too Fire Calendar приводит 27 лет наблюдений к единой шкале `hotspot_days_1km`».
+### 0:00–0:15 | The Problem & Regional Map
+- **On-screen:** Landing view showing the interactive map of Kyrgyzstan and the surrounding belt (`bbox = [68.5, 38.4, 80.7, 43.7]`).
+- **Voiceover:** "Satellite fire records break in 2012: switching from 1 km MODIS to 375 m VIIRS creates an artificial jump that makes fire activity look nearly twice as high. Ala-Too Fire Calendar aligns 27 years of observations onto a single `hotspot_days_1km` scale."
 
-### 0:15 – 0:35 | Выбор AOI и календарь (год × месяц)
-- **Действие:** Рисуем прямоугольник или полигон на карте (или вводим координаты `lat/lon`), открывается матрица 2000–2026. Переключаем палитру `viridis` → `cividis`, наводим курсор на ячейку `null` и ячейку `0`.
-- **Текст:** «Выделяем интересующий район — API за миллисекунды агрегирует ячейки сетки 0.25°. Календарь использует дальтоник-безопасные палитры `viridis` и `cividis`. Пропуски данных (`null`) отмечены отдельным паттерном и никогда не подменяются нулём».
+### 0:15–0:35 | AOI Selection & Year × Month Calendar
+- **On-screen:** Draw a bounding box or polygon on the map (or enter `lat/lon` coordinates) to load the 2000–2026 matrix. Toggle the palette from `viridis` to `cividis`, then hover over a `null` cell and a `0` cell.
+- **Voiceover:** "Draw any Area of Interest, and the API aggregates precomputed 0.25° grid cells in milliseconds. The calendar uses color-blind safe `viridis` and `cividis` palettes, while missing data (`null`) is rendered with a distinct pattern so it is never mistaken for zero."
 
-### 0:35 – 0:55 | Аномалия текущего месяца (month-to-date)
-- **Действие:** Переводим фокус на карточку аномалии (например, `2026-11` с `days_observed: 14`).
-- **Текст:** «Текущий месяц ещё не завершён. Чтобы аномалия не была искусственно занижена, мы обрезаем все прошлые годы до тех же 14 дней месяца и считаем отклонение через устойчивую медиану и MAD».
+### 0:35–0:55 | Month-to-Date Anomaly
+- **On-screen:** Focus on the current-month anomaly card (e.g., `2026-11` with `days_observed: 14`).
+- **Voiceover:** "Because the current month isn't finished yet, comparing it to full historical months would bias the anomaly downward. Instead, we truncate every past year to the exact same 14-day window and compute the deviation using a robust median and MAD."
 
-### 0:55 – 1:15 | График «до/после 2012» и валидация
-- **Действие:** Открываем блок гармонизации, показываем расхождение линий `raw` и `harmonized` после 2012 года и доверительный коридор `[lo, hi]`.
-- **Текст:** «Вот главный результат: дедупликация на сетке 0.01° и калибровка по тайлам 2° × 2° убирают ложный скачок 2012 года с `[step_ratio_raw]` до `[step_ratio_harmonized]`, при этом контрольный плацебо-год остаётся стабильным. До 2012 года опорный MODIS показан без интервала, после — с доверительным коридором».
+### 0:55–1:15 | Before/After 2012 Harmonization & Validation
+- **On-screen:** Open the harmonization chart, highlighting how the `raw` and `harmonized` curves diverge after 2012 along with the `[lo, hi]` confidence band.
+- **Voiceover:** "Here is our core result: 0.01° deduplication and 2° × 2° tile-level calibration reduce the 2012 step jump from `[step_ratio_raw]` down to `[step_ratio_harmonized]`, while our placebo control year stays stable. Pre-2012 MODIS is shown as the reference baseline, and post-2012 estimates carry a 95% confidence band."
 
-### 1:15 – 1:30 | Экспорт CSV и честные ограничения
-- **Действие:** Нажимаем кнопку скачивания CSV (`kind=monthly` или `kind=hotspots`), затем открываем страницу «Ограничения».
-- **Текст:** «Исследователи могут в один клик выгрузить сводный ряд или сырые детекции в CSV. А на странице ограничений мы честно фиксируем: хотспот — это тепловая аномалия 1 км², а не подтверждённый пожар. Спасибо!»
+### 1:15–1:30 | CSV Export & Honest Limitations
+- **On-screen:** Click the CSV download button (`kind=monthly` or `kind=hotspots`), then open the Limitations page.
+- **Voiceover:** "Researchers can export either the monthly series or raw detections to CSV in one click. And on our Limitations page, we stay transparent: a hotspot is a 1 km² thermal anomaly, not a confirmed wildfire. Thank you!"

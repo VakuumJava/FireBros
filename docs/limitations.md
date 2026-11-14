@@ -1,15 +1,15 @@
-# Ограничения данных и метода
+# Data and Method Limitations
 
-**Ala-Too Fire Calendar** объединяет спутниковые наблюдения за 2000–2026 годы в единую шкалу `hotspot_days_1km` для региона `bbox = [68.5, 38.4, 80.7, 43.7]`. Чтобы корректно интерпретировать календарь и графики, учитывайте шесть особенностей данных:
+**Ala-Too Fire Calendar** unifies satellite fire observations from 2000 to 2026 onto a single `hotspot_days_1km` scale across `bbox = [68.5, 38.4, 80.7, 43.7]`. To interpret the calendar, anomaly metrics, and time-series charts accurately, keep these six limitations in mind:
 
-1. **Хотспот ≠ пожар.** Спутниковая детекция фиксирует 1 км² «чего-то горячего» (включая весенние сельхозпалы и техногенные источники тепла), а не подтверждённое лесное возгорание.
-2. **Облака, дым и пыльные бури.** Плотная облачность и дым от крупных очагов маскируют соседние возгорания, а пыльные бури и солнечные блики иногда дают ложные срабатывания.
-3. **Гармонизация — оценка, а не измерение.** Данные VIIRS (с 2012 года) переведены в эквивалент MODIS (1 км) с помощью калибровки по тайлам 2° × 2° и сезонам. На графике после 2012 года всегда отображается интервал неопределённости `[lo, hi]`; до 2012 года MODIS используется как опорная шкала (`lo == hi == count`).
-4. **Неполный текущий месяц.** Аномалия рассчитывается строго «месяц-к-дате» по полю `days_observed` — исторические годы обрезаются до того же числа дней, иначе текущий месяц систематически выглядел бы заниженным.
-5. **Задержка NRT-данных.** Оперативные данные (`MODIS_NRT`, `VIIRS_SNPP_NRT`) поступают с задержкой и уточняются при переходе в научный архив (`SP`). Последние месяцы в ряду помечены флагом `nrt`.
-6. **Пробелы в наблюдениях (`null` ≠ `0`).** В календаре `0` означает, что наблюдения велись и хотспотов не было, а `null` (отдельный паттерн) — отсутствие данных за период.
+1. **Hotspot ≠ confirmed fire.** A satellite detection represents ~1 km² of thermal anomaly (including spring agricultural burning and industrial heat sources), not a confirmed wildfire.
+2. **Clouds, smoke, and dust storms.** Dense cloud cover and thick smoke from large fires can mask nearby active burning, while dust storms and sun glint can occasionally produce false detections.
+3. **Harmonization is an estimate, not a direct measurement.** VIIRS observations (from 2012 onward) are calibrated into MODIS 1 km equivalents using `2° × 2°` tile- and season-level regression. Charts after 2012 always display the `[lo, hi]` 95% uncertainty interval; prior to 2012, MODIS serves as the reference scale (`lo == hi == count`).
+4. **Incomplete current month.** Anomalies are calculated strictly month-to-date using `days_observed`—historical years are truncated to the same day-of-month window (`days <= through_day`), preventing an artificial negative bias for an ongoing month.
+5. **NRT data latency.** Near Real-Time (`MODIS_NRT`, `VIIRS_SNPP_NRT`) detections arrive with operational latency and are later refined when superseded by standard science-quality (`SP`) archives. Recent months are flagged as `nrt`.
+6. **Observation gaps (`null` ≠ `0`).** In the year × month calendar, `0` indicates valid observations with zero detected hotspots, whereas `null` (rendered with a distinct pattern) indicates missing data for that period.
 
 ---
 
-**Атрибуция данных:**  
+**Data attribution:**  
 NASA FIRMS — MODIS/VIIRS active fire data (2000–2026).
