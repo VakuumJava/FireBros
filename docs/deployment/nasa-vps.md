@@ -7,9 +7,9 @@ stays on the laptop. NASA credentials and raw archives are not deployed.
 ## Current release
 
 - Compose project: `vakuum-firebros` in `/srv/vakuum-firebros`.
-- Release: `firebros-20261115-427a07eea588`.
-- Image: `vakuum-firebros:firebros-20261115-427a07eea588`.
-- Release directory: `/srv/vakuum-firebros/releases/firebros-20261115-427a07eea588`.
+- Release: `firebros-20261115-4827c629593b`.
+- Image: `vakuum-firebros:firebros-20261115-4827c629593b`.
+- Release directory: `/srv/vakuum-firebros/releases/firebros-20261115-4827c629593b`.
 - Runtime selection: `/srv/vakuum-firebros/deploy.env` (release identifiers only).
 - Service: `vakuum-firebros-app-1`, UID 10001, read-only root and data, no host ports.
 - Limits: 1 GiB RAM, one CPU, 128 processes; eight admitted API requests.
@@ -23,12 +23,13 @@ and excludes data and secrets. A release package also uses this file as its root
 `.dockerignore`. A normal checkout needs `cd frontend && npm ci && npm run build`
 before this image is built.
 
-The preceding release `firebros-20261115-4fd50be6cc70` remains available for rollback;
-its `deploy.env` is saved as `backups/deploy.env.before-simple-20261115`.
+The preceding release `firebros-20261115-427a07eea588` remains available for rollback;
+its `deploy.env` is saved as `backups/deploy.env.before-startup-20261115`.
 The current release simplifies the dark atlas into a left selection column and
 a dominant map. The history dock is removed, supporting statistics use disclosure,
-and History, Method and Export remain separate. Backend, data, tile host and CSP
-are unchanged.
+and History, Method and Export remain separate. Saved analyses, URL sharing, GeoJSON exchange, seasonal comparison and report
+export are included. Request admission now spans the full response lifetime.
+Data, tile host and CSP are unchanged.
 
 A release package is a directory with `SHA256SUMS` over every file, named after the
 first twelve hex digits of that list's hash. Verify it and the data manifest on the
@@ -91,7 +92,17 @@ Caddy changes would be overwritten.
 HTTPS, certificate, HTTP redirect, application and compiled JS/CSS returned
 success. All five API requests completed concurrently; both CSV formats matched
 `X-Row-Count` (monthly 1 row, hotspots 107 rows for the test AOI/month).
-`nasa-simple-check.json` records the current simplified workspace release and public asset/API/CSV checks. `nasa-dark-check.json` records the previous dark atlas release. `nasa-visual-check.json` records the previous visual pass. `nasa-release-check.json` records the preceding security release: route validation, headers, neighbouring sites before and after the reload, API metrics, CSV rows and a browser CSP probe. `nasa-hosted-check.json` records the initial checks; `nasa-atlas-check.json` records the first redesign; `nasa-refinement-check.json` records the current refinement, asset hashes, five concurrent API responses and CSV rows. The container was healthy,
+`nasa-startup-check.json` records the current startup workflow release.
+`nasa-simple-check.json` records the preceding simplified workspace release and public asset/API/CSV checks. `nasa-dark-check.json` records the previous dark atlas release. `nasa-visual-check.json` records the previous visual pass. `nasa-release-check.json` records the preceding security release: route validation, headers, neighbouring sites before and after the reload, API metrics, CSV rows and a browser CSP probe. `nasa-hosted-check.json` records the initial checks; `nasa-atlas-check.json` records the first redesign; `nasa-refinement-check.json` records the current refinement, asset hashes, five concurrent API responses and CSV rows. The container was healthy,
 used about 85 MiB at idle and had no host port bindings. Existing `vakuum.cc` and
 `house.vakuum.cc` returned 200 before and after; `vpn.vakuum.cc/` retained its
 expected 404. Full mobile interaction QA remains separate from deployment checks.
+
+
+The startup workflow release passed local Python (91) and frontend (137) tests,
+Ruff, Prettier, actionlint and Vite build checks. Its real-data contracts, CSVs,
+report generation and 33 artifact hashes were verified. GitHub's initial push
+and pull-request runs terminated as `startup_failure` before creating jobs;
+this same platform-level result also appears on earlier repository commits.
+It is not recorded as a passing remote CI run. Branch protection requires a
+GitHub plan that supports private-repository rules; the repository remains private.
