@@ -82,7 +82,10 @@ describe("workspace navigation and selection", () => {
     const root = render(<App />).root;
     const toggle = root.findByProps({ "aria-controls": "area-editor" });
     expect(toggle.props["aria-expanded"]).toBe(false);
-    expect(root.findByType("select").props.value).toBe("Regional archive");
+    expect(
+      root.findByProps({ className: "area-picker" }).findByType("select").props
+        .value,
+    ).toBe("Regional archive");
     expect(root.findByProps({ id: "area-title" }).children).toEqual([
       "Regional archive",
     ]);
@@ -100,7 +103,10 @@ describe("workspace navigation and selection", () => {
     expect(root.findByProps({ id: "area-title" }).children).toEqual([
       "Chüy Valley",
     ]);
-    expect(root.findByType("select").props.value).toBe("Chüy Valley");
+    expect(
+      root.findByProps({ className: "area-picker" }).findByType("select").props
+        .value,
+    ).toBe("Chüy Valley");
     expect(toggle.props["aria-expanded"]).toBe(false);
     expect(
       root.findByProps({ "aria-labelledby": "area-title" }).props[
@@ -199,7 +205,9 @@ describe("workspace navigation and selection", () => {
     ["Osh", [72.4, 39.9, 73.3, 40.9]],
   ])("uses the %s preset across all selection controls", (name, bbox) => {
     const root = render(<App />).root;
-    const picker = root.findByType("select");
+    const picker = root
+      .findByProps({ className: "area-picker" })
+      .findByType("select");
     const toggle = root.findByProps({ "aria-controls": "area-editor" });
     click(toggle);
     act(() => picker.props.onChange({ target: { value: name } }));
@@ -230,7 +238,9 @@ describe("workspace navigation and selection", () => {
     act(() => root.findByType(CoordinateForm).props.onChange(polygon));
     expect(lastQuery()[0]).toEqual(polygon);
     expect(text(root.findByProps({ id: "area-title" }))).toBe("Custom polygon");
-    const picker = root.findByType("select");
+    const picker = root
+      .findByProps({ className: "area-picker" })
+      .findByType("select");
     expect(picker.props.value).toBe("Custom polygon");
     expect(picker.findAllByType("option").map(text)).toContain(
       "Custom polygon",

@@ -107,7 +107,10 @@ it("retains the chosen area and month across views", () => {
     "2024-07",
   );
   expect(text(view.root.findByProps({ id: "area-title" }))).toBe("Chüy Valley");
-  expect(view.root.findByType("select").props.value).toBe("Chüy Valley");
+  expect(
+    view.root.findByProps({ className: "area-picker" }).findByType("select")
+      .props.value,
+  ).toBe("Chüy Valley");
   expect(view.root.findByProps({ type: "month" }).props.value).toBe("2024-07");
   expectActiveView("explore");
 });

@@ -19,7 +19,7 @@
   "frontend/src/components/HarmonizationChart.jsx": "26912c6880864344cd20d702e74d7779022f79b779fcae874a00a93b0e95e173",
   "frontend/src/components/PaletteSwitch.jsx": "a6796c70988c06bed03d75f9a7e2b28e213cce2da92de3dc06befa1b84d27ce4",
   "frontend/src/components/PeriodSelect.jsx": "9b7c9e3bf9e511f644f29b48b83ade101e0740db85becd0ce448314a841d21f1",
-  "frontend/src/components/SeasonalProfile.jsx": "b5532654aa0f9bb055615c26c96c6dfd54e4d59b0158792f5e58a02931fd85e1",
+  "frontend/src/components/SeasonalProfile.jsx": "8421853529895d75d3a02543d07e4907a887b2f02e8d9ba977ffe42ad22b5db4",
   "frontend/src/components/StatusBadge.jsx": "7f904301d33730da205d123723bfc3c714a14d16b70a9913260500b57f849f49",
   "frontend/src/components/SummaryStats.jsx": "7b5471acfb6914d91b15e9d580d0ec3a21a89267d6a260fb0c09b415765ee785",
   "frontend/src/components/TopPeriods.jsx": "29c6f42d5994c3be0e354deac0a8cc86d4eb35b085ad70f7bd72c9b13d7a9169",
@@ -32,7 +32,7 @@
   "frontend/src/components/leafletSetup.js": "0a1047b5181544ebeeb25960cd7e2aad9555a46a64c12caaca78b7c36e9401a3",
   "frontend/src/components/map.css": "d77295bccfb014c1c1be7add6110d7e0264b1297f685e777ac2b5c34ecc32af4",
   "frontend/src/components/ranking.css": "96c3ac824fef55c188672c214f3160437f1c068970273f32e34a1448d5511ede",
-  "frontend/src/components/seasonal.css": "a13364e75c41555d90d45a7e179dbad07071d775e4efbe992edc005c1b5e61be",
+  "frontend/src/components/seasonal.css": "b8ddfff7026e581d93d9d071b032ef84c07e2dfb0d59b3982e96a3a710be49f7",
   "frontend/src/components/views/ExportView.jsx": "396136c49f9625276bea73ee3d1643857d65fcc73527418cb89229efd1eebbca",
   "frontend/src/components/views/HistoryView.jsx": "8c3710ff2e17681afc31962f4f146ba0481850f6035493bbf8cd8c6ca19de1ea",
   "frontend/src/components/views/MethodView.jsx": "8f624669327ec5115e86ce8dfeb9de11e338681007ae81bc1739487e441a3180",
@@ -53,5 +53,6 @@
   "frontend/src/workspace/selectionUrl.js": "dee15f9d7a1eb2e345c1e2cee8cfc6c0487991ed2fdf94d8f0233825c70180f8",
   "frontend/src/workspace/useSavedAreas.js": "15180830e215c69da451ad1a865dacec9172a6e5e52996b658631b1793c75476",
   "frontend/index.html": "aac05578899412c25bc5142dda22c1493797d9fe6ead5dba343c2d603ef2da47",
-  "frontend/public/fonts.css": "8c914aeb2c4e0f94fce42688a2f7cbc5bb594bac13222d01c459e1d2c5b7c708"
+  "frontend/public/fonts.css": "8c914aeb2c4e0f94fce42688a2f7cbc5bb594bac13222d01c459e1d2c5b7c708",
+  "frontend/src/analysis/seasonalChart.js": "e9df55a6689d4f8da3df12dc0adcf2a8b36507bd1032b661db6e55feaab3ceed"
 }
