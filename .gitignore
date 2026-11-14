@@ -45,3 +45,5 @@ desktop.ini
 # ---------- scratch ----------
 /tmp/
 *.log
+# frontend local env
+frontend/.env
