@@ -31,6 +31,7 @@ MODIS (1 км, с 2000) и VIIRS (375 м, с 2012) приводятся к од�
 
 | Файл | Что внутри |
 |---|---|
+| [`docs/PROJECT.md`](docs/PROJECT.md) | **полное описание проекта: что работает, что осталось, критерии готовности** |
 | [`docs/architecture.excalidraw`](docs/architecture.excalidraw) | диаграмма архитектуры для Excalidraw (импорт → Ctrl+A → Ctrl+C → вставка в комнату) |
 | [`docs/architecture.md`](docs/architecture.md) | слои, потоки данных, схема хранения, границы и не-цели |
 | [`docs/roles.md`](docs/roles.md) | 5 ролей, владение директориями, стыки, тайминг, фолбэки |
