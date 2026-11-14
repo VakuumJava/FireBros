@@ -3,7 +3,7 @@
 ## Slide 1 — Title and summary (Relevance)
 - **Project:** Ala-Too Fire Calendar
 - **Team:** Team FireBros
-- **Challenge:** [Selected NASA Challenge Name]
+- **Challenge:** Harmonization of MODIS and VIIRS Hot Spots
 - **One-sentence value proposition:** A web application that delivers a continuous, scientifically calibrated 2000–2026 thermal-anomaly time series for any user-drawn Area of Interest in Kyrgyzstan and its neighboring belt, eliminating the artificial 2012 sensor jump between MODIS and VIIRS.
 
 ---
