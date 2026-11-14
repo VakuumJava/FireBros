@@ -55,3 +55,6 @@ data/
 
 Данные NASA FIRMS распространяются свободно; в приложении обязательна строка атрибуции:
 `NASA FIRMS — MODIS/VIIRS active fire data (2000–2026)`. Ссылку держим в футере и на `/limitations`.
+## Implemented pipeline
+
+The current commands, no-key annual archive downloader, explicit local coverage and reproducibility contract are in [`pipeline/README.md`](../pipeline/README.md). The key may be stored in the ignored root `.env` with mode 0600; load it into the environment before invoking `--download api`. It is not needed by the API server or frontend. Never serve or copy this file into a container.
