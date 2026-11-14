@@ -9,6 +9,7 @@ ignore = ["E501"]
 
 [tool.ruff.lint.per-file-ignores]
 "backend/tests/*" = ["S101", "S608"]
+"pipeline/tests/*" = ["S101"]
 "backend/app/deps.py" = ["B008"]
 "backend/app/routers/*" = ["B008"]
 "backend/app/store/mock.py" = ["S311"]
@@ -17,7 +18,7 @@ ignore = ["E501"]
 quote-style = "double"
 
 [tool.pytest.ini_options]
-testpaths = ["backend/tests"]
-pythonpath = ["backend"]
+testpaths = ["backend/tests", "pipeline/tests"]
+pythonpath = ["backend", "pipeline"]
 addopts = "-q"
 filterwarnings = ["error::DeprecationWarning"]

@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "kind": "requirement-matrix",
+  "requirements": [
+    {
+      "id": "area.selection.and.month.comparison.form.the.primary.workspa",
+      "text": "Area selection and month comparison form the primary workspace.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [],
+      "priority": "critical",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "calendar.scrolling.is.bounded.by.default.with.an.explicit.fu",
+      "text": "Calendar scrolling is bounded by default, with an explicit full-history option.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [],
+      "priority": "minor",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "calendar.selection.is.visible.without.scrolling.to.another.s",
+      "text": "Calendar selection is visible without scrolling to another section.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [
+        "surface"
+      ],
+      "priority": "minor",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "charts.legend.validation.caveats.export.states.and.keyboard.",
+      "text": "Charts, legend, validation caveats, export states and keyboard behavior remain honest and usable.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [
+        "data",
+        "state",
+        "accessibility"
+      ],
+      "priority": "minor",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion",
+        "data",
+        "state",
+        "accessibility"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "each.component.owns.its.css.duplicate.legacy.map.calendar.st",
+      "text": "Each component owns its CSS; duplicate legacy map/calendar styles are removed.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "data",
+      "also": [
+        "visual"
+      ],
+      "priority": "minor",
+      "verification": [
+        "data",
+        "visual"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "every.navigation.destination.including.export.remains.access",
+      "text": "Every navigation destination, including export, remains accessible on small screens.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [
+        "data",
+        "accessibility",
+        "surface"
+      ],
+      "priority": "minor",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion",
+        "data",
+        "accessibility"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "loading.reserves.the.same.meaningful.geometry.as.the.loaded.",
+      "text": "Loading reserves the same meaningful geometry as the loaded panels, with no stale measurements.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [
+        "motion",
+        "state",
+        "visual"
+      ],
+      "priority": "minor",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion",
+        "state"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "mobile.starts.with.the.selected.area.and.month.result.map.ed",
+      "text": "Mobile starts with the selected area and month result; map editing is expandable.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "responsive",
+      "also": [
+        "interaction",
+        "data",
+        "state"
+      ],
+      "priority": "minor",
+      "verification": [
+        "responsive",
+        "visual",
+        "interaction",
+        "motion",
+        "data",
+        "state"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "one.compact.header.and.a.factual.page.title.identify.the.pro",
+      "text": "One compact header and a factual page title identify the product and region.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "visual",
+      "also": [
+        "surface"
+      ],
+      "priority": "minor",
+      "verification": [
+        "visual"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "one.token.system.controls.every.active.component.including.t",
+      "text": "One token system controls every active component, including the limitations dialog.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "state",
+      "also": [],
+      "priority": "minor",
+      "verification": [
+        "state",
+        "visual"
+      ],
+      "state": "REQUESTED"
+    }
+  ]
+}

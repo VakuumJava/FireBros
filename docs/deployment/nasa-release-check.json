@@ -1,0 +1,49 @@
+{
+  "url": "https://nasa.vakuum.cc/",
+  "release": "firebros-20261115-dce8ffebeee7",
+  "previous_release": "firebros-20261115-103ddd710525",
+  "image_id": "sha256:a8cac4e4838bc34a75a900fb980616af7c3dda81adf460841c2cda066d292775",
+  "package_sha256": "9663290b1c503e2ce73470a19a8822f7f44bba17b397f74cb943556c4bd8aff9",
+  "release_files_verified": 86,
+  "data_manifest_outputs_verified": 33,
+  "container": "healthy",
+  "caddy": {
+    "running_config_matched_disk": true,
+    "candidate_valid": true,
+    "non_nasa_routes_unchanged": true
+  },
+  "sites_before_and_after_reload": {
+    "https://vakuum.cc/": 200,
+    "https://house.vakuum.cc/": 200,
+    "https://vpn.vakuum.cc/": 404,
+    "https://nasa.vakuum.cc/": 200
+  },
+  "headers": {
+    "content_security_policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+    "duplicates": false,
+    "server_and_via_hidden": true,
+    "html_cache_control": "no-cache",
+    "asset_cache_control": "public, max-age=31536000, immutable",
+    "post_status": 405,
+    "docs_status": 404
+  },
+  "api": {
+    "source": "parquet",
+    "step_ratio_raw": 2.778,
+    "step_ratio_harmonized": 0.783,
+    "step_ratio_modis": 0.579,
+    "holdout_wape": 0.231
+  },
+  "csv": {
+    "selection": "bbox=74.4,42.7,75.4,43.3 2025-08..2025-10",
+    "x_row_count": 315,
+    "rows": 315
+  },
+  "browser_probe": {
+    "csp_violations": 0,
+    "console_errors": 0,
+    "chart": true,
+    "map": true,
+    "calendar_cells": 324
+  }
+}

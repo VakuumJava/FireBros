@@ -10,7 +10,7 @@ API_PREFIX = "/api/v1"
 API_VERSION = "1.0.0"
 FIRST_MONTH = "2000-01"
 KNOT_YEAR = 2012
-METHOD_VERSION = "harmonize-v1"
+METHOD_VERSION = "harmonize-v2"
 
 
 def _env_int(name: str, default: int) -> int:
@@ -33,7 +33,7 @@ def _env_path(name: str, default: Path) -> Path:
 
 def _env_list(name: str, default: tuple[str, ...]) -> tuple[str, ...]:
     raw = os.environ.get(name)
-    if not raw:
+    if raw is None:
         return default
     return tuple(item.strip() for item in raw.split(",") if item.strip())
 
@@ -47,6 +47,8 @@ class Settings:
     polygon_scan_rows: int
     max_span_months: int
     holdout_years: tuple[int, ...]
+    max_concurrent_queries: int = 8
+    require_data: bool = False
 
     @classmethod
     def from_env(cls) -> Settings:
@@ -57,10 +59,12 @@ class Settings:
                 "FIREBROS_CORS",
                 ("http://localhost:5173", "http://127.0.0.1:5173"),
             ),
-            csv_max_rows=_env_int("FIREBROS_CSV_MAX_ROWS", 2_000_000),
-            polygon_scan_rows=_env_int("FIREBROS_POLYGON_SCAN_ROWS", 500_000),
+            csv_max_rows=_env_int("FIREBROS_CSV_MAX_ROWS", 100_000),
+            polygon_scan_rows=_env_int("FIREBROS_POLYGON_SCAN_ROWS", 100_000),
             max_span_months=_env_int("FIREBROS_MAX_SPAN_MONTHS", 400),
             holdout_years=(2024, 2025),
+            max_concurrent_queries=_env_int("FIREBROS_MAX_CONCURRENT_QUERIES", 8),
+            require_data=os.environ.get("FIREBROS_REQUIRE_DATA", "false").lower() == "true",
         )
 
     @property

@@ -1,0 +1,28 @@
+<template>
+<style>
+#root { position:absolute; inset:0; background:#0e1218; color:#e6e9ee; font-family:Inter,sans-serif; }
+.scene { display:grid; grid-template-columns:500px 1fr; gap:50px; padding:108px 150px 108px 192px; height:100%; }
+.copy { display:flex; flex-direction:column; justify-content:center; gap:32px; }
+h1 { display:flex; flex-wrap:wrap; gap:0 .24em; margin:0; font-size:72px; line-height:1.03; letter-spacing:-.03em; }
+p { margin:0; font-size:32px; line-height:1.3; color:#c1ccd9; }
+.screen { align-self:center; width:1000px; height:760px; overflow:hidden; border:2px solid #6d7b8e; border-radius:8px; background:#151b23; }
+img { width:100%; height:100%; object-fit:contain; display:block; }
+</style>
+<div id="root" data-composition-variables="[{&quot;id&quot;: &quot;validation_line_0&quot;, &quot;type&quot;: &quot;string&quot;, &quot;label&quot;: &quot;Statement 1&quot;, &quot;default&quot;: &quot;Coefficients exclude 2024-2025.&quot;}, {&quot;id&quot;: &quot;validation_line_1&quot;, &quot;type&quot;: &quot;string&quot;, &quot;label&quot;: &quot;Statement 2&quot;, &quot;default&quot;: &quot;Diagnostics informed a model revision.&quot;}, {&quot;id&quot;: &quot;validation_line_2&quot;, &quot;type&quot;: &quot;string&quot;, &quot;label&quot;: &quot;Statement 3&quot;, &quot;default&quot;: &quot;Cell MAPE 78.46%; chart MAPE is AOI-total.&quot;}, {&quot;id&quot;: &quot;validation_line_3&quot;, &quot;type&quot;: &quot;string&quot;, &quot;label&quot;: &quot;Statement 4&quot;, &quot;default&quot;: &quot;Local prediction error remains substantial.&quot;}]" data-composition-id="validation" data-width="1920" data-height="1080" data-duration="14.45">
+ <div class="scene"><div class="copy"><h1 id="validation-title"><span>Inspect</span> <span>the</span> <span>residual</span> <span>error.</span></h1><p id="validation-line-0" class="statement" data-hold="true" data-var-text="validation_line_0">Coefficients exclude 2024-2025.</p>
+<p id="validation-line-1" class="statement" data-hold="true" data-var-text="validation_line_1">Diagnostics informed a model revision.</p>
+<p id="validation-line-2" class="statement" data-hold="true" data-var-text="validation_line_2">Cell MAPE 78.46%; chart MAPE is AOI-total.</p>
+<p id="validation-line-3" class="statement" data-hold="true" data-var-text="validation_line_3">Local prediction error remains substantial.</p></div>
+ <div class="screen" id="validation-screen"><img id="validation-image" src="assets/calibration.png" alt="Captured Ala-Too Fire Calendar application" /></div></div>
+</div>
+<script>
+ const tl=gsap.timeline({paused:true});
+ tl.fromTo("#validation-title span",{opacity:0,y:8,filter:"blur(10px)"},{opacity:1,y:0,filter:"blur(0px)",duration:.36,stagger:.04,ease:"power3.out"},0);
+ tl.fromTo("#validation-screen",{x:40,opacity:1},{x:0,opacity:1,duration:.6,ease:"expo.out"},0);
+ tl.fromTo("#validation-line-0", {opacity:0, x:24}, {opacity:1, x:0, duration:.45, ease:"power3.out"}, 2.00);
+tl.fromTo("#validation-line-1", {opacity:0, x:24}, {opacity:1, x:0, duration:.45, ease:"power3.out"}, 5.00);
+tl.fromTo("#validation-line-2", {opacity:0, x:24}, {opacity:1, x:0, duration:.45, ease:"power3.out"}, 8.00);
+tl.fromTo("#validation-line-3", {opacity:0, x:24}, {opacity:1, x:0, duration:.45, ease:"power3.out"}, 11.00);
+ window.__timelines["validation"]=tl;
+</script>
+</template>

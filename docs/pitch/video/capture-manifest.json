@@ -1,0 +1,13 @@
+{
+  "method_version": "harmonize-v2",
+  "source": "actual application capture",
+  "sha256": {
+    "assets/application.png": "1a71660f97ecdcb77e61d69dcf4ab39b4d8b7f33ead3be24740b9ab33d06b768",
+    "assets/area.png": "041632e7cb0a03a7ee40cba2d4bebbe572c09ea1934d97380af7880429eb6090",
+    "assets/anomaly.png": "0c2af85074a8e9a618b345f8571856c095cb33148ff70af3ff4e3f5dc536c6c7",
+    "assets/calibration.png": "f4944e80d33d71d9ae87455b5491035760ed38ffc58cae7611743eea5329e606",
+    "assets/export.png": "1e7abe733bbb10d8e8c5a90c9bfcdf6c569e9f24d734105ba4fcdcb017eb1942",
+    "assets/responses.json": "be1eccee940119218ec7d644ea2ff0e7e9c9fbe8da555d89517f3d766fbe669b",
+    "assets/harmonization_report.json": "3fbaa2c752a4fb64438de024af3ac2923e6b84741c8bfe395bb1dd31f1a193d2"
+  }
+}

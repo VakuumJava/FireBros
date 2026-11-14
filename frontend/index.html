@@ -3,9 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ala-Too Fire Calendar</title>
+    <meta name="theme-color" content="#f5f6f3" />
+    <title>Ala-Too Fire Atlas · Kyrgyzstan Fire History</title>
+    <meta
+      name="description"
+      content="Draw an area in Kyrgyzstan and neighbouring regions to compare monthly fire activity with NASA FIRMS history, calibrated estimates and uncertainty."
+    />
+    <link rel="canonical" href="https://nasa.vakuum.cc/" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link
+      rel="preload"
+      href="/fonts/IBMPlexSansUIMixVar.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/fonts.css" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ala-Too Fire Atlas" />
+    <meta
+      property="og:title"
+      content="Ala-Too Fire Atlas · Kyrgyzstan Fire History"
+    />
+    <meta
+      property="og:description"
+      content="Choose a place. Compare a month with the satellite archive. Explore NASA FIRMS observations, calibrated estimates and uncertainty."
+    />
+    <meta property="og:url" content="https://nasa.vakuum.cc/" />
+    <meta
+      property="og:image"
+      content="https://nasa.vakuum.cc/social-card.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Ala-Too Fire Atlas. A monthly view of fire activity in Kyrgyzstan and neighbouring regions."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ala-Too Fire Atlas" />
+    <meta
+      name="twitter:description"
+      content="Explore fire activity in Kyrgyzstan and neighbouring regions through the NASA FIRMS satellite archive."
+    />
+    <meta
+      name="twitter:image"
+      content="https://nasa.vakuum.cc/social-card.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Ala-Too Fire Atlas",
+        "url": "https://nasa.vakuum.cc/",
+        "description": "An interactive atlas for comparing monthly fire activity in Kyrgyzstan and neighbouring regions using NASA FIRMS observations and calibrated estimates.",
+        "applicationCategory": "ScienceApplication",
+        "operatingSystem": "Web browser",
+        "inLanguage": "en",
+        "isAccessibleForFree": true
+      }
+    </script>
   </head>
   <body>
+    <noscript>
+      <main
+        style="
+          max-width: 48rem;
+          margin: 4rem auto;
+          padding: 1.5rem;
+          font: 18px/1.6 sans-serif;
+          color: #1d312f;
+        "
+      >
+        <h1>Ala-Too Fire Atlas</h1>
+        <p>
+          Explore monthly fire activity in Kyrgyzstan and neighbouring mountain
+          regions. Choose an area on the map and compare a month with the
+          satellite archive to understand its historical context.
+        </p>
+        <p>
+          The atlas uses NASA FIRMS observations from MODIS and VIIRS.
+          Calibrated estimates help compare these sensors on a shared
+          measurement scale, with uncertainty and coverage information alongside
+          the results. A satellite hotspot is a thermal anomaly, not a confirmed
+          wildfire.
+        </p>
+        <p>
+          Enable JavaScript to use the map, activity calendar, historical
+          comparison and CSV downloads. Read about the observations at
+          <a href="https://firms.modaps.eosdis.nasa.gov/">NASA FIRMS</a>.
+        </p>
+      </main>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

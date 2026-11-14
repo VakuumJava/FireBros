@@ -15,12 +15,14 @@ def health(
     settings: Settings = Depends(get_settings),
     store: Store = Depends(get_store),
 ) -> dict[str, object]:
+    describe = getattr(store, "describe", None)
     return {
         "status": "ok",
         "api_version": API_VERSION,
         "source": store.source,
         "data_ready": settings.has_parquet,
         "csv_max_rows": settings.csv_max_rows,
+        **(describe() if describe else {}),
     }
 
 

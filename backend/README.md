@@ -36,8 +36,8 @@ field drifting out of the frozen contract fails CI, not the demo.
 | `FIREBROS_DATA_DIR` | `data/processed` | where `cells_monthly.parquet` and `hotspots/` live |
 | `FIREBROS_CONTRACTS_DIR` | `contracts` | fixtures for mock mode |
 | `FIREBROS_CORS` | `http://localhost:5173,http://127.0.0.1:5173` | comma-separated allowlist, never `*` with credentials |
-| `FIREBROS_CSV_MAX_ROWS` | `2000000` | hard cap on the hotspot export |
-| `FIREBROS_POLYGON_SCAN_ROWS` | `500000` | rows scanned before a polygon export is refused |
+| `FIREBROS_CSV_MAX_ROWS` | `100000` | hard cap on the hotspot export |
+| `FIREBROS_POLYGON_SCAN_ROWS` | `100000` | rows scanned before a polygon export is refused |
 | `FIREBROS_MAX_SPAN_MONTHS` | `400` | widest accepted `from`/`to` window |
 
 No secret is read here. `FIRMS_MAP_KEY` belongs to the pipeline only.
@@ -83,3 +83,12 @@ app/
 
 The routers never compute anything: parsing and HTTP codes live there, the
 maths lives in `service.py`, and data access lives behind `Store`.
+## Production integrity
+
+`FIREBROS_REQUIRE_DATA=true` returns 503 if the dataset is absent. `FIREBROS_MAX_CONCURRENT_QUERIES` defaults to 8 (Compose uses 8). DuckDB is limited to 128MB per query; the container also caps aggregate memory. An empty `FIREBROS_CORS` disables CORS. `FIREBROS_STATIC_DIR` serves the built frontend from the API origin.
+
+`cells_cumulative.parquet` contains the monthly storage columns plus `through_day`; it supports exact observed prefixes. A partial anomaly without this artifact returns 503, never a prorated historical estimate. All selected cells must have coverage before a month is presented as observed. Health exposes available first/last months, not server filesystem paths. CSV includes `X-Data-Source` and `X-Method-Version`. `/aoi/top` optionally accepts the same `from`/`to` filters.
+
+Build into a separate directory and restart workers against the complete snapshot. Never replace live Parquet files individually.
+
+With `FIREBROS_REQUIRE_DATA=true`, the store verifies manifest SHA-256 hashes once before serving the snapshot. A checksum mismatch produces 503. These checks detect corruption; they do not authenticate artifacts produced by an untrusted operator.

@@ -1,0 +1,91 @@
+{
+  "url": "https://nasa.vakuum.cc",
+  "release": "firebros-20261115-103ddd710525",
+  "root_status": 200,
+  "assets": [
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "seconds": 0.887
+    },
+    {
+      "path": "/fonts.css",
+      "status": 200,
+      "seconds": 0.914
+    },
+    {
+      "path": "/assets/index-zJs7Z1m4.js",
+      "status": 200,
+      "seconds": 2.185
+    },
+    {
+      "path": "/assets/index-D_sSjDyl.css",
+      "status": 200,
+      "seconds": 1.432
+    },
+    {
+      "path": "/fonts/IBMPlexSansUIMixVar.woff2",
+      "status": 200,
+      "seconds": 1.648
+    },
+    {
+      "path": "/social-card.png",
+      "status": 200,
+      "seconds": 1.359
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "seconds": 0.832
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "seconds": 0.913
+    }
+  ],
+  "health": {
+    "status": "ok",
+    "api_version": "1.0.0",
+    "source": "parquet",
+    "data_ready": true,
+    "csv_max_rows": 100000,
+    "first_month": "2000-11",
+    "last_month": "2026-11",
+    "monthly_rows": 337414,
+    "exact_prefixes": true,
+    "built_at": "2026-11-14T20:57:43.265937+00:00",
+    "method_version": "harmonize-v2"
+  },
+  "parallel_api": [
+    {
+      "path": "/api/v1/aoi/summary?bbox=74.4%2C42.7%2C75.4%2C43.3&from=2000-11&to=2026-11",
+      "status": 200,
+      "seconds": 1.477
+    },
+    {
+      "path": "/api/v1/aoi/calendar?bbox=74.4%2C42.7%2C75.4%2C43.3&from=2000-11&to=2026-11",
+      "status": 200,
+      "seconds": 1.093
+    },
+    {
+      "path": "/api/v1/aoi/anomaly?bbox=74.4%2C42.7%2C75.4%2C43.3&month=2025-10",
+      "status": 200,
+      "seconds": 1.758
+    },
+    {
+      "path": "/api/v1/aoi/top?bbox=74.4%2C42.7%2C75.4%2C43.3&from=2000-11&to=2026-11",
+      "status": 200,
+      "seconds": 1.013
+    },
+    {
+      "path": "/api/v1/aoi/harmonization?bbox=74.4%2C42.7%2C75.4%2C43.3&from=2000-11&to=2026-11",
+      "status": 200,
+      "seconds": 1.376
+    }
+  ],
+  "csv": {
+    "rows": 1,
+    "status": 200
+  }
+}

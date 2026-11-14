@@ -1,0 +1,26 @@
+<template>
+<style>
+#root { position:absolute; inset:0; background:#0e1218; color:#e6e9ee; font-family:Inter,sans-serif; }
+.scene { display:grid; grid-template-columns:500px 1fr; gap:50px; padding:108px 150px 108px 192px; height:100%; }
+.copy { display:flex; flex-direction:column; justify-content:center; gap:32px; }
+h1 { display:flex; flex-wrap:wrap; gap:0 .24em; margin:0; font-size:72px; line-height:1.03; letter-spacing:-.03em; }
+p { margin:0; font-size:32px; line-height:1.3; color:#c1ccd9; }
+.screen { align-self:center; width:1000px; height:760px; overflow:hidden; border:2px solid #6d7b8e; border-radius:8px; background:#151b23; }
+img { width:100%; height:100%; object-fit:contain; display:block; }
+</style>
+<div id="root" data-composition-variables="[{&quot;id&quot;: &quot;baseline_line_0&quot;, &quot;type&quot;: &quot;string&quot;, &quot;label&quot;: &quot;Statement 1&quot;, &quot;default&quot;: &quot;Median. Robust spread. Historical percentile.&quot;}, {&quot;id&quot;: &quot;baseline_line_1&quot;, &quot;type&quot;: &quot;string&quot;, &quot;label&quot;: &quot;Statement 2&quot;, &quot;default&quot;: &quot;The same day window, when available.&quot;}, {&quot;id&quot;: &quot;baseline_line_2&quot;, &quot;type&quot;: &quot;string&quot;, &quot;label&quot;: &quot;Statement 3&quot;, &quot;default&quot;: &quot;Hotspots are thermal anomalies, not confirmed fires.&quot;}]" data-composition-id="baseline" data-width="1920" data-height="1080" data-duration="15.45">
+ <div class="scene"><div class="copy"><h1 id="baseline-title"><span>Give</span> <span>the</span> <span>month</span> <span>context.</span></h1><p id="baseline-line-0" class="statement" data-hold="true" data-var-text="baseline_line_0">Median. Robust spread. Historical percentile.</p>
+<p id="baseline-line-1" class="statement" data-hold="true" data-var-text="baseline_line_1">The same day window, when available.</p>
+<p id="baseline-line-2" class="statement" data-hold="true" data-var-text="baseline_line_2">Hotspots are thermal anomalies, not confirmed fires.</p></div>
+ <div class="screen" id="baseline-screen"><img id="baseline-image" src="assets/anomaly.png" alt="Captured Ala-Too Fire Calendar application" /></div></div>
+</div>
+<script>
+ const tl=gsap.timeline({paused:true});
+ tl.fromTo("#baseline-title span",{opacity:0,y:8,filter:"blur(10px)"},{opacity:1,y:0,filter:"blur(0px)",duration:.36,stagger:.04,ease:"power3.out"},0);
+ tl.fromTo("#baseline-screen",{x:40,opacity:1},{x:0,opacity:1,duration:.6,ease:"expo.out"},0);
+ tl.fromTo("#baseline-line-0", {opacity:0, x:24}, {opacity:1, x:0, duration:.45, ease:"power3.out"}, 2.00);
+tl.fromTo("#baseline-line-1", {opacity:0, x:24}, {opacity:1, x:0, duration:.45, ease:"power3.out"}, 7.00);
+tl.fromTo("#baseline-line-2", {opacity:0, x:24}, {opacity:1, x:0, duration:.45, ease:"power3.out"}, 12.00);
+ window.__timelines["baseline"]=tl;
+</script>
+</template>

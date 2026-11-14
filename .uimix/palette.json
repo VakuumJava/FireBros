@@ -1,0 +1,28 @@
+{
+  "surface": "#ffffff",
+  "surface_alt": "#edf2ef",
+  "sunken": "#DDE0DD",
+  "text": "#21332d",
+  "muted": "#53645c",
+  "primary": "#245c4f",
+  "on_primary": "#ffffff",
+  "secondary": "#245c4f",
+  "accent": "#9a4427",
+  "border": "#798b80",
+  "focus": "#245c4f",
+  "success": "#287F39",
+  "warning": "#A06100",
+  "danger": "#C92A2A",
+  "radius": "2px",
+  "border_width": "1px",
+  "shadow": "none",
+  "mat": "transparent",
+  "theme": "light",
+  "row": "44px",
+  "_roles": {
+    "surface_alt": "surface",
+    "sunken": "surface",
+    "accent": "primary",
+    "focus": "primary"
+  }
+}

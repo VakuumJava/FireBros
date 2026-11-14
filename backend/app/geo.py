@@ -136,7 +136,36 @@ def parse_polygon(raw: str) -> Polygon:
         raise GeoError("polygon needs at least 3 vertices")
     if len(points) > MAX_POLYGON_VERTICES:
         raise GeoError(f"polygon is limited to {MAX_POLYGON_VERTICES} vertices")
+    if len(points) > 3 and points[0] == points[-1]:
+        points.pop()
+    if len(set(points)) != len(points) or polygon_area_km2(tuple(points)) < 1e-9:
+        raise GeoError("polygon must enclose a nonzero area without repeated vertices")
+    size = len(points)
+    for i in range(size):
+        for j in range(i + 1, size):
+            if j == i + 1 or (i == 0 and j == size - 1):
+                continue
+            if _segments_cross(
+                points[i], points[(i + 1) % size], points[j], points[(j + 1) % size]
+            ):
+                raise GeoError("polygon must not intersect itself")
     return tuple(points)
+
+
+def _segments_cross(a: Point, b: Point, c: Point, d: Point) -> bool:
+    def orientation(p: Point, q: Point, r: Point) -> float:
+        return (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+
+    o1, o2 = orientation(a, b, c), orientation(a, b, d)
+    o3, o4 = orientation(c, d, a), orientation(c, d, b)
+    if o1 * o2 < 0 and o3 * o4 < 0:
+        return True
+    return any(
+        abs(o) < 1e-12
+        and min(p[0], q[0]) <= r[0] <= max(p[0], q[0])
+        and min(p[1], q[1]) <= r[1] <= max(p[1], q[1])
+        for o, p, q, r in ((o1, a, b, c), (o2, a, b, d), (o3, c, d, a), (o4, c, d, b))
+    )
 
 
 def polygon_bbox(polygon: Polygon) -> BBox:
@@ -189,19 +218,29 @@ def _cells_touching(bbox: BBox) -> tuple[Cell, ...]:
 
 
 def _cell_touches_polygon(cell: Cell, polygon: Polygon) -> bool:
-    if point_in_polygon(cell.lon, cell.lat, polygon):
-        return True
-    corners = (
-        (cell.west, cell.south),
-        (cell.east, cell.south),
-        (cell.east, cell.north),
-        (cell.west, cell.north),
-    )
-    if any(point_in_polygon(lon, lat, polygon) for lon, lat in corners):
-        return True
-    return any(
-        cell.west <= lon <= cell.east and cell.south <= lat <= cell.north for lon, lat in polygon
-    )
+    clipped = list(polygon)
+    for axis, bound, lower in (
+        (0, cell.west, True),
+        (0, cell.east, False),
+        (1, cell.south, True),
+        (1, cell.north, False),
+    ):
+        output = []
+        for i, current in enumerate(clipped):
+            previous = clipped[i - 1]
+            current_in = current[axis] >= bound if lower else current[axis] <= bound
+            previous_in = previous[axis] >= bound if lower else previous[axis] <= bound
+            if current_in != previous_in:
+                ratio = (bound - previous[axis]) / (current[axis] - previous[axis])
+                output.append(
+                    tuple(previous[k] + ratio * (current[k] - previous[k]) for k in (0, 1))
+                )
+            if current_in:
+                output.append(current)
+        clipped = output
+        if len(clipped) < 3:
+            return False
+    return polygon_area_km2(tuple(clipped)) > 1e-9
 
 
 def describe_aoi(bbox: BBox, polygon: Polygon | None = None) -> Aoi:

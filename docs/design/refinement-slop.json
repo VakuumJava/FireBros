@@ -1,0 +1,486 @@
+[
+  {
+    "path": "frontend/src/components/AnomalyCard.jsx",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  },
+  {
+    "path": "frontend/src/components/AoiMap.jsx",
+    "findings": [
+      {
+        "rule": "inline-event-handler",
+        "name": "Inline event handler in the markup",
+        "severity": "warn",
+        "why": "Inline handlers are how a generated prototype wires the first interaction it can think of. They bypass the component boundary, the state model and the focus behaviour.",
+        "fix": "Bind the interaction in the component or module that owns the state, not in the tag.",
+        "hits": [
+          {
+            "line": 211,
+            "snippet": "onClick={() => draw(\"rectangle\")}"
+          },
+          {
+            "line": 219,
+            "snippet": "onClick={() => draw(\"polygon\")}"
+          },
+          {
+            "line": 227,
+            "snippet": "onClick={cancel}"
+          },
+          {
+            "line": 235,
+            "snippet": "onClick={() => {"
+          },
+          {
+            "line": 272,
+            "snippet": "onClick={() => {"
+          },
+          {
+            "line": 297,
+            "snippet": "onClick={() => choosePreset(preset)}"
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "unfinished",
+          "rules": 1
+        }
+      ],
+      "hint": "finish the placeholder, the link or the label"
+    }
+  },
+  {
+    "path": "frontend/src/components/CalendarHeatmap.jsx",
+    "findings": [
+      {
+        "rule": "inline-event-handler",
+        "name": "Inline event handler in the markup",
+        "severity": "warn",
+        "why": "Inline handlers are how a generated prototype wires the first interaction it can think of. They bypass the component boundary, the state model and the focus behaviour.",
+        "fix": "Bind the interaction in the component or module that owns the state, not in the tag.",
+        "hits": [
+          {
+            "line": 142,
+            "snippet": "onClick={() => setShowValues((shown) => !shown)}"
+          },
+          {
+            "line": 230,
+            "snippet": "onClick={() => select(r, c)}"
+          },
+          {
+            "line": 263,
+            "snippet": "onClick={() => setExpanded((value) => !value)}"
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "unfinished",
+          "rules": 1
+        }
+      ],
+      "hint": "finish the placeholder, the link or the label"
+    }
+  },
+  {
+    "path": "frontend/src/components/CoordinateForm.jsx",
+    "findings": [
+      {
+        "rule": "inline-event-handler",
+        "name": "Inline event handler in the markup",
+        "severity": "warn",
+        "why": "Inline handlers are how a generated prototype wires the first interaction it can think of. They bypass the component boundary, the state model and the focus behaviour.",
+        "fix": "Bind the interaction in the component or module that owns the state, not in the tag.",
+        "hits": [
+          {
+            "line": 46,
+            "snippet": "<form className=\"coords\" onSubmit={apply}>"
+          },
+          {
+            "line": 64,
+            "snippet": "onChange={(e) =>"
+          },
+          {
+            "line": 87,
+            "snippet": "onClick={() => onChange({ kind: \"bbox\", bbox: [...REGION_BBOX] })}"
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "unfinished",
+          "rules": 1
+        }
+      ],
+      "hint": "finish the placeholder, the link or the label"
+    }
+  },
+  {
+    "path": "frontend/src/components/ErrorBanner.jsx",
+    "findings": [
+      {
+        "rule": "inline-event-handler",
+        "name": "Inline event handler in the markup",
+        "severity": "warn",
+        "why": "Inline handlers are how a generated prototype wires the first interaction it can think of. They bypass the component boundary, the state model and the focus behaviour.",
+        "fix": "Bind the interaction in the component or module that owns the state, not in the tag.",
+        "hits": [
+          {
+            "line": 17,
+            "snippet": "<button type=\"button\" className=\"btn btn--ghost\" onClick={onRetry}>"
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "unfinished",
+          "rules": 1
+        }
+      ],
+      "hint": "finish the placeholder, the link or the label"
+    }
+  },
+  {
+    "path": "frontend/src/components/ExportPanel.jsx",
+    "findings": [
+      {
+        "rule": "inline-event-handler",
+        "name": "Inline event handler in the markup",
+        "severity": "warn",
+        "why": "Inline handlers are how a generated prototype wires the first interaction it can think of. They bypass the component boundary, the state model and the focus behaviour.",
+        "fix": "Bind the interaction in the component or module that owns the state, not in the tag.",
+        "hits": [
+          {
+            "line": 67,
+            "snippet": "onChange={() => setKind(\"monthly\")}"
+          },
+          {
+            "line": 80,
+            "snippet": "onChange={() => setKind(\"hotspots\")}"
+          },
+          {
+            "line": 106,
+            "snippet": "onClick={download}"
+          },
+          {
+            "line": 115,
+            "snippet": "onClick={() => {"
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "unfinished",
+          "rules": 1
+        }
+      ],
+      "hint": "finish the placeholder, the link or the label"
+    }
+  },
+  {
+    "path": "frontend/src/components/HarmonizationChart.jsx",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  },
+  {
+    "path": "frontend/src/components/PaletteSwitch.jsx",
+    "findings": [
+      {
+        "rule": "inline-event-handler",
+        "name": "Inline event handler in the markup",
+        "severity": "warn",
+        "why": "Inline handlers are how a generated prototype wires the first interaction it can think of. They bypass the component boundary, the state model and the focus behaviour.",
+        "fix": "Bind the interaction in the component or module that owns the state, not in the tag.",
+        "hits": [
+          {
+            "line": 13,
+            "snippet": "onClick={() => onChange(p)}"
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "unfinished",
+          "rules": 1
+        }
+      ],
+      "hint": "finish the placeholder, the link or the label"
+    }
+  },
+  {
+    "path": "frontend/src/components/PeriodSelect.jsx",
+    "findings": [
+      {
+        "rule": "inline-event-handler",
+        "name": "Inline event handler in the markup",
+        "severity": "warn",
+        "why": "Inline handlers are how a generated prototype wires the first interaction it can think of. They bypass the component boundary, the state model and the focus behaviour.",
+        "fix": "Bind the interaction in the component or module that owns the state, not in the tag.",
+        "hits": [
+          {
+            "line": 24,
+            "snippet": "onChange={(e) => update(\"from\", e.target.value)}"
+          },
+          {
+            "line": 34,
+            "snippet": "onChange={(e) => update(\"to\", e.target.value)}"
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "unfinished",
+          "rules": 1
+        }
+      ],
+      "hint": "finish the placeholder, the link or the label"
+    }
+  },
+  {
+    "path": "frontend/src/components/StatusBadge.jsx",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  },
+  {
+    "path": "frontend/src/components/SummaryStats.jsx",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  },
+  {
+    "path": "frontend/src/components/TopPeriods.jsx",
+    "findings": [
+      {
+        "rule": "inline-event-handler",
+        "name": "Inline event handler in the markup",
+        "severity": "warn",
+        "why": "Inline handlers are how a generated prototype wires the first interaction it can think of. They bypass the component boundary, the state model and the focus behaviour.",
+        "fix": "Bind the interaction in the component or module that owns the state, not in the tag.",
+        "hits": [
+          {
+            "line": 23,
+            "snippet": "onClick={() => setKind(\"months\")}"
+          },
+          {
+            "line": 30,
+            "snippet": "onClick={() => setKind(\"years\")}"
+          },
+          {
+            "line": 69,
+            "snippet": "onClick={() =>"
+          },
+          {
+            "line": 90,
+            "snippet": "onClick={() => setExpanded((value) => !value)}"
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "unfinished",
+          "rules": 1
+        }
+      ],
+      "hint": "finish the placeholder, the link or the label"
+    }
+  },
+  {
+    "path": "frontend/src/components/calendar.css",
+    "findings": [
+      {
+        "rule": "neon-on-dark",
+        "name": "Glowing accents on a dark page",
+        "severity": "warn",
+        "why": "Neon borders on every card turn a dark interface into a wall of light where nothing stands out.",
+        "fix": "Keep the dark theme, drop the glow. One accent, no bloom.",
+        "hits": [
+          {
+            "line": 191,
+            "snippet": "box-shadow:"
+          },
+          {
+            "line": 196,
+            "snippet": "box-shadow:"
+          }
+        ]
+      },
+      {
+        "rule": "repeating-stripes",
+        "name": "Repeating-gradient stripes",
+        "severity": "warn",
+        "why": "Stripes fill space with visual noise and are the cheapest way to make an empty area look designed.",
+        "fix": "A plain surface, or a texture that belongs to the design (paper, halftone, scan lines) at a size you chose on purpose.",
+        "hits": [
+          {
+            "line": 209,
+            "snippet": "background: repeating-linear-gradient("
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 8,
+      "grade": "crafted",
+      "rules": 2,
+      "clusters": [
+        {
+          "name": "glass-and-glow",
+          "rules": 1
+        },
+        {
+          "name": "visual-noise",
+          "rules": 1
+        }
+      ],
+      "hint": "remove the decoration that is not a physical property of the interface"
+    }
+  },
+  {
+    "path": "frontend/src/components/components.css",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  },
+  {
+    "path": "frontend/src/components/export.css",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  },
+  {
+    "path": "frontend/src/components/harmonization.css",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  },
+  {
+    "path": "frontend/src/components/insights.css",
+    "findings": [
+      {
+        "rule": "repeating-stripes",
+        "name": "Repeating-gradient stripes",
+        "severity": "warn",
+        "why": "Stripes fill space with visual noise and are the cheapest way to make an empty area look designed.",
+        "fix": "A plain surface, or a texture that belongs to the design (paper, halftone, scan lines) at a size you chose on purpose.",
+        "hits": [
+          {
+            "line": 230,
+            "snippet": "background: repeating-linear-gradient("
+          }
+        ]
+      }
+    ],
+    "score": {
+      "value": 4,
+      "grade": "crafted",
+      "rules": 1,
+      "clusters": [
+        {
+          "name": "visual-noise",
+          "rules": 1
+        }
+      ],
+      "hint": "remove the texture that carries no information"
+    }
+  },
+  {
+    "path": "frontend/src/ui/theme.css",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  },
+  {
+    "path": "frontend/src/ui/tokens.css",
+    "findings": [],
+    "score": {
+      "value": 0,
+      "grade": "crafted",
+      "rules": 0,
+      "clusters": [],
+      "hint": "nothing fires"
+    }
+  }
+]

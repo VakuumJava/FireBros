@@ -1,0 +1,15 @@
+nasa.vakuum.cc {
+	encode zstd gzip
+	request_body {
+		max_size 16KB
+	}
+	@unsupported not method GET HEAD OPTIONS
+	respond @unsupported 405
+	header {
+		defer
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+		-Via
+	}
+	reverse_proxy vakuum-firebros-api:8000
+}

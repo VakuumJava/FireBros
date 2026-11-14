@@ -1,0 +1,95 @@
+.data-export {
+  gap: var(--space-4);
+  min-width: 0;
+}
+.data-export .data-export__choices {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.data-export .data-export__choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  margin: 0;
+  color: var(--text);
+  background: var(--surface);
+  font-size: 14px;
+  cursor: pointer;
+}
+.data-export__choice + .data-export__choice {
+  border-top: 1px solid var(--rule);
+}
+.data-export .data-export__choice:has(input:checked) {
+  background: var(--surface-alt);
+  box-shadow: inset 3px 0 var(--secondary);
+}
+.data-export .data-export__choice:hover:not(:has(input:disabled)) {
+  background: var(--hover);
+}
+.data-export__choice:active:not(:has(input:disabled)) {
+  box-shadow: inset 3px 0 var(--accent);
+}
+.data-export .data-export__choice:has(input:disabled) {
+  opacity: 1;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.data-export .data-export__choice input {
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  flex-shrink: 0;
+  margin: 2px 0 0;
+  accent-color: var(--secondary);
+}
+.data-export .data-export__choice input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.data-export__choice > span {
+  min-width: 0;
+}
+.data-export__choice strong {
+  font-weight: 500;
+}
+.data-export .data-export__choice small {
+  margin-top: var(--space-1);
+  font-size: 13px;
+  color: var(--muted);
+}
+.data-export__scope {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+.data-export__scope span {
+  display: block;
+}
+.data-export__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.data-export__actions .btn {
+  flex: 1 1 auto;
+}
+.data-export__actions .btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.data-export__result {
+  padding: var(--space-3) 0 0;
+  border-top: 1px solid var(--rule);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.data-export__result.card__msg--error {
+  border-top: 3px double var(--error);
+}

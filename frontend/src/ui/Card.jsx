@@ -1,18 +1,35 @@
-// Block wrapper: title + loading/error states. Props: state = { data, error, loading }
-export default function Card({ title, hint, aside, state, className = '', children }) {
+export default function Card({
+  title,
+  hint,
+  aside,
+  state,
+  className = "",
+  hideTitle = false,
+  children,
+}) {
   const { data, error, loading } = state || {};
   return (
-    <section className={`card ${className}`} aria-busy={loading ? 'true' : 'false'}>
-      <header className="card__head">
+    <section className={`card ${className}`} aria-busy={Boolean(loading)}>
+      <header className={hideTitle ? "visually-hidden" : "card__head"}>
         <div>
           <h2 className="card__title">{title}</h2>
           {hint && <p className="card__hint">{hint}</p>}
         </div>
         {aside}
       </header>
-      {error && <p className="card__msg card__msg--error" role="alert">{error.detail || error.message}</p>}
-      {!error && !data && <p className="card__msg">{loading ? 'Loading...' : 'No data'}</p>}
-      {data && <div className={loading ? 'is-stale' : ''}>{children}</div>}
+      {state && error && (
+        <p className="card__msg card__msg--error" role="alert">
+          {error.detail || error.message}
+        </p>
+      )}
+      {state && !error && !data && (
+        <div className={loading ? "card__skeleton" : "card__msg"} role="status">
+          {loading
+            ? "Loading observations…"
+            : "No observations available for this selection."}
+        </div>
+      )}
+      {(!state || data) && children}
     </section>
   );
 }

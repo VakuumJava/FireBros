@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import random
+from dataclasses import replace
 from datetime import date
 from pathlib import Path
 
@@ -36,6 +37,19 @@ class MockStore:
             _scale(record, share)
             for record in self._records
             if start <= (record.year, record.month) <= end
+        ]
+
+    def prefix_records(
+        self, aoi: Aoi, start: YearMonth, end: YearMonth, through_day: int
+    ) -> list[MonthlyRecord]:
+        return [
+            replace(
+                record,
+                count=round(record.count * through_day / record.days_observed),
+                days_observed=through_day,
+            )
+            for record in self.records(aoi, start, end)
+            if record.days_observed >= through_day
         ]
 
     def hotspots(
@@ -80,7 +94,7 @@ def _merge(summary: dict, harmonization: dict) -> list[MonthlyRecord]:
             lo=row["lo"],
             hi=row["hi"],
             raw=row["raw"],
-            modis=row.get("modis_truth"),
+            modis=row["raw"] if row["sensor"] == "MODIS" else row.get("modis_truth"),
             sensor=row["sensor"],
             days_observed=base["days_observed"],
         )

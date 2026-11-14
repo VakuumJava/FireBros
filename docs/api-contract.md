@@ -1,7 +1,7 @@
 # Схема API (поля JSON)
 
 База: `/api/v1`. Все ответы — `application/json; charset=utf-8`, кроме CSV.
-Машинные схемы: [`../contracts/*.schema.json`](../contracts/). Примеры: [`../contracts/fixtures/`](../contracts/fixtures/).
+Машинные схемы: [`../contracts/*.schema.json`](../contracts/). Примеры: [`../contracts/fixtures/`](../contracts/fixtures/). OpenAPI сервиса: `/api/v1/openapi.json`; интерактивная документация отключена, потому что подгружает сторонние скрипты и несовместима с CSP.
 
 ## Общее для всех ответов
 
@@ -31,7 +31,7 @@
 
 ```jsonc
 {
-  "meta":  { "source": "parquet", "unit": "hotspot_days_1km", "method_version": "harmonize-v1", "...": "..." },
+  "meta":  { "source": "parquet", "unit": "hotspot_days_1km", "method_version": "harmonize-v2", "...": "..." },
   "aoi":   { "id": "aoi_145ca8037dbb", "kind": "bbox", "bbox": [68.5,38.4,80.7,43.7],
              "area_km2": 600222.2, "cells_total": 1078, "cells_inside": 1078,
              "cells_partial": 0, "coverage_fraction": 1.0 },
@@ -77,7 +77,7 @@
   "robust_z": 1.04,          // (observed - median) / (1.4826 * MAD)
   "percentile": 0.808,       // доля лет, где было не больше
   "direction": "above",      // above | normal | below
-  "label": "на 1.0σ выше нормы",
+  "label": "1.0σ above the median",
   "series": [{ "year": 2000, "count": 268 }]
 }
 ```
@@ -106,18 +106,21 @@
       "modis_truth": 3213          // настоящий MODIS в тот же месяц; только в перекрытии
   }],
   "jump": {
-      "step_ratio_raw": 1.859,         // ложный скачок: +86%
-      "step_ratio_harmonized": 1.048,  // после: +5%
+      "step_ratio_raw": 1.859,         // наивная склейка: сенсор плюс реальная изменчивость
+      "step_ratio_harmonized": 1.048,  // после калибровки
+      "step_ratio_modis": 1.012,       // что увидел сам MODIS в тот же переход — эталон
       "step_ratio_placebo": 0.922,     // контрольный год без смены сенсора
       "definition": "median_m[ value(knot,m) / median(value(knot-3..knot-1, m)) ]",
       "target": 1.0
   },
   "validation": { "holdout_years": [2024, 2025], "n": 24,
-                  "rmse_log": 0.074, "mape": 0.067, "bias": 0.003 }
+                  "rmse_log": 0.074, "mape": 0.067, "wape": 0.058, "bias": 0.003 }
 }
 ```
 
 На графике: `raw` и `harmonized` линиями, `lo/hi` полосой, `modis_truth` точками, вертикаль на `knot_year`.
+
+MODIS продолжал наблюдения в 2012 году, поэтому `step_ratio_harmonized` сравнивается с `step_ratio_modis`, а не с единицей: реальный сезон может быть тише или активнее прошлых лет. `wape` — сумма абсолютных ошибок, делённая на сумму MODIS; в отличие от `mape` она не взрывается на месяцах с одной-двумя детекциями.
 
 ## `GET /aoi/export.csv?kind=hotspots|monthly`
 
@@ -135,7 +138,7 @@ latitude,longitude,acq_date,acq_time,satellite,instrument,sensor_family,confiden
 year,month,count,lo,hi,sensor,harmonized,days_observed,days_in_month
 ```
 
-Больше `CSV_MAX_ROWS` (по умолчанию 2 000 000) → `413` с просьбой сузить AOI или период. Лучше внятный отказ, чем вкладка, которая умерла.
+Больше `FIREBROS_CSV_MAX_ROWS` (по умолчанию 100 000) → `413` с просьбой сузить AOI или период. Лучше внятный отказ, чем вкладка, которая умерла.
 
 ## `GET /meta/health`, `GET /meta/region`
 
@@ -149,3 +152,19 @@ year,month,count,lo,hi,sensor,harmonized,days_observed,days_in_month
 | `422` | битый bbox/polygon, `from > to`, AOI вне региона, месяц из будущего | `{"detail": "..."}` с человеческим текстом |
 | `413` | CSV больше лимита | `{"detail": "narrow the AOI or the period"}` |
 | `503` | Parquet есть, но не читается | `{"detail": "store not ready"}` |
+
+## Implementation notes (current)
+
+- `GET /aoi/top` accepts optional `from` / `to` with the same bounds as summary.
+- A partial-month anomaly requires the precomputed cumulative artifact. Missing exact coverage returns 404, missing artifact returns 503. Full-month histories use complete months only.
+- Health adds `first_month`, `last_month`, `monthly_rows`, `exact_prefixes`, `built_at` and `method_version` when available. They describe the installed dataset, not forecast coverage or validation approval.
+- CSV adds `X-Data-Source` and `X-Method-Version`; `X-Row-Count` is the number of data rows excluding the header.
+- Busy servers may return 503 with `Retry-After`; excessive query bytes return 414.
+- Partial coverage across the selected spatial cells is considered unavailable, not a complete observation.
+- `nrt_months` is a legacy field for partial months and is not a definitive inventory of NRT-origin records.
+
+`jump` is a descriptive temporal ratio, not a causal measure of sensor bias.
+The implementation requires each contributing calendar month to have three prior
+complete years. The independent pipeline report also publishes paired
+same-period sensor ratios; its cell-level MAPE differs from the API's AOI-total
+MAPE because aggregation occurs before the API error metric.
