@@ -1,5 +1,5 @@
 import { act, create } from "react-test-renderer";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { buildSeasonalProfile } from "../analysis/seasonality";
 import SeasonalProfile from "../components/SeasonalProfile";
 
@@ -10,7 +10,19 @@ const calendar = (years, january) => ({
 });
 
 let view;
-afterEach(() => act(() => view?.unmount()));
+beforeEach(() => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      disconnect() {}
+    },
+  );
+});
+afterEach(() => {
+  act(() => view?.unmount());
+  vi.unstubAllGlobals();
+});
 
 describe("seasonal baseline", () => {
   it("keeps observed zeros, excludes selected year and partial source months", () => {
@@ -108,10 +120,8 @@ it("offers only available selected-year months and labels partial data in the ta
     );
   });
   const buttons = view.root.findAllByType("button");
-  expect(buttons).toHaveLength(12);
+  expect(buttons).toHaveLength(1);
   expect(buttons[0].props.disabled).toBe(false);
-  expect(buttons[1].props.disabled).toBe(true);
-  expect(buttons[0].props["aria-label"]).toContain("incomplete month");
   act(() => buttons[0].props.onClick());
   expect(onSelect).toHaveBeenCalledWith("2023-01");
   expect(view.root.findAllByType("circle")).toHaveLength(0);
@@ -125,4 +135,84 @@ it("offers only available selected-year months and labels partial data in the ta
       .findAllByType("td")
       .some((cell) => cell.children.includes("No data")),
   ).toBe(true);
+});
+
+it("exposes exact month values and disables comparison for missing observations", () => {
+  const data = calendar([2020, 2021, 2022, 2023], [0, 10, 20, 8]);
+  act(() => {
+    view = create(
+      <SeasonalProfile
+        data={data}
+        selectedMonth="2023-01"
+        onSelect={vi.fn()}
+      />,
+    );
+  });
+  expect(view.root.findByType("svg").props.preserveAspectRatio).toBeUndefined();
+  expect(view.root.findAllByType("path")).toHaveLength(3);
+  expect(view.root.findAllByType("circle")).toHaveLength(1);
+  expect(
+    view.root.findAllByType("dd").map((node) => node.children.join("")),
+  ).toEqual(["8", "10", "5–15"]);
+  act(() =>
+    view.root.findByType("select").props.onChange({ target: { value: "1" } }),
+  );
+  expect(view.root.findByType("button").props.disabled).toBe(true);
+  expect(view.root.findAllByType("dd")[0].children).toEqual(["No data"]);
+});
+
+it("resizes the chart when the container becomes visible on mobile", () => {
+  let notify;
+  const disconnect = vi.fn();
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      constructor(callback) {
+        notify = callback;
+      }
+      observe() {}
+      disconnect = disconnect;
+    },
+  );
+  act(() => {
+    view = create(
+      <SeasonalProfile data={calendar([2020], [1])} selectedMonth="2020-01" />,
+      {
+        createNodeMock: (element) =>
+          element.props.className === "seasonal__plot" ? {} : null,
+      },
+    );
+  });
+  act(() => notify([{ contentRect: { width: 320 } }]));
+  expect(view.root.findByType("svg").props.width).toBe(320);
+  expect(view.root.findByType("svg").props.height).toBe(250);
+  act(() => notify([{ contentRect: { width: 0 } }]));
+  expect(view.root.findByType("svg").props.width).toBe(320);
+  act(() => view.unmount());
+  expect(disconnect).toHaveBeenCalledOnce();
+});
+
+it("keeps a tapped month selected after leaving the chart", () => {
+  const onSelect = vi.fn();
+  const data = calendar([2020, 2021, 2022, 2023], [0, 10, 20, 8]);
+  data.values[3][6] = 12;
+  act(() => {
+    view = create(
+      <SeasonalProfile
+        data={data}
+        selectedMonth="2023-01"
+        onSelect={onSelect}
+      />,
+    );
+  });
+  const svg = view.root.findByType("svg");
+  act(() =>
+    svg.props.onPointerDown({
+      clientX: 468,
+      currentTarget: { getBoundingClientRect: () => ({ left: 0, width: 840 }) },
+    }),
+  );
+  act(() => svg.props.onPointerLeave());
+  act(() => view.root.findByType("button").props.onClick());
+  expect(onSelect).toHaveBeenCalledWith("2023-07");
 });

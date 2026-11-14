@@ -8,7 +8,7 @@ percentile; comparison details use native disclosure.
 
 ## Recorded checks
 
-- 137 tests pass across ten files, including named-area selection, synchronized
+- 152 tests pass across ten files, including named-area selection, synchronized
   months and ranges, keyboard calendar navigation, empty and missing data, CSV,
   focus return, route visibility and stale-request handling.
 - New regressions cover opening the mobile map with focus and scroll, moving
@@ -34,7 +34,7 @@ choices; only the earlier dark cartographic preference was explicitly selected.
 STATIC QA: source checks pass with documented checker limitations.
 RENDER QA: inconclusive — no browser MCP.
 BRIEF QA: implementation recorded; font-path diagnostic and rendered checks open.
-PRODUCT QA: 137 tests pass; visual acceptance pending.
+PRODUCT QA: 152 tests pass; visual acceptance pending.
 SEO QA: static checks pass; Core Web Vitals unmeasured.
 
 
@@ -49,3 +49,11 @@ standalone npm install from the lockfile is checked before release. Python
 runtime dependencies are audited independently; online npm advisory lookup is
 also required by CI, since a cached/offline audit cannot establish current
 advisory coverage.
+
+
+Seasonal chart revision: a shared zero-based nice axis, gap-safe selected-year
+and median lines, historical IQR band and an exact-value inspection row replace
+stretched SVG ticks. ResizeObserver sizes the chart to its visible container;
+mobile month labels are thinned without removing data. Tapped months stay selected.
+Chart geometry and interaction regressions pass; browser-rendered verification
+remains unavailable in this environment.
