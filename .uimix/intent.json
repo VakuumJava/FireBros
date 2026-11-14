@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "kind": "requirement-matrix",
+  "requirements": [
+    {
+      "id": "csv.downloads.must.use.the.chosen.area.and.period.and.displa",
+      "text": "CSV downloads must use the chosen area and period and display export errors.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "data",
+      "also": [],
+      "priority": "major",
+      "verification": [
+        "data",
+        "visual"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "rankings.must.select.the.corresponding.month.and.switch.betw",
+      "text": "Rankings must select the corresponding month and switch between months and years.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [],
+      "priority": "major",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "selected.month.analysis.must.show.observed.hotspot.days.hist",
+      "text": "Selected-month analysis must show observed hotspot-days, historical median, robust sigma, percentile and coverage caveats.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [
+        "state"
+      ],
+      "priority": "major",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion",
+        "state"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "source.attribution.and.accessible.limitations.must.remain.av",
+      "text": "Source attribution and accessible limitations must remain available.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "accessibility",
+      "also": [],
+      "priority": "major",
+      "verification": [
+        "accessibility"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "the.calendar.must.distinguish.zero.from.missing.observations",
+      "text": "The calendar must distinguish zero from missing observations, support keyboard selection and an optional numeric view.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "interaction",
+      "also": [
+        "accessibility",
+        "surface"
+      ],
+      "priority": "major",
+      "verification": [
+        "interaction",
+        "visual",
+        "motion",
+        "accessibility"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "the.interactive.map.must.support.rectangles.polygons.precise",
+      "text": "The interactive map must support rectangles, polygons, precise coordinates and named area presets.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "data",
+      "also": [],
+      "priority": "major",
+      "verification": [
+        "data",
+        "visual"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "the.interface.must.adapt.to.mobile.screens.preserve.focus.in",
+      "text": "The interface must adapt to mobile screens, preserve focus indicators and support reduced motion.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "responsive",
+      "also": [
+        "interaction",
+        "motion",
+        "visual",
+        "surface"
+      ],
+      "priority": "major",
+      "verification": [
+        "responsive",
+        "visual",
+        "interaction",
+        "motion"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "the.method.section.must.show.real.sensor.comparisons.uncerta",
+      "text": "The method section must show real sensor comparisons, uncertainty and internal-validation limits.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "surface",
+      "also": [],
+      "priority": "major",
+      "verification": [
+        "visual"
+      ],
+      "state": "REQUESTED"
+    }
+  ]
+}

@@ -1,128 +1,164 @@
-import React, { useEffect } from 'react';
+import { useEffect, useRef } from "react";
+import "./limitations.css";
 
-/**
- * Modal dialog presenting all six scientific and data limitations
- * defined in docs/limitations.md.
- */
+const FOCUSABLE =
+  'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function LimitationsView({ isOpen, onClose }) {
+  const dialog = useRef(null);
+  const close = useRef(onClose);
+  close.current = onClose;
+
   useEffect(() => {
-    if (!isOpen) {
-      return undefined;
-    }
+    if (!isOpen) return undefined;
+
+    const previous = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const controls = () =>
+      [...dialog.current.querySelectorAll(FOCUSABLE)].filter(
+        (element) => !element.closest('[hidden], [aria-hidden="true"]'),
+      );
+    const focusFirst = () => (controls()[0] || dialog.current)?.focus();
+    focusFirst();
 
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape' && onClose) {
-        onClose();
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close.current?.();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const items = controls();
+      const first = items[0];
+      const last = items.at(-1);
+      const active = document.activeElement;
+      const outside = !dialog.current.contains(active);
+      if (!first) {
+        event.preventDefault();
+        dialog.current.focus();
+      } else if (event.shiftKey && (active === first || outside)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || outside)) {
+        event.preventDefault();
+        first.focus();
       }
     };
+    const keepFocusInside = (event) => {
+      if (!dialog.current?.contains(event.target)) focusFirst();
+    };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("focusin", keepFocusInside);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("focusin", keepFocusInside);
+      document.body.style.overflow = previousOverflow;
+      if (previous?.isConnected) previous.focus();
+    };
+  }, [isOpen]);
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   return (
-    <div
-      className="alatoo-modal-backdrop"
-      role="presentation"
-      onClick={(event) => {
-        if (event.target === event.currentTarget && onClose) {
-          onClose();
-        }
-      }}
-    >
+    <div className="limitations-backdrop">
       <div
-        className="alatoo-modal"
+        ref={dialog}
+        className="limitations"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="alatoo-limitations-title"
+        aria-labelledby="limitations-title"
+        aria-describedby="limitations-intro"
+        tabIndex={-1}
       >
-        <div className="alatoo-modal__header">
-          <h2 id="alatoo-limitations-title" className="alatoo-modal__title">
-            Data and Method Limitations
-          </h2>
+        <header className="limitations__header">
+          <h2 id="limitations-title">Data &amp; method limitations</h2>
           <button
             type="button"
-            className="alatoo-btn alatoo-btn--secondary"
+            className="limitations__close"
             onClick={onClose}
-            aria-label="Close limitations modal"
+            aria-label="Close limitations"
           >
             Close
           </button>
-        </div>
-
-        <div className="alatoo-modal__body">
-          <p className="alatoo-modal__intro">
-            <strong>Ala-Too Fire Calendar</strong> unifies satellite fire observations
-            from 2000 to 2026 onto a single <code>hotspot_days_1km</code> scale across{' '}
-            <code>bbox = [68.5, 38.4, 80.7, 43.7]</code>. Keep these six limitations
-            in mind when interpreting the calendar, anomaly metrics, and time-series charts:
+        </header>
+        <div className="limitations__body">
+          <p id="limitations-intro" className="limitations__intro">
+            The atlas estimates historical fire activity from satellite
+            observations. It does not confirm individual wildfires or measure
+            burned area.
           </p>
-
-          <ol className="alatoo-limitations-list">
+          <ol className="limitations__list">
             <li>
-              <strong>Hotspot &ne; confirmed fire.</strong> A satellite detection represents
-              ~1 km&sup2; of thermal anomaly (including spring agricultural burning and
-              industrial heat sources), not a confirmed wildfire.
+              <h3>A hotspot is a thermal anomaly</h3>
+              <p>
+                Detections can include agricultural burning and industrial heat
+                sources. One detection does not establish a wildfire.
+              </p>
             </li>
             <li>
-              <strong>Clouds, smoke, and dust storms.</strong> Dense cloud cover and thick
-              smoke from large fires can mask nearby active burning, while dust storms and
-              sun glint can occasionally produce false detections.
+              <h3>Observation conditions affect detection</h3>
+              <p>
+                Clouds, smoke and dust can hide active burning. Sun glint and
+                other effects can also produce false detections.
+              </p>
             </li>
             <li>
-              <strong>Harmonization is an estimate, not a direct measurement.</strong> VIIRS
-              observations (from 2012 onward) are calibrated into MODIS 1 km equivalents
-              using <code>2&deg; &times; 2&deg;</code> tile- and season-level regression.
-              Charts after 2012 always display the <code>[lo, hi]</code> 95% uncertainty
-              interval; prior to 2012, MODIS serves as the reference scale (
-              <code>lo == hi == count</code>).
+              <h3>Calibration is an estimate</h3>
+              <p>
+                VIIRS is calibrated to the MODIS reference scale using 2° tiles
+                and seasonal regression. The 95% interval represents approximate
+                calibration uncertainty; it does not cover every measurement
+                error. Earlier MODIS counts use the reference scale directly.
+              </p>
+              <p>
+                Holdout diagnostics informed the model revision. Validation is
+                internal, rather than an untouched external benchmark.
+              </p>
             </li>
             <li>
-              <strong>Incomplete current month.</strong> Anomalies are calculated strictly
-              month-to-date using <code>days_observed</code>&mdash;historical years are
-              truncated to the same day-of-month window (<code>days &lt;= through_day</code>),
-              preventing an artificial negative bias for an ongoing month.
+              <h3>Incomplete months use matching day windows</h3>
+              <p>
+                Where daily coverage is available, the selected month and
+                historical years use days up to the same cutoff. More source
+                data may change the result.
+              </p>
             </li>
             <li>
-              <strong>NRT data latency.</strong> Near Real-Time (<code>MODIS_NRT</code>,{' '}
-              <code>VIIRS_SNPP_NRT</code>) detections arrive with operational latency and
-              are later refined when superseded by standard science-quality (<code>SP</code>)
-              archives. Recent months are flagged as <code>nrt</code>.
+              <h3>Recent data may be revised</h3>
+              <p>
+                Near Real-Time (NRT) observations arrive with latency. Standard
+                science-quality archives replace them when available. Partial
+                source coverage is flagged separately.
+              </p>
             </li>
             <li>
-              <strong>Observation gaps (<code>null</code> &ne; <code>0</code>).</strong> In
-              the year &times; month calendar, <code>0</code> indicates valid observations
-              with zero detected hotspots, whereas <code>null</code> (rendered with a
-              distinct pattern) indicates missing data for that period.
+              <h3>Missing observations are not zero activity</h3>
+              <p>
+                A hatched calendar cell means no usable data. Zero means the
+                available observations contain no detected hotspots.
+              </p>
             </li>
           </ol>
-
-          <div className="alatoo-null-demo" aria-label="Visual legend for null cells">
-            <span
-              className="alatoo-null-demo__swatch cell-null-pattern"
-              aria-hidden="true"
-            />
-            <span>
-              <strong>Hatched cell (null):</strong> missing observation period, distinct from{' '}
-              <code>0</code> hotspot-days.
-            </span>
+          <div className="limitations__resolution">
+            <h3>Spatial resolution and units</h3>
+            <p>
+              Areas use whole 0.25° reporting cells, so small polygons are
+              approximations. Detections are snapped to a 0.01° angular grid,
+              not equal-area 1 km pixels. The unit is{" "}
+              <code>hotspot_days_1km</code>. Available source days do not imply
+              cloud-free coverage.
+            </p>
           </div>
         </div>
-
-        <div className="alatoo-modal__footer">
-          <span>Data attribution: NASA FIRMS &mdash; MODIS/VIIRS active fire data (2000&ndash;2026).</span>
-          <button
-            type="button"
-            className="alatoo-btn alatoo-btn--primary"
-            onClick={onClose}
-          >
-            Got it
+        <footer className="limitations__footer">
+          <span>Source: NASA FIRMS · MODIS / VIIRS</span>
+          <button type="button" className="limitations__done" onClick={onClose}>
+            Back to the atlas
           </button>
-        </div>
+        </footer>
       </div>
     </div>
   );

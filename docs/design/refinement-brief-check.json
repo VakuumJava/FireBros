@@ -1,0 +1,83 @@
+{
+ "brief": "./.uimix/DESIGN-BRIEF.json",
+ "checks": [
+  {
+   "status": "pass",
+   "id": "modes",
+   "detail": "one surface, no dark counterpart"
+  },
+  {
+   "status": "pass",
+   "id": "theme",
+   "detail": "blocks found: light"
+  },
+  {
+   "status": "pass",
+   "id": "light/text",
+   "detail": "13.32:1 (floor 4.50) #21332d on #ffffff"
+  },
+  {
+   "status": "pass",
+   "id": "light/muted",
+   "detail": "6.28:1 (floor 4.50) #53645c on #ffffff"
+  },
+  {
+   "status": "pass",
+   "id": "light/on_primary",
+   "detail": "7.72:1 (floor 4.50) #ffffff on #245c4f"
+  },
+  {
+   "status": "pass",
+   "id": "light/primary",
+   "detail": "7.72:1 (floor 3.00) #245c4f on #ffffff"
+  },
+  {
+   "status": "pass",
+   "id": "light/focus",
+   "detail": "7.72:1 (floor 3.00) #245c4f on #ffffff"
+  },
+  {
+   "status": "pass",
+   "id": "light/border",
+   "detail": "3.61:1 (floor 1.15) #798b80 on #ffffff"
+  },
+  {
+   "status": "pass",
+   "id": "locale",
+   "detail": "answer: english only \u2014 no translation layer"
+  },
+  {
+   "status": "pass",
+   "id": "locale/lang",
+   "detail": "lang='en'"
+  },
+  {
+   "status": "pass",
+   "id": "locale/layer",
+   "detail": "no translation layer"
+  },
+  {
+   "status": "fail",
+   "id": "fonts/files",
+   "detail": "declared font files are not on disk: fonts/IBMPlexSansUIMixVar.woff2, fonts/IBMPlexSansUIMix-Italic.woff2, fonts/JetBrainsMonoUIMixVar.woff2"
+  },
+  {
+   "status": "fail",
+   "id": "nav",
+   "detail": "no top bar found"
+  },
+  {
+   "status": "pass",
+   "id": "density",
+   "detail": "--row: 44px (regular)"
+  },
+  {
+   "status": "pass",
+   "id": "copy",
+   "detail": "no placeholder text"
+  }
+ ],
+ "fail": 2,
+ "warn": 0,
+ "inconclusive": 0
+}

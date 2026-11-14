@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
 /**
  * Mandatory scientific attribution footer for Ala-Too Fire Calendar.
  */
 export function AttributionFooter({
   onOpenLimitations,
-  methodVersion = 'harmonize-v1',
+  methodVersion = "harmonize-v1",
 }) {
   return (
     <footer className="alatoo-footer">
       <div className="alatoo-footer__inner">
         <div className="alatoo-footer__attribution">
           <span className="alatoo-footer__source">
-            NASA FIRMS &mdash; MODIS/VIIRS active fire data (2000&ndash;2026)
+            NASA FIRMS &mdash; MODIS/VIIRS active fire data
           </span>
           <span aria-hidden="true">&middot;</span>
           <span>Team Stellar Baatyr</span>

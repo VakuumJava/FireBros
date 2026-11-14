@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import './tokens.css';
-import { PALETTE_NAMES } from './palettes.js';
-import { DataSourceBadge } from './DataSourceBadge.jsx';
-import { AttributionFooter } from './AttributionFooter.jsx';
-import { LimitationsView } from './LimitationsView.jsx';
+import React, { useState } from "react";
+import "./legacy-shell.css";
+import { PALETTE_NAMES } from "./palettes.js";
+import { DataSourceBadge } from "./DataSourceBadge.jsx";
+import { AttributionFooter } from "./AttributionFooter.jsx";
+import { LimitationsView } from "./LimitationsView.jsx";
 
 function SlotPlaceholder({ slotName, description }) {
   return (
@@ -20,14 +20,14 @@ function SlotPlaceholder({ slotName, description }) {
  * mandatory NASA FIRMS attribution footer, and the 6-point Limitations modal.
  */
 export function AppShell({
-  palette = 'viridis',
+  palette = "viridis",
   onPaletteChange,
   onExportCsv,
   exportDisabled = false,
   exportLoading = false,
-  dataSource = 'mock',
-  unit = 'hotspot_days_1km',
-  methodVersion = 'harmonize-v1',
+  dataSource = "mock",
+  unit = "hotspot_days_1km",
+  methodVersion = "harmonize-v1",
   mapSlot = null,
   anomalyCardSlot = null,
   calendarSlot = null,
@@ -39,7 +39,9 @@ export function AppShell({
   const [internalLimitsOpen, setInternalLimitsOpen] = useState(false);
 
   const limitsOpen =
-    typeof isLimitationsOpen === 'boolean' ? isLimitationsOpen : internalLimitsOpen;
+    typeof isLimitationsOpen === "boolean"
+      ? isLimitationsOpen
+      : internalLimitsOpen;
 
   const handleOpenLimits = () => {
     if (onOpenLimitations) {
@@ -57,7 +59,7 @@ export function AppShell({
     }
   };
 
-  const activePalette = PALETTE_NAMES.includes(palette) ? palette : 'viridis';
+  const activePalette = PALETTE_NAMES.includes(palette) ? palette : "viridis";
 
   return (
     <div className="alatoo-shell">
@@ -66,13 +68,17 @@ export function AppShell({
           <div className="alatoo-brand">
             <div className="alatoo-brand__title-row">
               <h1 className="alatoo-brand__title">Ala-Too Fire Calendar</h1>
-              <span className="alatoo-unit-chip" title="Canonical measurement unit">
+              <span
+                className="alatoo-unit-chip"
+                title="Canonical measurement unit"
+              >
                 {unit}
               </span>
               <DataSourceBadge source={dataSource} />
             </div>
             <p className="alatoo-brand__subtitle">
-              Team Stellar Baatyr &middot; Harmonized MODIS/VIIRS Fire Activity (2000&ndash;2026) &middot; bbox [68.5, 38.4, 80.7, 43.7]
+              Team Stellar Baatyr &middot; Harmonized MODIS/VIIRS Fire Activity
+              (2000&ndash;2026) &middot; bbox [68.5, 38.4, 80.7, 43.7]
             </p>
           </div>
 
@@ -84,7 +90,7 @@ export function AppShell({
             >
               {PALETTE_NAMES.map((name) => {
                 const isSelected = activePalette === name;
-                const label = name === 'viridis' ? 'Viridis' : 'Cividis';
+                const label = name === "viridis" ? "Viridis" : "Cividis";
                 return (
                   <button
                     key={name}
@@ -94,9 +100,15 @@ export function AppShell({
                     onClick={() => onPaletteChange && onPaletteChange(name)}
                   >
                     <span className="alatoo-swatch" aria-hidden="true">
-                      <span className={`alatoo-swatch__stop alatoo-swatch--${name}-0`} />
-                      <span className={`alatoo-swatch__stop alatoo-swatch--${name}-1`} />
-                      <span className={`alatoo-swatch__stop alatoo-swatch--${name}-2`} />
+                      <span
+                        className={`alatoo-swatch__stop alatoo-swatch--${name}-0`}
+                      />
+                      <span
+                        className={`alatoo-swatch__stop alatoo-swatch--${name}-1`}
+                      />
+                      <span
+                        className={`alatoo-swatch__stop alatoo-swatch--${name}-2`}
+                      />
                     </span>
                     <span>{label}</span>
                   </button>
@@ -118,7 +130,7 @@ export function AppShell({
               onClick={onExportCsv}
               disabled={exportDisabled || exportLoading || !onExportCsv}
             >
-              {exportLoading ? 'Exporting CSV...' : 'Export CSV'}
+              {exportLoading ? "Exporting CSV..." : "Export CSV"}
             </button>
           </div>
         </div>
@@ -134,7 +146,9 @@ export function AppShell({
               <h2 id="panel-title-map" className="alatoo-panel__title">
                 Area of Interest (AOI)
               </h2>
-              <span className="alatoo-panel__meta">EPSG:4326 &middot; 0.25&deg; grid</span>
+              <span className="alatoo-panel__meta">
+                EPSG:4326 &middot; 0.25&deg; grid
+              </span>
             </div>
             <div className="alatoo-panel__body">
               {mapSlot || (
@@ -154,7 +168,9 @@ export function AppShell({
               <h2 id="panel-title-anomaly" className="alatoo-panel__title">
                 Current Month Anomaly &amp; Top Periods
               </h2>
-              <span className="alatoo-panel__meta">Month-to-date (MAD &sigma;)</span>
+              <span className="alatoo-panel__meta">
+                Month-to-date (MAD &sigma;)
+              </span>
             </div>
             <div className="alatoo-panel__body">
               {anomalyCardSlot || (
@@ -196,7 +212,9 @@ export function AppShell({
               <h2 id="panel-title-validation" className="alatoo-panel__title">
                 MODIS / VIIRS Harmonization &amp; Validation
               </h2>
-              <span className="alatoo-panel__meta">2012 knot &middot; 95% CI</span>
+              <span className="alatoo-panel__meta">
+                2012 knot &middot; 95% CI
+              </span>
             </div>
             <div className="alatoo-panel__body">
               {validationChartSlot || (

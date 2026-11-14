@@ -1,0 +1,15 @@
+PASS warning   #A06100     4.99:1  (needs 4.5)
+PASS success   #287F39     5.02:1  (needs 4.5)
+PASS danger    #C92A2A     5.46:1  (needs 4.5)
+PASS muted     #55645f     6.22:1  (needs 4.5)
+PASS primary   #964225     6.77:1  (needs 4.5)
+PASS accent    #964225     6.77:1  (needs 4.5)
+PASS focus     #964225     6.77:1  (needs 4.5)
+PASS secondary #245C54     7.68:1  (needs 4.5)
+PASS text      #1D312F    13.70:1  (needs 4.5)
+WARN warning and primary are only 0.082 apart perceptually — they will read as the same color
+PASS border    #7e8e86     3.44:1  (needs 3.0 vs surface)
+PASS on_primary #ffffff     6.77:1  (needs 3.0 vs primary)
+NOTE 2 token(s) have no declared role (surface_alt, sunken) — unverified. Add a `_roles` entry mapping each to its role (text/muted/primary/.../border/on_primary/...); a name is not a semantic, so these are INCONCLUSIVE, never passing.
+
+11/11 tokens pass their floor

@@ -9,61 +9,65 @@
 
 export const PALETTES = {
   viridis: [
-    '#440154',
-    '#482878',
-    '#3E4989',
-    '#31688E',
-    '#26828E',
-    '#1F9E89',
-    '#35B779',
-    '#6ECE58',
-    '#B5DE2B',
-    '#FDE725',
+    "#440154",
+    "#482878",
+    "#3E4989",
+    "#31688E",
+    "#26828E",
+    "#1F9E89",
+    "#35B779",
+    "#6ECE58",
+    "#B5DE2B",
+    "#FDE725",
   ],
   cividis: [
-    '#002051',
-    '#0A326A',
-    '#2B446E',
-    '#4D566D',
-    '#696970',
-    '#7F7C75',
-    '#999276',
-    '#B5A872',
-    '#D4C068',
-    '#FDEA45',
+    "#002051",
+    "#0A326A",
+    "#2B446E",
+    "#4D566D",
+    "#696970",
+    "#7F7C75",
+    "#999276",
+    "#B5A872",
+    "#D4C068",
+    "#FDEA45",
   ],
 };
 
-export const PALETTE_NAMES = Object.freeze(['viridis', 'cividis']);
+export const PALETTE_NAMES = Object.freeze(["viridis", "cividis"]);
 
 export const PALETTE_LABELS = {
-  viridis: 'Viridis',
-  cividis: 'Cividis',
+  viridis: "Viridis",
+  cividis: "Cividis",
 };
 
 function parseHex(hexColor) {
-  if (typeof hexColor !== 'string') {
+  if (typeof hexColor !== "string") {
     return null;
   }
-  const clean = hexColor.trim().replace(/^#/, '');
+  const clean = hexColor.trim().replace(/^#/, "");
   if (clean.length === 3) {
     const r = parseInt(clean[0] + clean[0], 16);
     const g = parseInt(clean[1] + clean[1], 16);
     const b = parseInt(clean[2] + clean[2], 16);
-    return Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b) ? null : [r, g, b];
+    return Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)
+      ? null
+      : [r, g, b];
   }
   if (clean.length === 6) {
     const r = parseInt(clean.slice(0, 2), 16);
     const g = parseInt(clean.slice(2, 4), 16);
     const b = parseInt(clean.slice(4, 6), 16);
-    return Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b) ? null : [r, g, b];
+    return Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)
+      ? null
+      : [r, g, b];
   }
   return null;
 }
 
 function toHex([r, g, b]) {
   const clampByte = (v) => Math.max(0, Math.min(255, Math.round(v)));
-  const hex = (v) => clampByte(v).toString(16).padStart(2, '0');
+  const hex = (v) => clampByte(v).toString(16).padStart(2, "0");
   return `#${hex(r)}${hex(g)}${hex(b)}`;
 }
 
@@ -105,7 +109,7 @@ export function rgbAt(name, t) {
  * @param {number} t
  * @returns {string}
  */
-export const colorAt = (name, t) => `rgb(${rgbAt(name, t).join(',')})`;
+export const colorAt = (name, t) => `rgb(${rgbAt(name, t).join(",")})`;
 
 /**
  * Readable text color on top of an [r, g, b] tuple or hex color string.
@@ -114,15 +118,17 @@ export const colorAt = (name, t) => `rgb(${rgbAt(name, t).join(',')})`;
  * @returns {string}
  */
 export function textOn(color) {
-  if (typeof color === 'string') {
+  if (typeof color === "string") {
     return getContrastTextColor(color);
   }
   if (Array.isArray(color) && color.length >= 3) {
     const [r, g, b] = color;
-    const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-    return lum > 0.55 ? '#111' : '#fff';
+    const luminance = relativeLuminance([r, g, b]);
+    return 1.05 / (luminance + 0.05) >= (luminance + 0.05) / 0.05
+      ? "#fff"
+      : "#000";
   }
-  return '#fff';
+  return "#fff";
 }
 
 /**
@@ -135,8 +141,8 @@ export function textOn(color) {
  */
 export const gradientCss = (name, steps = 12) =>
   `linear-gradient(to right, ${Array.from({ length: steps }, (_, i) =>
-    colorAt(name, i / (steps - 1))
-  ).join(', ')})`;
+    colorAt(name, i / (steps - 1)),
+  ).join(", ")})`;
 
 /**
  * Maps a numeric value within [min, max] to an interpolated hex color
@@ -150,13 +156,23 @@ export const gradientCss = (name, steps = 12) =>
  * @param {'viridis'|'cividis'} [paletteName='viridis']
  * @returns {string|null}
  */
-export function getHeatmapColor(value, min, max, paletteName = 'viridis') {
-  if (value === null || value === undefined || typeof value !== 'number' || Number.isNaN(value)) {
+export function getHeatmapColor(value, min, max, paletteName = "viridis") {
+  if (
+    value === null ||
+    value === undefined ||
+    typeof value !== "number" ||
+    Number.isNaN(value)
+  ) {
     return null;
   }
 
   const span = max - min;
-  const t = span <= 0 ? (value > min ? 1 : 0) : Math.max(0, Math.min(1, (value - min) / span));
+  const t =
+    span <= 0
+      ? value > min
+        ? 1
+        : 0
+      : Math.max(0, Math.min(1, (value - min) / span));
   return toHex(rgbAt(paletteName, t));
 }
 
@@ -170,7 +186,7 @@ export function getHeatmapColor(value, min, max, paletteName = 'viridis') {
 export function getContrastTextColor(hexColor) {
   const rgb = parseHex(hexColor);
   if (!rgb) {
-    return '#0F172A';
+    return "#0F172A";
   }
   const lumBg = relativeLuminance(rgb);
   const lumWhite = 1.0;
@@ -179,5 +195,5 @@ export function getContrastTextColor(hexColor) {
   const contrastWhite = (lumWhite + 0.05) / (lumBg + 0.05);
   const contrastDark = (lumBg + 0.05) / (lumDark + 0.05);
 
-  return contrastWhite >= contrastDark ? '#FFFFFF' : '#0F172A';
+  return contrastWhite >= contrastDark ? "#FFFFFF" : "#0F172A";
 }
