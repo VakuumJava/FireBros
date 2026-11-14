@@ -2,7 +2,7 @@
 
 ## Slide 1 — Title and summary (Relevance)
 - **Project:** Ala-Too Fire Calendar
-- **Team:** Team FireBros
+- **Team:** Team Stellar Baatyr
 - **Challenge:** Harmonization of MODIS and VIIRS Hot Spots
 - **One-sentence value proposition:** A web application that delivers a continuous, scientifically calibrated 2000–2026 thermal-anomaly time series for any user-drawn Area of Interest in Kyrgyzstan and its neighboring belt, eliminating the artificial 2012 sensor jump between MODIS and VIIRS.
 
@@ -60,7 +60,7 @@
 ---
 
 ## Slide 7 — Team and references (Required fields)
-- **Team FireBros (Roles P1–P5):**
+- **Team Stellar Baatyr (Roles P1–P5):**
   - **P1:** Integration, API contract, code review, deployment
   - **P2:** Data engineering (FIRMS ingestion, `0.01°` deduplication, Parquet aggregates, CSV store)
   - **P3:** Science & validation (harmonization, tile-level calibration, uncertainty intervals, hold-out metrics)
