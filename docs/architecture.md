@@ -1,51 +1,51 @@
-# Архитектура
+# Architecture
 
-**Диаграмма:** [`architecture.excalidraw`](architecture.excalidraw) — 117 элементов, слои слева направо, цвет рамки = владелец модуля.
+**Diagram:** [`architecture.excalidraw`](architecture.excalidraw) - 117 elements, layers left to right, border colour = module owner. English text, pure ASCII, so it cannot be mangled by any editor or clipboard round-trip.
 
-## Как положить её в вашу комнату Excalidraw
+## Getting it into the Excalidraw room
 
-Живую коллаб-комнату снаружи не отредактировать (там ключ шифрования в ссылке), поэтому файл импортируется за 15 секунд:
+A live collab room cannot be edited from outside (the encryption key lives in the link), so the file is imported in 15 seconds:
 
-1. Открыть https://excalidraw.com (новая пустая вкладка, **не** комната).
-2. `Menu → Open` → выбрать `docs/architecture.excalidraw`.
-3. `Ctrl+A` → `Ctrl+C`.
-4. Перейти во вкладку с комнатой `#room=5fb1be6a…` → `Ctrl+V`.
+1. Open https://excalidraw.com in a blank tab (**not** the room).
+2. `Menu -> Open` -> pick `docs/architecture.excalidraw`.
+3. `Ctrl+A`, `Ctrl+C`.
+4. Switch to the room tab -> `Ctrl+V`.
 
-Сцена вставится одним блоком, ничего не перезапишет. Дальше её можно двигать и подписывать руками — это обычные прямоугольники и стрелки, не картинка.
+It pastes as one block and overwrites nothing. Every box and arrow stays editable.
 
 ---
 
-## Слои
+## Layers
 
 ```mermaid
 flowchart LR
-  subgraph SRC["1 · Данные (P2)"]
-    M["MODIS C6.1<br/>1 км · 2000→"]
-    V["VIIRS SNPP<br/>375 м · 2012→"]
-    N["NOAA-20/21<br/>выключено флагом"]
+  subgraph SRC["1 - Data (P2)"]
+    M["MODIS C6.1<br/>1 km / 2000 -"]
+    V["VIIRS SNPP<br/>375 m / 2012 -"]
+    N["NOAA-20 / 21<br/>off by flag"]
   end
 
-  subgraph PIPE["2 · Pipeline, offline (P2 + P3)"]
-    I["ingest<br/>5-дневные окна"] --> G["grid<br/>снап 0.01°"]
-    G --> A["aggregate<br/>0.25° месячные"]
-    A --> H["harmonize (P3)<br/>тайлы 2°, log1p"]
-    H --> VA["validate (P3)<br/>hold-out + тест скачка"]
+  subgraph PIPE["2 - Pipeline, offline (P2 + P3)"]
+    I["ingest<br/>5-day windows"] --> G["grid<br/>snap 0.01 deg"]
+    G --> A["aggregate<br/>0.25 deg monthly"]
+    A --> H["harmonize (P3)<br/>2 deg tiles, log1p"]
+    H --> VA["validate (P3)<br/>hold-out + knot test"]
   end
 
-  subgraph ST["3 · Хранилище"]
+  subgraph ST["3 - Storage"]
     C1[("cells_monthly.parquet")]
     C2[("calibration.parquet")]
     C3[("hotspots/*.parquet")]
   end
 
-  subgraph API["4 · API (P1)"]
-    F["FastAPI /api/v1<br/>суммирует ячейки AOI"]
+  subgraph API["4 - API (P1)"]
+    F["FastAPI /api/v1<br/>sums AOI cells"]
   end
 
-  subgraph FE["5 · Фронтенд (P4, P5)"]
-    MAP["Карта + AOI"] --> CAL["Календарь"]
-    CAL --> ANOM["Аномалия"]
-    ANOM --> CH["До/после 2012"]
+  subgraph FE["5 - Frontend (P4, P5)"]
+    MAP["Map + AOI"] --> CAL["Calendar"]
+    CAL --> ANOM["Anomaly"]
+    ANOM --> CH["Before / after 2012"]
     CAL --> CSV["CSV"]
   end
 
@@ -61,67 +61,81 @@ flowchart LR
   C2 --> F
   C3 --> F
   CT --> F
-  CT -.->|"фикстуры с часа 0"| MAP
+  CT -.->|"fixtures from hour 0"| MAP
   F --> MAP
 ```
 
-## Принцип, на котором держится скорость
+## The principle that makes it fast
 
-Тяжёлое считается заранее, один раз, офлайн. На запрос API не читает 4 млн точек — он суммирует ~1000 ячеек из Parquet. Сырые точки читаются только для CSV.
+Heavy work runs once, offline. A request does not read 4M raw points - it sums ~1000 cells from Parquet. Raw points are read only for the CSV export.
 
-Следствие для ролей: **P2 и P3 не блокируют P4**. Фронт с первого часа живёт на `contracts/fixtures/*.json`, которые повторяют форму реальных ответов до последнего поля.
+Consequence for the team: **P2 and P3 do not block P4.** The frontend runs on `contracts/fixtures/*.json` from hour 0, and the fixtures mirror the real responses field for field.
 
-## Слои и их контракты
+## Layers and their contracts
 
-| Слой | Вход | Выход | Владелец |
+| Layer | Input | Output | Owner |
 |---|---|---|---|
-| Данные | FIRMS area API + `MAP_KEY` | `data/raw/**` (CSV, не в git) | P2 |
-| Pipeline | `data/raw/**` | `cells_monthly.parquet`, `hotspots/*.parquet`, `calibration.parquet`, `manifest.json` | P2 → P3 |
-| Хранилище | parquet | те же файлы + схемы в `/contracts` | P1 (схемы), P2 (файлы) |
-| API | parquet + схемы | JSON строго по `/contracts` | P1 |
-| Фронтенд | JSON / фикстуры | 5 блоков UI | P4 (P5 — тексты, a11y) |
+| Data | FIRMS area API + `MAP_KEY` | `data/raw/**` (CSV, not in git) | P2 |
+| Pipeline | `data/raw/**` | `cells_monthly.parquet`, `hotspots/*.parquet`, `calibration.parquet`, `manifest.json` | P2 -> P3 |
+| Storage | parquet | same files + schemas in `/contracts` | P1 (schemas), P2 (files) |
+| API | parquet + schemas | JSON strictly per `/contracts` | P1 |
+| Frontend | JSON / fixtures | 5 UI blocks | P4 (P5: copy, a11y) |
 
-## Схема хранения
+## Storage schema
 
-`cells_monthly.parquet` — одна строка на (ячейка, месяц, семейство сенсора):
+`cells_monthly.parquet` - one row per (cell, month, sensor family):
 
-| Колонка | Тип | Смысл |
+| Column | Type | Meaning |
 |---|---|---|
-| `grid_row`, `grid_col` | int | индекс ячейки 0.25°, от юго-западного угла региона |
-| `year`, `month` | int | месяц наблюдения |
-| `sensor_family` | str | `MODIS` · `VIIRS_SNPP` · `VIIRS_NOAA20` · `VIIRS_NOAA21` |
-| `hotspot_days` | int | **единица измерения продукта**: Σ по дням (уникальные 1-км ячейки) |
-| `days_observed` | int | сколько дней месяца реально есть в данных |
-| `n_detections` | int | сырые детекции — только для диагностики, **не** для графика |
+| `grid_row`, `grid_col` | int | 0.25 deg cell index from the region's south-west corner |
+| `year`, `month` | int | observation month |
+| `sensor_family` | str | `MODIS` / `VIIRS_SNPP` / `VIIRS_NOAA20` / `VIIRS_NOAA21` |
+| `hotspot_days` | int | **the product unit**: sum over days of unique 1-km cells |
+| `days_observed` | int | how many days of the month actually exist in the data |
+| `n_detections` | int | raw detections - diagnostics only, **never** plotted |
 
-`calibration.parquet` — одна строка на (тайл 2°, месяц):
+`calibration.parquet` - one row per (2 deg tile, month):
 
-| Колонка | Смысл |
+| Column | Meaning |
 |---|---|
-| `tile_row`, `tile_col` | индекс тайла 2° |
-| `month` | 1–12 |
-| `a`, `b` | коэффициенты `log1p(MODIS) = a + b·log1p(VIIRS)` |
-| `sigma_a`, `sigma_b` | ошибки коэффициентов → интервал неопределённости |
-| `n_obs` | сколько месяцев перекрытия попало в подгонку |
-| `shrinkage` | 0…1, вес тайловой подгонки против глобальной |
+| `tile_row`, `tile_col` | 2 deg tile index |
+| `month` | 1-12 |
+| `a`, `b` | `log1p(MODIS) = a + b * log1p(VIIRS)` |
+| `sigma_a`, `sigma_b` | coefficient errors -> uncertainty band |
+| `n_obs` | overlap months used in the fit |
+| `shrinkage` | 0..1, weight of the tile fit against the global fit |
 
-`hotspots/*.parquet` — партиции по году, колонки как в API-CSV: `latitude`, `longitude`, `acq_date`, `acq_time`, `satellite`, `instrument`, `sensor_family`, `confidence`, `frp`, `daynight`, `grid_cell`.
+`hotspots/*.parquet` - per-year partitions, columns identical to the API CSV: `latitude`, `longitude`, `acq_date`, `acq_time`, `satellite`, `instrument`, `sensor_family`, `confidence`, `frp`, `daynight`, `grid_cell`.
 
-## Четыре вещи, которые нельзя размазывать по слоям
+## Four things that must not be spread across layers
 
-1. **Единица `hotspot_days_1km`** определяется в `grid.py` и больше нигде не переопределяется. Если API начнёт считать «детекции», а календарь — «ячейки», проект развалится тихо.
-2. **`null` ≠ `0`** в календаре. Пробел в данных и настоящий ноль — разные вещи, и фронт это рисует по-разному.
-3. **`days_observed`** обязателен в каждом месячном ответе. Текущий месяц неполный, NRT догоняет; без этого поля аномалия систематически врёт вниз.
-4. **Калибровка считается по региональным тайлам, а не по AOI.** Иначе результат зависит от того, что пользователь нарисовал, и график «до/после» перестаёт быть доказательством.
+1. **The `hotspot_days_1km` unit** is defined in `grid.py` and nowhere else. If the API counts detections while the calendar counts cells, the project fails silently.
+2. **`null` is not `0`** in the calendar. A data gap and a real zero are different facts and the UI renders them differently.
+3. **`days_observed`** is mandatory in every monthly response. The current month is partial and NRT lags; without this field the anomaly is systematically biased downwards.
+4. **Calibration is computed per regional tile, not per AOI.** Otherwise the result depends on what the user drew, and the before/after chart stops being evidence.
 
-## Границы и не-цели
+## Boundaries and non-goals
 
-- Регион фиксирован: `bbox = 68.5, 38.4, 80.7, 43.7`. Запрос вне региона — `422` с внятным текстом, а не тихий ноль.
-- Глобальный охват, авторизация, загрузка своих данных, мобильное приложение — не в этой итерации.
-- Полигон в MVP приводится к списку 0.25° ячеек (центр внутри полигона + пограничные partial). Растеризация в растр не нужна.
+- Region is fixed: `bbox = 68.5, 38.4, 80.7, 43.7`. A request outside it returns `422` with a readable message, not a silent zero.
+- Global coverage, auth, user uploads, mobile app - not in this iteration.
+- In the MVP a polygon is reduced to a list of 0.25 deg cells (centre inside, plus border cells). No rasterisation.
 
-## Деплой
+## Deployment
 
-- API: один контейнер (uvicorn), Parquet монтируется read-only.
-- Фронт: статика (Vite build) на любом CDN; API-URL через `VITE_API_URL`.
-- Нет базы данных. Нет очередей. Нет фоновых задач в рантайме — всё в pipeline.
+- API: one container (uvicorn), Parquet mounted read-only.
+- Frontend: static build (Vite) on any CDN; API URL via `VITE_API_URL`.
+- No database. No queue. No runtime background jobs - everything happens in the pipeline.
+
+## API surface
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /api/v1/aoi/summary` | unified monthly series + coverage |
+| `GET /api/v1/aoi/calendar` | year x month matrix for the heatmap |
+| `GET /api/v1/aoi/anomaly` | current month vs history (month-to-date) |
+| `GET /api/v1/aoi/top` | most active months and years |
+| `GET /api/v1/aoi/harmonization` | before/after 2012 + validation metrics |
+| `GET /api/v1/aoi/export.csv` | raw hotspots or the monthly table |
+| `GET /api/v1/meta/health`, `/meta/region` | diagnostics and region metadata |
+
+Field-by-field reference: [`api-contract.md`](api-contract.md). Machine schemas: [`../contracts/`](../contracts).
