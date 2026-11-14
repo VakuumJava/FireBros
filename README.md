@@ -5,7 +5,7 @@ MODIS (1 км, с 2000) и VIIRS (375 м, с 2012) приводятся к од�
 
 Хакатон-проект. Веб-приложение: рисуешь AOI на карте → получаешь календарь активности год × месяц, аномалию текущего месяца, топ-периоды, график «до/после гармонизации» и CSV.
 
-**Сейчас в репозитории:** зафиксированные решения, архитектура, роли на 5 человек и контракт API. Код модулей добавляется по мере старта — см. [`docs/roles.md`](docs/roles.md).
+**Сейчас в репозитории:** рабочий продукт на моках — FastAPI (`/backend`), фронтенд на React + Leaflet + Plotly (`/frontend`), контракт (`/contracts`), страница ограничений и питч-материалы. Pipeline (P2/P3) ещё не влит: пока нет `cells_monthly.parquet`, API честно отвечает `meta.source = "mock"` и отдаёт фикстуры, а фронт умеет работать вообще без бэкенда.
 
 ---
 
@@ -35,24 +35,54 @@ MODIS (1 км, с 2000) и VIIRS (375 м, с 2012) приводятся к од�
 | [`docs/architecture.md`](docs/architecture.md) | слои, потоки данных, схема хранения, границы и не-цели |
 | [`docs/roles.md`](docs/roles.md) | 5 ролей, владение директориями, стыки, тайминг, фолбэки |
 | [`docs/api-contract.md`](docs/api-contract.md) | схема API: эндпоинты, поля JSON, коды ошибок |
+| [`docs/limitations.md`](docs/limitations.md) | шесть ограничений: облака и дым, хотспот ≠ пожар, гармонизация как оценка, неполный месяц, NRT, `null ≠ 0` |
+| [`docs/pitch/`](docs/pitch) | слайды и сценарий демо на 90 секунд |
 | [`contracts/`](contracts) | JSON Schema + фикстуры — единственный источник правды для стыков |
 | [`data/README.md`](data/README.md) | как получить FIRMS, раскладка каталогов, лицензия |
 
 ---
 
-## 3. Структура репозитория
+## 3. Структура и запуск
 
 ```
 /data            # сырьё FIRMS (в .gitignore; как скачать — data/README.md)
-/pipeline        # ingest → grid → aggregate → harmonize → validate
+/pipeline        # ingest → grid → aggregate → harmonize → validate (P2/P3, ещё не влит)
 /backend         # FastAPI: /aoi/summary, /calendar, /anomaly, /top, /export.csv, /harmonization
-/frontend        # React + Leaflet + Plotly
+/frontend        # React + Leaflet + Plotly, сборка Vite
 /contracts       # JSON Schema = контракт стыков + фикстуры
-/docs            # архитектура, роли, метод, ограничения, диаграмма
+/docs            # архитектура, роли, метод, ограничения, питч
 README.md
 ```
 
 **Принцип:** тяжёлое считается заранее. Pipeline превращает сырые точки в месячные агрегаты по 0.25° ячейкам (Parquet); API на запрос AOI только суммирует ячейки; сырые точки нужны только для CSV. Поэтому фронт с первого часа работает на `contracts/fixtures/`, не дожидаясь данных.
+
+### Запуск
+
+```bash
+# 1. API, из корня репозитория
+python -m venv .venv
+.venv/Scripts/pip install -r backend/requirements-dev.txt     # Windows
+# .venv/bin/pip install -r backend/requirements-dev.txt       # Linux / macOS
+.venv/Scripts/python -m uvicorn app.main:app --app-dir backend --port 8000
+
+# 2. Фронтенд, второй терминал
+cd frontend
+npm ci
+cp .env.example .env        # выставить VITE_USE_MOCK=false, чтобы шли запросы к API
+npm run dev                 # http://localhost:5173, /api проксируется на :8000
+```
+
+С `VITE_USE_MOCK=true` (по умолчанию) фронт живёт на `contracts/fixtures/` и бэкенд не нужен — режим для верстки и демо без сети. С `false` все пять блоков берут данные из API; `meta.source` в шапке показывает, откуда они на самом деле.
+
+> `npm` не работает по UNC-пути `\\wsl$\...`: фронтенд запускать внутри WSL или на нативной файловой системе.
+
+### Проверки
+
+```bash
+.venv/Scripts/python -m pytest        # 38 тестов, включая валидацию ответов по JSON Schema
+.venv/Scripts/python -m ruff check .
+cd frontend && npm run build && npm test   # сборка Vite + 9 unit-тестов
+```
 
 ---
 
