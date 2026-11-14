@@ -1,6 +1,10 @@
 /**
  * Perceptually uniform, colorblind-safe sequential colormaps (viridis & cividis)
  * for Ala-Too Fire Calendar heatmap cells and legend scales.
+ *
+ * Compatible with both P4 component imports (PALETTES, PALETTE_LABELS, rgbAt,
+ * colorAt, textOn, gradientCss) and P5 UI helpers (PALETTE_NAMES,
+ * getHeatmapColor, getContrastTextColor).
  */
 
 export const PALETTES = {
@@ -31,6 +35,11 @@ export const PALETTES = {
 };
 
 export const PALETTE_NAMES = Object.freeze(['viridis', 'cividis']);
+
+export const PALETTE_LABELS = {
+  viridis: 'Viridis',
+  cividis: 'Cividis',
+};
 
 function parseHex(hexColor) {
   if (typeof hexColor !== 'string') {
@@ -67,6 +76,69 @@ function relativeLuminance([r, g, b]) {
 }
 
 /**
+ * Interpolates [r, g, b] (0..255 integers) at normalized position t in [0..1]
+ * for the given palette ('viridis' or 'cividis').
+ *
+ * @param {'viridis'|'cividis'} name
+ * @param {number} t
+ * @returns {[number, number, number]}
+ */
+export function rgbAt(name, t) {
+  const stops = PALETTES[name] || PALETTES.viridis;
+  const clamped = Math.min(1, Math.max(0, Number.isFinite(t) ? t : 0));
+  const x = clamped * (stops.length - 1);
+  const i = Math.min(Math.floor(x), stops.length - 2);
+  const f = x - i;
+  const a = parseHex(stops[i]);
+  const b = parseHex(stops[i + 1]);
+  return [
+    Math.round(a[0] + (b[0] - a[0]) * f),
+    Math.round(a[1] + (b[1] - a[1]) * f),
+    Math.round(a[2] + (b[2] - a[2]) * f),
+  ];
+}
+
+/**
+ * Returns an `rgb(r,g,b)` CSS color string at normalized position t in [0..1].
+ *
+ * @param {'viridis'|'cividis'} name
+ * @param {number} t
+ * @returns {string}
+ */
+export const colorAt = (name, t) => `rgb(${rgbAt(name, t).join(',')})`;
+
+/**
+ * Readable text color on top of an [r, g, b] tuple or hex color string.
+ *
+ * @param {[number, number, number]|string} color
+ * @returns {string}
+ */
+export function textOn(color) {
+  if (typeof color === 'string') {
+    return getContrastTextColor(color);
+  }
+  if (Array.isArray(color) && color.length >= 3) {
+    const [r, g, b] = color;
+    const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    return lum > 0.55 ? '#111' : '#fff';
+  }
+  return '#fff';
+}
+
+/**
+ * Builds a horizontal CSS linear-gradient string sampling `steps` points
+ * from the given palette ('viridis' or 'cividis').
+ *
+ * @param {'viridis'|'cividis'} name
+ * @param {number} [steps=12]
+ * @returns {string}
+ */
+export const gradientCss = (name, steps = 12) =>
+  `linear-gradient(to right, ${Array.from({ length: steps }, (_, i) =>
+    colorAt(name, i / (steps - 1))
+  ).join(', ')})`;
+
+/**
  * Maps a numeric value within [min, max] to an interpolated hex color
  * from the selected colorblind-safe palette ('viridis' or 'cividis').
  * Returns null for missing observations (null, undefined, NaN) so callers
@@ -83,25 +155,9 @@ export function getHeatmapColor(value, min, max, paletteName = 'viridis') {
     return null;
   }
 
-  const stops = PALETTES[paletteName] || PALETTES.viridis;
   const span = max - min;
   const t = span <= 0 ? (value > min ? 1 : 0) : Math.max(0, Math.min(1, (value - min) / span));
-
-  const scaled = t * (stops.length - 1);
-  const idx = Math.floor(scaled);
-  const frac = scaled - idx;
-
-  if (idx >= stops.length - 1) {
-    return stops[stops.length - 1];
-  }
-
-  const c0 = parseHex(stops[idx]);
-  const c1 = parseHex(stops[idx + 1]);
-  return toHex([
-    c0[0] + (c1[0] - c0[0]) * frac,
-    c0[1] + (c1[1] - c0[1]) * frac,
-    c0[2] + (c1[2] - c0[2]) * frac,
-  ]);
+  return toHex(rgbAt(paletteName, t));
 }
 
 /**
