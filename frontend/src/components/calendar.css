@@ -4,7 +4,7 @@
 }
 .cal__toolbar {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
   padding-bottom: var(--space-4);
@@ -23,6 +23,7 @@
   align-items: baseline;
   flex-wrap: wrap;
   gap: var(--space-1) var(--space-3);
+  color: var(--muted);
   font-size: var(--fs-2);
   font-variant-numeric: tabular-nums;
 }
@@ -33,12 +34,13 @@
   letter-spacing: -0.02em;
 }
 .cal__partial-label {
-  color: var(--muted);
   border-bottom: 1px dashed currentColor;
   font-size: var(--fs-1);
 }
 .cal__assessment-link {
+  color: var(--primary);
   font-size: var(--fs-1);
+  text-decoration-color: var(--rule);
 }
 .cal__values-toggle,
 .cal__archive-toggle {
@@ -49,7 +51,7 @@
   min-height: var(--row);
   padding: var(--space-2) var(--space-3);
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius);
+  border-radius: var(--radius-control);
   background: var(--surface);
   color: var(--text);
   font: inherit;
@@ -113,12 +115,44 @@
   scrollbar-color: var(--border-strong) var(--surface-alt);
   scrollbar-width: thin;
   scrollbar-gutter: stable;
-  border-block: 1px solid var(--rule);
   padding: var(--space-1);
+  border-block: 1px solid var(--rule);
   scroll-padding: 44px var(--space-2) var(--space-2) 52px;
 }
 .cal--expanded .cal__scroll {
   max-height: none;
+}
+.cal--compact .cal__scroll {
+  max-height: 220px;
+}
+.cal--compact.cal--expanded .cal__scroll {
+  max-height: none;
+}
+.cal--compact .cal__toolbar {
+  padding-bottom: var(--space-3);
+}
+.cal--compact .cal__guide {
+  padding-block: var(--space-2);
+}
+.cal--compact .cal__guide > p:first-child {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.cal--compact .cal__selected-value strong {
+  font-size: var(--fs-3);
+}
+.cal--compact .cal__archive-controls {
+  padding-top: var(--space-2);
+}
+.cal--compact .cal__archive-toggle {
+  min-height: 36px;
+}
+.cal--compact .cal__legend {
+  padding-top: var(--space-3);
 }
 .cal__grid {
   display: flex;
@@ -132,13 +166,15 @@
   align-items: center;
   gap: 3px;
 }
+.cal__row--decade {
+  padding-top: var(--space-2);
+}
 .cal__row--head {
   position: sticky;
   top: -4px;
   z-index: 4;
-  min-height: 36px;
+  min-height: 40px;
   background: var(--surface);
-  border-bottom: 1px solid var(--rule);
 }
 .cal__colhead,
 .cal__rowhead {
@@ -148,7 +184,16 @@
   font-variant-numeric: tabular-nums;
 }
 .cal__colhead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
   text-align: center;
+}
+.cal__colhead.is-selected {
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: inset 0 -2px var(--primary);
 }
 .cal__colhead:first-child,
 .cal__rowhead {
@@ -157,8 +202,16 @@
   align-self: stretch;
   display: flex;
   align-items: center;
+  padding-left: var(--space-1);
   background: var(--surface);
   z-index: 2;
+}
+.cal__rowhead.is-selected {
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: inset 2px 0 var(--primary);
+  background: var(--surface-alt);
+  border-radius: 3px;
 }
 .cal__cell {
   position: relative;
@@ -169,14 +222,14 @@
   min-height: 32px;
   padding: 0;
   border: 0;
-  border-radius: var(--radius);
+  border-radius: 3px;
   font: inherit;
   font-size: var(--fs-1);
   font-weight: 500;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   cursor: pointer;
-  transition: box-shadow 120ms ease;
+  transition: box-shadow 150ms ease;
 }
 .cal__value {
   opacity: 0;
@@ -208,8 +261,8 @@
 .cal__cell--null {
   background: repeating-linear-gradient(
     135deg,
-    var(--surface-alt) 0 4px,
-    var(--border-strong) 4px 5px
+    var(--null-bg) 0 4px,
+    var(--null-stripe) 4px 5px
   );
 }
 .cal__cell--nrt::after {
@@ -233,7 +286,20 @@
   color: var(--muted);
   font-size: var(--fs-1);
 }
-.cal .legend {
+.cal__archive-toggle {
+  padding-inline: 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.cal__archive-toggle:hover {
+  border-color: transparent;
+  background: transparent;
+  text-decoration-thickness: 2px;
+}
+.cal .cal__legend {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -254,7 +320,7 @@
 .cal .legend__bar {
   display: block;
   height: 8px;
-  border-radius: 1px;
+  border-radius: 4px;
 }
 .cal .legend__ticks {
   display: flex;
@@ -302,7 +368,7 @@
   .cal__values-toggle svg {
     display: none;
   }
-  .cal .legend {
+  .cal .cal__legend {
     align-items: stretch;
     flex-direction: column;
     gap: var(--space-4);

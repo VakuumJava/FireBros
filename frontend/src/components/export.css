@@ -31,7 +31,7 @@
   background: var(--hover);
 }
 .data-export__choice:active:not(:has(input:disabled)) {
-  box-shadow: inset 3px 0 var(--accent);
+  box-shadow: inset 3px 0 var(--primary);
 }
 .data-export .data-export__choice:has(input:disabled) {
   opacity: 1;
@@ -92,4 +92,25 @@
 }
 .data-export__result.card__msg--error {
   border-top: 3px double var(--error);
+}
+
+.evidence-export {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+.evidence-export h3 {
+  font-size: var(--fs-3);
+  font-weight: 500;
+}
+.evidence-export p {
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: var(--fs-2);
+}
+.evidence-export button {
+  margin-top: var(--space-4);
+}
+.evidence-export .card__msg--error {
+  color: var(--error);
 }

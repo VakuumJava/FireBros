@@ -7,34 +7,57 @@ import Card from "./ui/Card";
 import Footer from "./ui/Footer";
 import AoiMap from "./components/AoiMap";
 import CoordinateForm from "./components/CoordinateForm";
-import PeriodSelect from "./components/PeriodSelect";
-import CalendarHeatmap from "./components/CalendarHeatmap";
-import PaletteSwitch from "./components/PaletteSwitch";
 import AnomalyCard from "./components/AnomalyCard";
-import TopPeriods from "./components/TopPeriods";
-import HarmonizationChart from "./components/HarmonizationChart";
-import SummaryStats from "./components/SummaryStats";
-import ExportPanel from "./components/ExportPanel";
 import StatusBadge from "./components/StatusBadge";
 import ErrorBanner from "./components/ErrorBanner";
-import { fmt } from "./ui/format";
-import { areaLabel } from "./api/areas";
+import WorkspaceTools from "./components/WorkspaceTools";
+import HistoryView from "./components/views/HistoryView";
+import MethodView from "./components/views/MethodView";
+import ExportView from "./components/views/ExportView";
+
+import { areaLabel, AREA_PRESETS } from "./api/areas";
+import { useSectionNavigation } from "./ui/useSectionNavigation";
 
 const now = new Date();
 const CURRENT_MONTH = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
 
 export default function App() {
-  const [aoi, setAoi] = useState(DEFAULT_AOI);
+  const [initial] = useState(() =>
+    initialSelection(
+      window.location.search,
+      CURRENT_MONTH,
+      window.location.hash,
+    ),
+  );
+  const [aoi, setAoi] = useState(initial.aoi);
   const [mapExpanded, setMapExpanded] = useState(false);
   const areaToggle = useRef(null);
-  const [initial] = useState(() =>
-    initialSelection(window.location.search, CURRENT_MONTH),
-  );
+  const areaEditor = useRef(null);
+  const monthInput = useRef(null);
+  const viewTitle = useRef(null);
+  const navigation = useSectionNavigation();
+  const previousView = useRef(navigation.active);
   const [range, setRange] = useState(initial.range);
   const [month, setMonth] = useState(initial.month);
-  const [palette, setPalette] = useState("viridis");
+  const [palette, setPalette] = useState(initial.palette);
   const [revision, setRevision] = useState(0);
   const [availability, setAvailability] = useState(null);
+  const [selectionWarning, setSelectionWarning] = useState(
+    initial.selectionWarning,
+  );
+  useEffect(() => {
+    if (!mapExpanded) return;
+    areaEditor.current?.querySelector("button")?.focus({ preventScroll: true });
+    areaEditor.current?.scrollIntoView({ behavior: "auto", block: "start" });
+  }, [mapExpanded]);
+  useEffect(() => {
+    if (previousView.current === navigation.active) return;
+    previousView.current = navigation.active;
+    const target =
+      navigation.active === "explore" ? monthInput.current : viewTitle.current;
+    target?.focus({ preventScroll: true });
+    target?.scrollIntoView({ behavior: "auto", block: "center" });
+  }, [navigation.active]);
   useEffect(() => {
     if (USE_MOCK) return;
     const controller = new AbortController();
@@ -71,11 +94,8 @@ export default function App() {
   };
   const compareMonth = (value) => {
     setMonth(value);
-    document.getElementById("explore")?.scrollIntoView({
-      behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-    });
+    navigation.select("explore");
+    document.getElementById("explore")?.scrollIntoView({ behavior: "auto" });
   };
   const changeArea = (next) => {
     setAoi(next);
@@ -86,15 +106,30 @@ export default function App() {
     const value = event.target.value;
     if (value >= range.from && value <= range.to) setMonth(value);
   };
+  const restoreSelection = (selection) => {
+    changeArea(selection.aoi);
+    setRange(selection.range);
+    setMonth(selection.month);
+    setPalette(selection.palette);
+    navigation.select(selection.view);
+  };
   const loading = Object.values(d).some((state) => state.loading);
 
   return (
     <div className="app">
-      <a className="skip-link" href="#explore">
-        Skip to fire activity
+      <a className="skip-link" href="#main">
+        Skip to main content
       </a>
       <header className="header">
-        <a className="brand" href="#explore" aria-label="Ala-Too Fire Atlas">
+        <a
+          className="brand"
+          href="#explore"
+          aria-label="Ala-Too Fire Atlas"
+          onClick={(event) => {
+            event.preventDefault();
+            navigation.select("explore");
+          }}
+        >
           <svg
             className="brand__mark"
             width="30"
@@ -121,30 +156,52 @@ export default function App() {
           </span>
         </a>
         <nav className="header__nav" aria-label="Main navigation">
-          <a href="#explore">Explore</a>
-          <a href="#calendar">History</a>
-          <a href="#method">Method</a>
-          <a href="#export">Export</a>
+          {[
+            ["explore", "Map"],
+            ["calendar", "History"],
+            ["method", "Method"],
+            ["export", "Export"],
+          ].map(([id, label]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              aria-current={navigation.active === id ? "location" : undefined}
+              onClick={(event) => {
+                event.preventDefault();
+                navigation.select(id);
+              }}
+            >
+              {label}
+            </a>
+          ))}
         </nav>
       </header>
-      <main className="main" id="explore" tabIndex={-1}>
-        <div className="page-heading">
-          <div>
-            <h1>Fire activity in context</h1>
-            <p>Kyrgyzstan and neighbouring regions · MODIS / VIIRS</p>
-          </div>
-          <div className="archive-status">
-            <span>
-              {availability?.first_month || "2000"} —{" "}
-              {availability?.last_month || "present"}
-            </span>
-            <StatusBadge meta={meta} loading={loading} />
-          </div>
-        </div>
+      <main className="main" id="main" tabIndex={-1}>
+        {navigation.active !== "explore" && (
+          <h1 className="view-title" ref={viewTitle} tabIndex={-1}>
+            {navigation.active === "calendar"
+              ? "History"
+              : navigation.active === "method"
+                ? "Method"
+                : "Export"}
+          </h1>
+        )}
         <ErrorBanner
           states={d}
           onRetry={() => setRevision((value) => value + 1)}
         />
+        {selectionWarning && (
+          <div className="selection-warning" role="status">
+            <p>{selectionWarning}</p>
+            <button
+              type="button"
+              className="btn btn--ghost"
+              onClick={() => setSelectionWarning(null)}
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
         {USE_MOCK && (
           <p className="demo-notice">
             Fixture preview. The sample area is fixed; period filters work, but
@@ -152,17 +209,41 @@ export default function App() {
           </p>
         )}
 
-        <div className="workspace">
-          <section
-            className="map-panel"
-            data-expanded={mapExpanded}
-            aria-labelledby="area-title"
-          >
-            <div className="map-panel__heading">
-              <div>
-                <span className="field-label">Selected area</span>
-                <h2 id="area-title">{areaLabel(aoi)}</h2>
-              </div>
+        <div
+          className="workspace"
+          id="explore"
+          hidden={navigation.active !== "explore"}
+        >
+          <aside className="selection-panel" aria-label="Area and month">
+            <div className="selection-panel__title">
+              {navigation.active === "explore" && <h1>Fire activity</h1>}
+              <p>Kyrgyzstan & neighbouring regions</p>
+            </div>
+            <label className="area-picker">
+              <span>Area</span>
+              <select
+                value={areaLabel(aoi)}
+                onChange={(event) => {
+                  const preset = AREA_PRESETS.find(
+                    (item) => item.name === event.target.value,
+                  );
+                  if (preset)
+                    changeArea({ kind: "bbox", bbox: [...preset.bbox] });
+                  else if (event.target.value === "Regional archive")
+                    changeArea(DEFAULT_AOI);
+                }}
+              >
+                <option value="Regional archive">Regional archive</option>
+                {AREA_PRESETS.map((preset) => (
+                  <option key={preset.name}>{preset.name}</option>
+                ))}
+                {![
+                  "Regional archive",
+                  ...AREA_PRESETS.map((preset) => preset.name),
+                ].includes(areaLabel(aoi)) && <option>{areaLabel(aoi)}</option>}
+              </select>
+            </label>
+            <div className="area-actions">
               <button
                 ref={areaToggle}
                 type="button"
@@ -171,159 +252,100 @@ export default function App() {
                 aria-controls="area-editor"
                 onClick={() => setMapExpanded((value) => !value)}
               >
-                {mapExpanded ? "Done" : "Change area"}
+                {mapExpanded ? "Close map" : "Edit on map"}
               </button>
-              <span className="map-panel__area">
-                {d.summary.data
-                  ? `${fmt(Math.round(d.summary.data.aoi.area_km2))} km²`
-                  : "Area selection"}
-              </span>
-            </div>
-            <div className="map-panel__body" id="area-editor">
-              <AoiMap aoi={aoi} onChange={changeArea} />
               <details className="precision-controls">
-                <summary>
-                  Coordinate bounds <span aria-hidden="true">+</span>
-                </summary>
+                <summary>Coordinates</summary>
                 <CoordinateForm aoi={aoi} onChange={changeArea} />
               </details>
             </div>
-          </section>
-          <section
-            className="assessment"
-            aria-label="Selected month assessment"
-          >
-            <div className="assessment__heading">
-              <div>
-                <span className="field-label">Monthly comparison</span>
-                <h2>Against the historical record</h2>
-              </div>
-              <label className="month-picker">
-                <span className="visually-hidden">Compare month</span>
-                <input
-                  type="month"
-                  value={month}
-                  min={range.from}
-                  max={range.to}
-                  onChange={changeMonth}
-                />
-              </label>
-            </div>
+            <label className="month-picker">
+              <span>Month</span>
+              <input
+                ref={monthInput}
+                type="month"
+                value={month}
+                min={range.from}
+                max={range.to}
+                onChange={changeMonth}
+              />
+            </label>
             <Card
-              title="Selected month"
+              title="Month assessment"
               hideTitle
               className="assessment__result"
               state={d.anomaly}
             >
               {d.anomaly.data && <AnomalyCard data={d.anomaly.data} />}
             </Card>
-            <p className="assessment__footnote">
-              A hotspot is a satellite thermal anomaly, not a confirmed
-              wildfire.
+            <button
+              type="button"
+              className="history-link"
+              onClick={() => navigation.select("calendar")}
+            >
+              View history <span aria-hidden="true">→</span>
+            </button>
+            <WorkspaceTools
+              aoi={aoi}
+              range={range}
+              month={month}
+              palette={palette}
+              view={navigation.active}
+              onRestore={restoreSelection}
+            />
+          </aside>
+          <section
+            className="map-panel"
+            data-expanded={mapExpanded}
+            aria-labelledby="area-title"
+          >
+            <h2 id="area-title" className="visually-hidden">
+              {areaLabel(aoi)}
+            </h2>
+            <div className="map-panel__body" id="area-editor" ref={areaEditor}>
+              <AoiMap
+                aoi={aoi}
+                onChange={changeArea}
+                active={navigation.active === "explore"}
+              />
+            </div>
+            <p className="map-caption">
+              Area selection · hotspots are summarized, not plotted
             </p>
           </section>
         </div>
 
-        <section
-          className="history"
-          id="calendar"
-          aria-labelledby="history-title"
-        >
-          <div className="section-heading">
-            <div>
-              <h2 id="history-title">Activity history</h2>
-              <p>Monthly hotspot-days on the MODIS reference scale</p>
-            </div>
-            <PaletteSwitch
-              palettes={palettes}
-              value={palette}
-              onChange={setPalette}
-            />
-          </div>
-          <div className="history__controls">
-            <PeriodSelect
-              range={range}
-              currentMonth={availability?.last_month || CURRENT_MONTH}
-              onChange={changeRange}
-            />
-            <p>Choose a month in the calendar to update the comparison.</p>
-          </div>
-          <div className="history__grid">
-            <Card
-              title="Activity calendar"
-              hideTitle
-              className="calendar-panel"
-              state={d.calendar}
-            >
-              {d.calendar.data && (
-                <CalendarHeatmap
-                  data={d.calendar.data}
-                  palette={palette}
-                  nrtMonths={d.summary.data?.coverage.nrt_months}
-                  selectedMonth={month}
-                  onSelect={setMonth}
-                />
-              )}
-            </Card>
-            <Card
-              title="Most active periods"
-              className="ranking-panel"
-              hint="Within this area and date range"
-              state={d.top}
-            >
-              {d.top.data && (
-                <TopPeriods data={d.top.data} onSelect={compareMonth} />
-              )}
-            </Card>
-          </div>
-        </section>
-
-        <section className="method" id="method" aria-labelledby="method-title">
-          <div className="section-heading">
-            <div>
-              <h2 id="method-title">Sensor calibration</h2>
-              <p>VIIRS is calibrated against overlapping MODIS observations.</p>
-            </div>
-          </div>
-          <Card
-            title="Sensor comparison"
-            hideTitle
-            className="method__chart"
-            state={d.harmonization}
-          >
-            {d.harmonization.data && (
-              <HarmonizationChart data={d.harmonization.data} />
-            )}
-          </Card>
-        </section>
-
-        <section
-          className="export-section"
-          id="export"
-          aria-labelledby="export-title"
-        >
-          <div className="section-heading">
-            <div>
-              <h2 id="export-title">Export this selection</h2>
-              <p>
-                {areaLabel(aoi)} · {range.from} — {range.to}
-              </p>
-            </div>
-          </div>
-          <div className="export-section__grid">
-            <Card
-              title="Selection summary"
-              state={d.summary}
-              className="summary-panel"
-            >
-              {d.summary.data && <SummaryStats data={d.summary.data} />}
-            </Card>
-            <Card title="CSV download" className="export-panel">
-              <ExportPanel aoi={aoi} range={range} source={meta?.source} />
-            </Card>
-          </div>
-        </section>
+        <HistoryView
+          active={navigation.active === "calendar"}
+          aoi={aoi}
+          range={range}
+          month={month}
+          palette={palette}
+          palettes={palettes}
+          states={d}
+          availability={availability}
+          currentMonth={CURRENT_MONTH}
+          onRangeChange={changeRange}
+          onPaletteChange={setPalette}
+          onMonthSelect={compareMonth}
+        />
+        <MethodView active={navigation.active === "method"} states={d} />
+        <ExportView
+          active={navigation.active === "export"}
+          aoi={aoi}
+          range={range}
+          month={month}
+          states={d}
+        />
       </main>
+      <div className="source-line">
+        <StatusBadge meta={meta} loading={loading} />
+        {availability?.last_month && (
+          <span>
+            {availability.first_month} — {availability.last_month}
+          </span>
+        )}
+      </div>
       <Footer
         firstMonth={availability?.first_month}
         lastMonth={availability?.last_month}

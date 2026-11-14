@@ -36,12 +36,12 @@ function History({ series, year }) {
   return (
     <div className="atlas-history">
       <div className="atlas-history__caption">
-        <span>The same month across years</span>
-        <span>Selected year highlighted</span>
+        <span>Same month across years</span>
+        <span className="atlas-history__key">Selected year</span>
       </div>
       <svg
         width="100%"
-        height="60"
+        height="52"
         viewBox={`0 0 ${series.length * step} 88`}
         preserveAspectRatio="none"
         role="img"
@@ -91,35 +91,22 @@ export default function AnomalyCard({ data }) {
         <span>hotspot-days</span>
       </div>
       <p className="atlas-anomaly__verdict">{headline(data)}</p>
-      <dl className="atlas-baseline">
-        <div>
-          <dt>Historical median</dt>
-          <dd>{fmt(baseline.median)}</dd>
-        </div>
-        <div>
-          <dt>Robust sigma</dt>
-          <dd>{fmt(baseline.robust_sigma)}</dd>
-        </div>
-        <div>
-          <dt>Baseline years</dt>
-          <dd>{fmt(baseline.n_years)}</dd>
-        </div>
-        <div>
-          <dt>Standardized score</dt>
-          <dd>
-            {baseline.robust_sigma === 0 ? "Unavailable" : fmt(data.robust_z)}
-          </dd>
-        </div>
-      </dl>
-      <div className="atlas-percentile">
+      <div className="atlas-anomaly__context">
+        <dl className="atlas-anomaly__median">
+          <div>
+            <dt>Historical median</dt>
+            <dd>{fmt(baseline.median)}</dd>
+          </div>
+        </dl>
         <div className="atlas-percentile__heading">
-          <span>Position in the historical record</span>
           <strong>
             {percentile === null
-              ? "Unavailable"
+              ? "Percentile: Unavailable"
               : `${ordinal(percentile)} percentile`}
           </strong>
         </div>
+      </div>
+      <div className="atlas-percentile">
         <div
           className="atlas-percentile__track"
           role="img"
@@ -129,28 +116,59 @@ export default function AnomalyCard({ data }) {
               : `${Math.round(percentile)} percent of baseline years had no higher count`
           }
         >
-          {percentile !== null && (
+          {[0, 50, 100].map((value) => (
             <span
-              className="atlas-percentile__marker"
-              style={{ left: `${percentile}%` }}
+              key={value}
+              className="atlas-percentile__tick"
+              style={{ left: `${value}%` }}
+              aria-hidden="true"
             />
+          ))}
+          {percentile !== null && (
+            <>
+              <span
+                className="atlas-percentile__fill"
+                style={{ width: `${percentile}%` }}
+                aria-hidden="true"
+              />
+              <span
+                className="atlas-percentile__marker"
+                style={{ left: `${percentile}%` }}
+                aria-hidden="true"
+              />
+            </>
           )}
         </div>
-        <div className="atlas-percentile__scale">
-          <span>Lowest</span>
-          <span>Median</span>
-          <span>Highest</span>
-        </div>
       </div>
-      <History series={data.series} year={Number(data.month.slice(0, 4))} />
-      <p
-        className={`atlas-window ${data.partial ? "atlas-window--partial" : ""}`}
-      >
-        {data.partial
-          ? `Incomplete month: compared month-to-date through day ${data.through_day}. `
-          : "Comparison window: "}
-        {baseline.window}.{data.partial ? " Source data may still grow." : ""}
-      </p>
+      {data.partial && (
+        <p className="atlas-window atlas-window--partial">
+          Incomplete month: compared month-to-date through day{" "}
+          {data.through_day}. {baseline.window}. Source data may still grow.
+        </p>
+      )}
+      <details className="atlas-comparison">
+        <summary>Comparison details</summary>
+        <dl className="atlas-baseline">
+          <div>
+            <dt>Robust sigma</dt>
+            <dd>{fmt(baseline.robust_sigma)}</dd>
+          </div>
+          <div>
+            <dt>Baseline years</dt>
+            <dd>{fmt(baseline.n_years)}</dd>
+          </div>
+          <div>
+            <dt>Standardized score</dt>
+            <dd>
+              {baseline.robust_sigma === 0 ? "Unavailable" : fmt(data.robust_z)}
+            </dd>
+          </div>
+        </dl>
+        <History series={data.series} year={Number(data.month.slice(0, 4))} />
+        {!data.partial && (
+          <p className="atlas-window">Comparison window: {baseline.window}.</p>
+        )}
+      </details>
     </div>
   );
 }

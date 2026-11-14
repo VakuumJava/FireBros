@@ -9,6 +9,8 @@ export default function CalendarHeatmap({
   nrtMonths = [],
   selectedMonth,
   onSelect,
+  compact = false,
+  active = true,
 }) {
   const { years, values, max, unit } = data;
   const nrt = useMemo(() => new Set(nrtMonths), [nrtMonths]);
@@ -53,9 +55,14 @@ export default function CalendarHeatmap({
   };
 
   useEffect(() => {
-    if (selectedRow >= 0 && selectedColumn >= 0 && selectedColumn < 12)
+    if (
+      active &&
+      selectedRow >= 0 &&
+      selectedColumn >= 0 &&
+      selectedColumn < 12
+    )
       revealCell(cells.current[`${selectedRow}-${selectedColumn}`], true);
-  }, [selectedMonth, selectedRow, selectedColumn, expanded]);
+  }, [active, selectedMonth, selectedRow, selectedColumn, expanded]);
 
   const fr = Math.min(focus.r, years.length - 1);
   const preview = hovered || focused;
@@ -109,7 +116,7 @@ export default function CalendarHeatmap({
 
   return (
     <div
-      className={`cal${showValues ? " cal--values" : ""}${expanded ? " cal--expanded" : ""}`}
+      className={`cal${compact ? " cal--compact" : ""}${showValues ? " cal--values" : ""}${expanded ? " cal--expanded" : ""}`}
     >
       <div className="cal__toolbar">
         <div className="cal__selection" aria-live="polite" aria-atomic="true">
@@ -188,15 +195,26 @@ export default function CalendarHeatmap({
             <span className="cal__colhead" role="columnheader">
               Year
             </span>
-            {MONTHS_SHORT.map((month) => (
-              <span key={month} role="columnheader" className="cal__colhead">
+            {MONTHS_SHORT.map((month, column) => (
+              <span
+                key={month}
+                role="columnheader"
+                className={`cal__colhead${selected && selected.c === column ? " is-selected" : ""}`}
+              >
                 {month}
               </span>
             ))}
           </div>
           {years.map((year, r) => (
-            <div className="cal__row" role="row" key={year}>
-              <span role="rowheader" className="cal__rowhead">
+            <div
+              className={`cal__row${r > 0 && year % 10 === 0 ? " cal__row--decade" : ""}`}
+              role="row"
+              key={year}
+            >
+              <span
+                role="rowheader"
+                className={`cal__rowhead${selected && selected.r === r ? " is-selected" : ""}`}
+              >
                 {year}
               </span>
               {values[r].map((value, c) => {
@@ -266,7 +284,7 @@ export default function CalendarHeatmap({
           </button>
         </div>
       )}
-      <div className="legend">
+      <div className="legend cal__legend">
         <div className="legend__scale">
           <p className="legend__cap">
             {unit === "hotspot_days_1km" ? "Hotspot-days, 1 km" : unit}

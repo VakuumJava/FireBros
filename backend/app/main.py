@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import asyncio
 import logging
 import os
 from pathlib import Path
@@ -12,31 +11,8 @@ from fastapi.staticfiles import StaticFiles
 
 from .config import API_PREFIX, API_VERSION, Settings
 from .errors import DomainError
+from .middleware import SECURITY_HEADERS, RequestGuard
 from .routers import aoi, meta
-
-MAX_QUERY_BYTES = 24_000
-CONTENT_SECURITY_POLICY = "; ".join(
-    (
-        "default-src 'self'",
-        "script-src 'self'",
-        "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: blob: https://tile.openstreetmap.org",
-        "font-src 'self'",
-        "connect-src 'self'",
-        "object-src 'none'",
-        "base-uri 'none'",
-        "form-action 'none'",
-        "frame-ancestors 'none'",
-    )
-)
-SECURITY_HEADERS = {
-    "Content-Security-Policy": CONTENT_SECURITY_POLICY,
-    "Cross-Origin-Opener-Policy": "same-origin",
-    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
-    "Referrer-Policy": "strict-origin-when-cross-origin",
-    "X-Content-Type-Options": "nosniff",
-    "X-Frame-Options": "DENY",
-}
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -54,28 +30,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         redoc_url=None,
     )
     application.state.settings = config
-    query_slots = asyncio.Semaphore(config.max_concurrent_queries)
-
-    @application.middleware("http")
-    async def protect_requests(request: Request, call_next):
-        path = request.url.path
-        if len(request.scope.get("query_string", b"")) > MAX_QUERY_BYTES:
-            response = JSONResponse({"detail": "query is too long"}, status_code=414)
-        elif not path.startswith(API_PREFIX):
-            response = await call_next(request)
-        elif query_slots.locked():
-            response = JSONResponse(
-                {"detail": "server is busy; retry shortly"},
-                status_code=503,
-                headers={"Retry-After": "2"},
-            )
-        else:
-            async with query_slots:
-                response = await call_next(request)
-        response.headers.update(SECURITY_HEADERS)
-        response.headers["Cache-Control"] = _cache_policy(path)
-        return response
-
     if config.cors_origins:
         application.add_middleware(
             CORSMiddleware,
@@ -90,6 +44,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "X-Method-Version",
             ],
         )
+    application.add_middleware(RequestGuard, max_concurrent_queries=config.max_concurrent_queries)
 
     application.add_exception_handler(DomainError, _domain_error)
     application.add_exception_handler(Exception, _unexpected_error)
@@ -101,21 +56,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     return application
 
 
-def _cache_policy(path: str) -> str:
-    if path.startswith(API_PREFIX):
-        return "no-store"
-    if path.startswith("/assets/"):
-        return "public, max-age=31536000, immutable"
-    return "no-cache"
-
-
 async def _domain_error(_: Request, exc: DomainError) -> JSONResponse:
     return JSONResponse({"detail": exc.detail}, status_code=exc.status_code)
 
 
 async def _unexpected_error(_: Request, exc: Exception) -> JSONResponse:
     logging.getLogger(__name__).error("request failed", exc_info=exc)
-    return JSONResponse({"detail": "internal server error"}, status_code=500)
+    return JSONResponse(
+        {"detail": "internal server error"},
+        status_code=500,
+        headers={**SECURITY_HEADERS, "Cache-Control": "no-store"},
+    )
 
 
 app = create_app()

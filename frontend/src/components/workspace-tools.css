@@ -1,0 +1,140 @@
+.workspace-tools {
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs-2);
+}
+.workspace-tools > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--row);
+  gap: var(--space-2);
+  color: var(--muted);
+  list-style: none;
+}
+.workspace-tools > summary::-webkit-details-marker {
+  display: none;
+}
+.workspace-tools > summary::after {
+  content: "+";
+}
+.workspace-tools[open] > summary::after {
+  content: "−";
+}
+.workspace-tools > summary:hover {
+  color: var(--primary);
+}
+.workspace-tools__content,
+.workspace-tools__share,
+.workspace-tools__save,
+.workspace-tools__files {
+  display: grid;
+  gap: var(--space-3);
+}
+.workspace-tools__content {
+  padding-bottom: var(--space-3);
+}
+.workspace-tools__save,
+.workspace-tools__files {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule);
+}
+.workspace-tools__label {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+  color: var(--muted);
+}
+.workspace-tools__label input {
+  font-size: var(--fs-2);
+}
+.workspace-tools__label input[type="file"] {
+  padding: var(--space-2);
+  font-size: var(--fs-1);
+}
+.workspace-tools__label input::file-selector-button {
+  margin-right: var(--space-2);
+  border: 0;
+  border-radius: var(--radius-control);
+  padding: var(--space-2);
+  background: var(--surface-alt);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.workspace-tools__label input:hover::file-selector-button {
+  background: var(--hover);
+}
+.workspace-tools__label input:disabled::file-selector-button {
+  cursor: not-allowed;
+  color: var(--muted);
+}
+.workspace-tools__areas {
+  display: grid;
+  gap: var(--space-1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.workspace-tools__areas li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+.workspace-tools__open,
+.workspace-tools__delete {
+  min-height: var(--row);
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.workspace-tools__open {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-2);
+  text-align: left;
+}
+.workspace-tools__open span {
+  overflow-wrap: anywhere;
+}
+.workspace-tools__open small {
+  color: var(--muted);
+  font-size: var(--fs-1);
+  font-variant-numeric: tabular-nums;
+}
+.workspace-tools__delete {
+  padding: var(--space-2);
+  color: var(--muted);
+  font-size: var(--fs-1);
+}
+.workspace-tools__open:hover,
+.workspace-tools__delete:hover {
+  background: var(--surface-alt);
+  color: var(--primary);
+}
+.workspace-tools :is(button, summary, input):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.workspace-tools button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.workspace-tools button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.workspace-tools__note,
+.workspace-tools__status,
+.workspace-tools__storage-error {
+  color: var(--muted);
+  font-size: var(--fs-1);
+  overflow-wrap: anywhere;
+}
+.workspace-tools__status--error {
+  color: var(--error);
+}

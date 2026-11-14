@@ -28,6 +28,27 @@ function mount(options = {}) {
 }
 
 describe("archive window", () => {
+  it("keeps every month and its keyboard guide available in the compact dock", () => {
+    act(() => {
+      view = create(
+        <CalendarHeatmap data={archive} compact selectedMonth="2025-10" />,
+      );
+    });
+    expect(
+      view.root.findByProps({ className: "cal cal--compact" }),
+    ).toBeDefined();
+    expect(view.root.findAllByProps({ role: "gridcell" })).toHaveLength(144);
+    const grid = view.root.findByProps({ role: "grid" });
+    expect(
+      label(view.root.findByProps({ id: grid.props["aria-describedby"] })),
+    ).toContain("Arrow keys to move");
+    act(() => button("Show full archive").props.onClick());
+    expect(
+      view.root.findByProps({ className: "cal cal--compact cal--expanded" }),
+    ).toBeDefined();
+    expect(view.root.findAllByProps({ role: "gridcell" })).toHaveLength(144);
+  });
+
   it("expands and collapses the archive without dropping observations", () => {
     mount();
     const cells = () => view.root.findAllByProps({ role: "gridcell" });
@@ -89,5 +110,83 @@ describe("archive window", () => {
         "aria-label": "2025, November: 1 hotspot-days",
       }).props.tabIndex,
     ).toBe(0);
+  });
+
+  it("reveals the latest selected month when its hidden view becomes active", () => {
+    const measure = vi.fn(() => ({
+      top: 800,
+      bottom: 844,
+      left: 44,
+      right: 92,
+      height: 44,
+    }));
+    const viewport = {
+      clientHeight: 440,
+      clientWidth: 640,
+      scrollTop: 0,
+      scrollLeft: 0,
+      getBoundingClientRect: vi.fn(() => ({ top: 100, left: 0 })),
+    };
+    act(() => {
+      view = create(
+        <CalendarHeatmap
+          data={archive}
+          selectedMonth="2025-10"
+          active={false}
+        />,
+        {
+          createNodeMock(element) {
+            if (element.props.className === "cal__scroll") return viewport;
+            if (element.props.role === "gridcell")
+              return {
+                getBoundingClientRect:
+                  element.props["aria-label"] === "2024, April: 1 hotspot-days"
+                    ? measure
+                    : vi.fn(),
+              };
+            return null;
+          },
+        },
+      );
+    });
+    expect(viewport.getBoundingClientRect).not.toHaveBeenCalled();
+
+    act(() => {
+      view.update(
+        <CalendarHeatmap
+          data={archive}
+          selectedMonth="2024-04"
+          active={false}
+        />,
+      );
+    });
+    expect(viewport.scrollTop).toBe(0);
+    expect(measure).not.toHaveBeenCalled();
+
+    act(() => {
+      view.update(
+        <CalendarHeatmap data={archive} selectedMonth="2024-04" active />,
+      );
+    });
+    expect(measure).toHaveBeenCalledOnce();
+    expect(viewport.scrollTop).toBe(502);
+
+    act(() => {
+      view.update(
+        <CalendarHeatmap
+          data={archive}
+          selectedMonth="2024-04"
+          active={false}
+        />,
+      );
+    });
+    viewport.scrollTop = 0;
+    act(() => {
+      view.update(
+        <CalendarHeatmap data={archive} selectedMonth="2024-04" active />,
+      );
+    });
+    expect(measure).toHaveBeenCalledTimes(2);
+    expect(viewport.scrollTop).toBe(502);
   });
 });

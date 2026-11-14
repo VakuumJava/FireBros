@@ -4,14 +4,37 @@ import "leaflet-draw";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import { REGION_BBOX } from "../api/config";
-import { AREA_PRESETS } from "../api/areas";
-import "./insights.css";
+import "./map.css";
 
 const round = (value) => Math.round(value * 1e4) / 1e4;
 const boundsOf = ([west, south, east, north]) => [
   [south, west],
   [north, east],
 ];
+
+function ToolIcon({ kind }) {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {kind === "rectangle" ? (
+        <rect x="3" y="4" width="12" height="10" rx="1" />
+      ) : kind === "polygon" ? (
+        <path d="m4 3 10 2 1 9-9 1-3-6 1-6Z" />
+      ) : (
+        <>
+          <path d="M3 6V3h3m6 0h3v3m0 6v3h-3M6 15H3v-3" />
+          <path d="M6 9h6M9 6v6" />
+        </>
+      )}
+    </svg>
+  );
+}
 
 function shapeOptions(element) {
   const color = getComputedStyle(element).getPropertyValue("--primary").trim();
@@ -44,7 +67,7 @@ function isContained(aoi) {
   );
 }
 
-export default function AoiMap({ aoi, onChange }) {
+export default function AoiMap({ aoi, onChange, active = true }) {
   const element = useRef(null);
   const map = useRef(null);
   const shapes = useRef(null);
@@ -111,7 +134,7 @@ export default function AoiMap({ aoi, onChange }) {
         (selection.bbox[0] >= selection.bbox[2] ||
           selection.bbox[1] >= selection.bbox[3])
       ) {
-        setError("Draw a larger rectangle, or enter its coordinates below.");
+        setError("Draw a larger rectangle, or enter its coordinates.");
         return;
       }
       setError(null);
@@ -123,6 +146,12 @@ export default function AoiMap({ aoi, onChange }) {
     });
     const resize = new ResizeObserver(() => {
       instance.invalidateSize();
+      if (element.current.clientWidth === 0) {
+        drawing.current?.disable();
+        drawing.current = null;
+        setMode(null);
+        return;
+      }
       if (
         !fitted.current &&
         element.current.clientWidth > 0 &&
@@ -169,6 +198,13 @@ export default function AoiMap({ aoi, onChange }) {
       });
   }, [aoi]);
 
+  useEffect(() => {
+    if (active) return;
+    drawing.current?.disable();
+    drawing.current = null;
+    setMode(null);
+  }, [active]);
+
   const draw = (kind) => {
     drawing.current?.disable();
     setError(null);
@@ -192,10 +228,6 @@ export default function AoiMap({ aoi, onChange }) {
     drawing.current = null;
     setMode(null);
   };
-  const choosePreset = (preset) => {
-    cancel();
-    onChange({ kind: "bbox", bbox: [...preset.bbox] });
-  };
 
   return (
     <div className="atlas-map">
@@ -210,6 +242,7 @@ export default function AoiMap({ aoi, onChange }) {
           aria-pressed={mode === "rectangle"}
           onClick={() => draw("rectangle")}
         >
+          <ToolIcon kind="rectangle" />
           Rectangle
         </button>
         <button
@@ -218,17 +251,9 @@ export default function AoiMap({ aoi, onChange }) {
           aria-pressed={mode === "polygon"}
           onClick={() => draw("polygon")}
         >
+          <ToolIcon kind="polygon" />
           Polygon
         </button>
-        {mode && (
-          <button
-            type="button"
-            className="atlas-tool atlas-tool--cancel"
-            onClick={cancel}
-          >
-            Cancel drawing
-          </button>
-        )}
         <button
           type="button"
           className="atlas-tool atlas-tool--extent"
@@ -240,8 +265,18 @@ export default function AoiMap({ aoi, onChange }) {
             });
           }}
         >
+          <ToolIcon kind="extent" />
           Regional view
         </button>
+        {mode && (
+          <button
+            type="button"
+            className="atlas-tool atlas-tool--cancel"
+            onClick={cancel}
+          >
+            Cancel drawing
+          </button>
+        )}
       </div>
       <div
         ref={element}
@@ -249,57 +284,36 @@ export default function AoiMap({ aoi, onChange }) {
         role="region"
         aria-label="Area selection map. Use the coordinate fields for keyboard selection."
       />
-      <div className="atlas-map__status" aria-live="polite">
-        {error ? (
-          <p className="atlas-message atlas-message--error" role="alert">
-            {error}
-          </p>
-        ) : (
-          <p>
-            {mode === "polygon"
-              ? "Click to add corners. Select the first corner to finish."
-              : mode === "rectangle"
-                ? "Drag across the map to define your area."
-                : "Dashed outline: available archive. Solid outline: your selection."}
-          </p>
-        )}
-        {tileError && (
-          <p className="atlas-message">
-            Map tiles could not load. Coordinate selection still works.{" "}
-            <button
-              type="button"
-              className="atlas-text-button"
-              onClick={() => {
-                setTileError(false);
-                tiles.current?.redraw();
-              }}
-            >
-              Retry map
-            </button>
-          </p>
-        )}
-      </div>
-      <div
-        className="atlas-map__presets"
-        role="group"
-        aria-label="Example areas"
-      >
-        <span>Quick areas</span>
-        {AREA_PRESETS.map((preset) => (
-          <button
-            type="button"
-            key={preset.name}
-            className="atlas-preset"
-            aria-pressed={
-              aoi.kind === "bbox" &&
-              aoi.bbox.every((value, index) => value === preset.bbox[index])
-            }
-            onClick={() => choosePreset(preset)}
-          >
-            {preset.name}
-          </button>
-        ))}
-      </div>
+      {(mode || error || tileError) && (
+        <div className="atlas-map__status" aria-live="polite">
+          {error ? (
+            <p className="atlas-message atlas-message--error" role="alert">
+              {error}
+            </p>
+          ) : mode ? (
+            <p>
+              {mode === "polygon"
+                ? "Click to add corners. Select the first corner to finish."
+                : "Drag across the map to define your area."}
+            </p>
+          ) : null}
+          {tileError && (
+            <p className="atlas-message">
+              Map tiles could not load. Coordinate selection still works.{" "}
+              <button
+                type="button"
+                className="atlas-text-button"
+                onClick={() => {
+                  setTileError(false);
+                  tiles.current?.redraw();
+                }}
+              >
+                Retry map
+              </button>
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,200 @@
+.seasonal {
+  min-width: 0;
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+.seasonal__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+}
+.seasonal__heading h2 {
+  font-size: var(--fs-4);
+  font-weight: 500;
+}
+.seasonal__heading p,
+.seasonal__footnote {
+  color: var(--muted);
+  font-size: var(--fs-2);
+  margin-top: var(--space-2);
+}
+.seasonal__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: var(--fs-1);
+}
+.seasonal__legend li {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+.seasonal__key {
+  width: 16px;
+  height: 3px;
+  background: var(--text);
+}
+.seasonal__key--range {
+  height: 12px;
+  width: 5px;
+  margin-inline: 5px 6px;
+  background: var(--border);
+}
+.seasonal__key--selected {
+  width: 8px;
+  height: 8px;
+  margin-inline: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+}
+.seasonal__notice {
+  margin-top: var(--space-4);
+  color: var(--muted);
+}
+.seasonal__plot {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+.seasonal__scale {
+  width: 36px;
+  flex-shrink: 0;
+  height: 180px;
+  padding-block: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  color: var(--muted);
+  font-size: var(--fs-1);
+  font-variant-numeric: tabular-nums;
+}
+.seasonal__chart {
+  min-width: 0;
+  flex: 1;
+}
+.seasonal__chart svg {
+  display: block;
+  width: 100%;
+  height: 180px;
+  overflow: visible;
+}
+.seasonal__grid {
+  stroke: var(--rule);
+  vector-effect: non-scaling-stroke;
+}
+.seasonal__range {
+  stroke: var(--border);
+  stroke-width: 6px;
+  vector-effect: non-scaling-stroke;
+}
+.seasonal__median {
+  stroke: var(--text);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
+.seasonal__selected {
+  fill: var(--primary);
+}
+.seasonal__months {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.seasonal__months button,
+.seasonal__months > span {
+  min-width: 0;
+  min-height: var(--row);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: var(--fs-1);
+}
+.seasonal__months button:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+.seasonal__months button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+.seasonal__months button:active:not(:disabled) {
+  background: var(--hover);
+}
+.seasonal__months button:disabled {
+  opacity: 1;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.seasonal__details {
+  margin-top: var(--space-3);
+}
+.seasonal__details summary {
+  display: flex;
+  align-items: center;
+  min-height: var(--row);
+  color: var(--text);
+  font-size: var(--fs-2);
+}
+.seasonal__details summary:hover {
+  color: var(--primary);
+}
+.seasonal__details summary:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.seasonal__details summary:active {
+  color: var(--primary-hover);
+}
+.seasonal__table-wrap {
+  overflow-x: auto;
+}
+.seasonal table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-2);
+  font-variant-numeric: tabular-nums;
+}
+.seasonal caption {
+  text-align: left;
+  color: var(--muted);
+  padding-bottom: var(--space-3);
+}
+.seasonal th,
+.seasonal td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+}
+.seasonal th:first-child {
+  text-align: left;
+}
+.seasonal thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  font-weight: 500;
+}
+.seasonal tbody th {
+  font-weight: 400;
+}
+@media (max-width: 600px) {
+  .seasonal__plot {
+    overflow-x: auto;
+    padding-bottom: var(--space-2);
+  }
+  .seasonal__chart {
+    min-width: 528px;
+  }
+}

@@ -5,7 +5,9 @@
 Ala-Too Fire Calendar is an open-source geospatial application for comparing
 monthly thermal activity across Kyrgyzstan and its neighbouring region. Users
 define an area on a map, inspect a harmonized historical calendar, compare a
-selected month with its historical baseline, and export reproducible CSV data.
+selected month with its historical baseline, and export reproducible CSV data. Saved areas, shareable analysis links, WGS84
+GeoJSON exchange, seasonal comparisons and self-contained reports support a
+repeatable research workflow.
 
 ## What is different
 
@@ -59,5 +61,5 @@ Team Stellar Baatyr. Repository: https://github.com/VakuumJava/FireBros
 
 NASA FIRMS — MODIS/VIIRS active fire data. Map data © OpenStreetMap contributors.
 AI assistance supported engineering and review; generated metrics were not
-replaced by invented figures. The team should review this submission and add
-its member names and the final public deployment URL before submitting it.
+replaced by invented figures. Live application: https://nasa.vakuum.cc. The team should review this submission
+and add its member names before submitting it.

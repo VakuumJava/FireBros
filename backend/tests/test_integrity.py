@@ -100,6 +100,38 @@ def test_rejections_carry_security_headers(client):
     assert "content-security-policy" in response.headers
 
 
+def test_unexpected_errors_keep_security_headers_without_details(settings):
+    app = create_app(settings)
+
+    @app.get("/api/v1/broken")
+    def broken():
+        raise RuntimeError("private internal diagnostic")
+
+    with TestClient(app, raise_server_exceptions=False) as client:
+        response = client.get("/api/v1/broken")
+    assert response.status_code == 500
+    assert response.json() == {"detail": "internal server error"}
+    assert "private" not in response.text
+    assert "content-security-policy" in response.headers
+    assert response.headers["cache-control"] == "no-store"
+
+
+def test_cors_preflight_keeps_security_headers(settings):
+    app = create_app(replace(settings, cors_origins=("https://trusted.example",)))
+    with TestClient(app) as client:
+        response = client.options(
+            "/api/v1/aoi/summary",
+            headers={
+                "Origin": "https://trusted.example",
+                "Access-Control-Request-Method": "GET",
+            },
+        )
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "https://trusted.example"
+    assert "content-security-policy" in response.headers
+    assert response.headers["cache-control"] == "no-store"
+
+
 def test_static_assets_are_cached_by_fingerprint(tmp_path, monkeypatch, settings):
     (tmp_path / "assets").mkdir()
     (tmp_path / "index.html").write_text("<!doctype html><title>atlas</title>")

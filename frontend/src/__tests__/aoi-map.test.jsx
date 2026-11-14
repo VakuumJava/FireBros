@@ -8,7 +8,11 @@ const leaflet = vi.hoisted(() => ({
   rectangle: vi.fn(),
   polygon: vi.fn(),
   featureGroup: vi.fn(),
-  Draw: { Event: { CREATED: "draw:created", DRAWSTOP: "draw:drawstop" } },
+  Draw: {
+    Event: { CREATED: "draw:created", DRAWSTOP: "draw:drawstop" },
+    Rectangle: vi.fn(),
+    Polygon: vi.fn(),
+  },
 }));
 vi.mock("../components/leafletSetup", () => ({ default: leaflet }));
 vi.mock("leaflet-draw", () => ({}));
@@ -20,6 +24,7 @@ let container;
 let instance;
 let resize;
 let disconnect;
+let drawHandler;
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -32,6 +37,13 @@ beforeEach(() => {
     remove: vi.fn(),
   };
   leaflet.map.mockReturnValue(instance);
+  drawHandler = { enable: vi.fn(), disable: vi.fn() };
+  leaflet.Draw.Rectangle.mockImplementation(function () {
+    return drawHandler;
+  });
+  leaflet.Draw.Polygon.mockImplementation(function () {
+    return drawHandler;
+  });
   leaflet.tileLayer.mockReturnValue({
     addTo: vi.fn().mockReturnThis(),
     on: vi.fn().mockReturnThis(),
@@ -125,5 +137,46 @@ describe("collapsed mobile area editor", () => {
     view = undefined;
     expect(disconnect).toHaveBeenCalledOnce();
     expect(instance.remove).toHaveBeenCalledOnce();
+  });
+
+  it("stops drawing when navigation hides the map and retains the selection", () => {
+    container.clientWidth = 600;
+    mount();
+    const rectangle = view.root.findAllByType("button")[0];
+    act(() => rectangle.props.onClick());
+    expect(drawHandler.enable).toHaveBeenCalledOnce();
+    expect(rectangle.props["aria-pressed"]).toBe(true);
+
+    act(() =>
+      view.update(<AoiMap aoi={first} onChange={vi.fn()} active={false} />),
+    );
+    expect(drawHandler.disable).toHaveBeenCalledOnce();
+    expect(rectangle.props["aria-pressed"]).toBe(false);
+
+    act(() => view.update(<AoiMap aoi={first} onChange={vi.fn()} active />));
+    expect(instance.fitBounds).toHaveBeenCalledOnce();
+    expect(leaflet.featureGroup.mock.results[0].value.getLayers()).toHaveLength(
+      1,
+    );
+    expect(drawHandler.enable).toHaveBeenCalledOnce();
+  });
+
+  it("releases drawing hooks when the mobile editor collapses to zero width", () => {
+    container.clientWidth = 600;
+    mount();
+    const polygon = view.root.findAllByType("button")[1];
+    act(() => polygon.props.onClick());
+    expect(drawHandler.enable).toHaveBeenCalledOnce();
+
+    container.clientWidth = 0;
+    act(() => resize());
+    expect(drawHandler.disable).toHaveBeenCalledOnce();
+    expect(polygon.props["aria-pressed"]).toBe(false);
+
+    act(() => resize());
+    container.clientWidth = 600;
+    act(() => resize());
+    expect(drawHandler.disable).toHaveBeenCalledOnce();
+    expect(instance.fitBounds).toHaveBeenCalledOnce();
   });
 });

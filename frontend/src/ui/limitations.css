@@ -1,7 +1,7 @@
 .data-footer {
   margin-top: var(--space-6);
   padding-block: var(--space-5);
-  border-top: 1px solid var(--border-strong);
+  border-top: 1px solid var(--rule);
   color: var(--muted);
   font-size: 13px;
 }
@@ -64,7 +64,7 @@
   display: grid;
   place-items: center;
   padding: var(--space-5);
-  background: color-mix(in srgb, var(--text) 48%, transparent);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
 }
 .limitations {
   display: flex;
@@ -73,7 +73,7 @@
   max-height: calc(100dvh - 48px);
   overflow: hidden;
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius);
+  border-radius: var(--radius-card);
   background: var(--surface);
   color: var(--text);
   font: 15px/1.6 var(--font-body);
@@ -160,7 +160,7 @@
   cursor: pointer;
 }
 .limitations__done:hover {
-  background: color-mix(in srgb, var(--primary) 85%, var(--text));
+  background: var(--primary-hover);
 }
 @media (max-width: 640px) {
   .data-footer__main,

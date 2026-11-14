@@ -1,13 +1,13 @@
 {
  "$schema": "uimixes-design-brief-1",
  "created": "2026-11-14T21:26:13+00:00",
- "updated": "2026-11-14T21:33:58+00:00",
+ "updated": "2026-11-14T23:30:10+00:00",
  "answers": {
-  "job": "A compact geospatial research tool for choosing an area and interpreting monthly fire anomalies; factual labels, visible data, no marketing landing-page composition.",
+  "job": "A simple dark map application: choose a place and month, read the anomaly, then inspect history or export. One working surface, no dashboard decoration.",
   "stack": "React 18, vanilla CSS, Leaflet, Plotly and existing FastAPI; preserve the project stack.",
-  "screens": "Map and selected-month assessment; activity calendar; harmonization evidence; export and limitations",
+  "screens": "Map and selected-month assessment; saved areas and sharing; full history with seasonal comparison; harmonization evidence; CSV, GeoJSON and evidence report export; scientific limitations.",
   "data": "AOI geometry; monthly hotspot-days; archive dates; observed value; median; robust sigma; percentile; coverage; sensor comparison; validation metrics",
-  "constraints": "Repair current design in place: remove slogan and numbered-section styling, centralize tokens and component CSS ownership, compact controls, bounded archive view, mobile assessment first, preserve scientific accuracy, React18 Leaflet Plotly and deployed API.",
+  "constraints": "Preserve the accepted simple dark workspace and existing stack. Add useful analysis, reproducible sharing and bounded local saved areas through secondary disclosures and existing routes. No account requirement, no fake alerts, no decorative dashboard. Preserve real measurements, keyboard support and explicit uncertainty.",
   "elements": [
    "tables and rows",
    "forms and fields",
@@ -30,26 +30,27 @@
    "offline / stale"
   ],
   "detail": "close to production — real storage, validation, roles",
-  "mood": "editorial and print — paper, rules, serif, generous margins",
-  "style.edges": "mixed",
+  "mood": "Restrained contemporary dark map tool: flat graphite surfaces, soft corners, clear typography, warm emphasis only for actions and measurements.",
+  "style.edges": "soft",
   "style.depth": "flat",
   "style.order": "strict",
-  "style.voice": "expressive",
+  "style.voice": "quiet",
   "style.reference": "contemporary",
-  "modes": "light only — one surface, no dark counterpart",
+  "modes": "dark only — one surface, no light counterpart",
   "theme": "you choose from the brand description",
   "locale": [
    "English only — no translation layer"
   ],
-  "fonts": "bundled catalogue (ships with the skill, no download)",
-  "nav": "no rail — one column with a top bar",
+  "fonts": "Retain bundled IBM Plex Sans and JetBrains Mono, with the dark atlas UI in Plex and coordinate metadata in Mono.",
+  "nav": "Single persistent control column with a simple top navigation; mobile stacks controls and offers an expandable map. No duplicate history dock.",
   "density": "regular (44px rows)",
   "a11y": "WCAG 2.2 AA (default)",
   "seo": "yes — full SEO (title, meta, OG, canonical, JSON-LD, sitemap, robots)",
   "motion3d": "no, CSS motion only",
-  "style": "infographic",
+  "style": "dark-mode",
   "surface": "product UI / app",
-  "copy": "you write it from what I told you — real sentences, no placeholders"
+  "copy": "you write it from what I told you — real sentences, no placeholders",
+  "references": "User explicitly selected: Тёмный картографический атлас: большая карта, графит, огненные акценты"
  },
  "skipped": [],
  "notes": [],
@@ -290,6 +291,222 @@
    "id": "constraints",
    "value": "Repair current design in place: remove slogan and numbered-section styling, centralize tokens and component CSS ownership, compact controls, bounded archive view, mobile assessment first, preserve scientific accuracy, React18 Leaflet Plotly and deployed API.",
    "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:12:52+00:00",
+   "id": "constraints",
+   "value": "User requests a more beautiful frontend: refined cartographic product with soft tonal surfaces, precise typography, balanced map and analysis, warm-neutral ground and restrained pine/ember accents. Preserve stack, interactions, genuine data and validation caveats. No promotional slogans or fabricated graphics.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:12:52+00:00",
+   "id": "style.edges",
+   "option": 2,
+   "value": "soft",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:12:52+00:00",
+   "id": "style.depth",
+   "option": 2,
+   "value": "tonal",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:12:52+00:00",
+   "id": "style.order",
+   "option": 1,
+   "value": "strict",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:12:52+00:00",
+   "id": "style.voice",
+   "option": 2,
+   "value": "expressive",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:12:52+00:00",
+   "id": "style.reference",
+   "option": 1,
+   "value": "contemporary",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:13:07+00:00",
+   "id": "style",
+   "option": 3,
+   "value": "semi-flat",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:13:07+00:00",
+   "id": "fonts",
+   "value": "Retain the already bundled IBM Plex Sans and JetBrains Mono for continuity; explicit typography override from the semi-flat defaults.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:13:07+00:00",
+   "id": "references",
+   "value": "Cartographic product interface: geographic map as primary media, quiet tonal assessment, readable data sheet. Existing product data; no stock imagery.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "modes",
+   "value": "dark only — one surface, no light counterpart",
+   "by": "person"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "references",
+   "value": "User explicitly selected: Тёмный картографический атлас: большая карта, графит, огненные акценты",
+   "by": "person"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "style.edges",
+   "option": 2,
+   "value": "soft",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "style.depth",
+   "option": 2,
+   "value": "tonal",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "style.order",
+   "option": 1,
+   "value": "strict",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "style.voice",
+   "option": 1,
+   "value": "quiet",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "style.reference",
+   "option": 3,
+   "value": "technical",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "style",
+   "option": 2,
+   "value": "dark-mode",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:18:06+00:00",
+   "id": "constraints",
+   "value": "Full map-first dark atlas rebuild: dark OSM basemap via tile-only color treatment, real geometry selection, right inspector, history dock, separate method/export views. Technical reference carried by tabular scales and geographic bounds. No fake detections or emergency-live claims.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:19:35+00:00",
+   "id": "fonts",
+   "value": "Retain bundled IBM Plex Sans and JetBrains Mono, with the dark atlas UI in Plex and coordinate metadata in Mono.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:19:35+00:00",
+   "id": "nav",
+   "value": "No rail; four named views in a top navigation bar, backed by URL hashes.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:22:48+00:00",
+   "id": "job",
+   "value": "A simple dark map application: choose a place and month, read the anomaly, then inspect history or export. One working surface, no dashboard decoration.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:22:48+00:00",
+   "id": "constraints",
+   "value": "User asks full simplification. Retain previously chosen dark appearance. Replace competing panels and floating trays with a quiet left control column and dominant map. Hide secondary statistical detail behind disclosure. Preserve scientific data, all existing functions, architecture and keyboard support.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:22:48+00:00",
+   "id": "style.edges",
+   "option": 2,
+   "value": "soft",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:22:48+00:00",
+   "id": "style.depth",
+   "option": 1,
+   "value": "flat",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:22:48+00:00",
+   "id": "style.order",
+   "option": 1,
+   "value": "strict",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:22:48+00:00",
+   "id": "style.voice",
+   "option": 1,
+   "value": "quiet",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:22:48+00:00",
+   "id": "style.reference",
+   "option": 1,
+   "value": "contemporary",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:23:08+00:00",
+   "id": "style",
+   "option": 3,
+   "value": "clean-corporate",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:23:08+00:00",
+   "id": "nav",
+   "value": "Single persistent control column with a simple top navigation; mobile stacks controls and offers an expandable map. No duplicate history dock.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:23:12+00:00",
+   "id": "style",
+   "value": "dark-mode",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:25:54+00:00",
+   "id": "mood",
+   "value": "Restrained contemporary dark map tool: flat graphite surfaces, soft corners, clear typography, warm emphasis only for actions and measurements.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:30:10+00:00",
+   "id": "screens",
+   "value": "Map and selected-month assessment; saved areas and sharing; full history with seasonal comparison; harmonization evidence; CSV, GeoJSON and evidence report export; scientific limitations.",
+   "by": "agent"
+  },
+  {
+   "at": "2026-11-14T23:30:10+00:00",
+   "id": "constraints",
+   "value": "Preserve the accepted simple dark workspace and existing stack. Add useful analysis, reproducible sharing and bounded local saved areas through secondary disclosures and existing routes. No account requirement, no fake alerts, no decorative dashboard. Preserve real measurements, keyboard support and explicit uncertainty.",
+   "by": "agent"
   }
  ],
  "provenance": {
@@ -318,6 +535,7 @@
   "motion3d": "agent",
   "style": "agent",
   "surface": "agent",
-  "copy": "agent"
+  "copy": "agent",
+  "references": "agent"
  }
 }

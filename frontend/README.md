@@ -6,6 +6,7 @@ React 18, Vite, Leaflet and Plotly. Node 22.12+ is required. The API contract li
 npm ci
 npm run dev
 npm run build
+npm run format:check
 npm test
 ```
 
@@ -34,3 +35,12 @@ connection; manual coordinate entry remains available independently.
 
 Verification evidence and limitations are recorded in `QA.md`. A passing
 build/unit suite does not substitute for desktop/mobile browser inspection.
+
+`src/workspace/` validates versioned share links, WGS84 GeoJSON and bounded local
+storage. `src/analysis/` contains pure seasonal statistics and safe standalone
+report generation. `src/components/views/` owns History, Method and Export;
+App coordinates shared selection state. All imported geometry is handled locally.
+
+The seasonal baseline uses complete months and excludes the selected year. Shared
+links are reproducible selections, not frozen data: reopening a link queries the
+current data snapshot. Downloaded reports preserve the original response metadata.

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fmt, MONTHS_FULL } from "../ui/format";
-import "./insights.css";
+import "./ranking.css";
 
 export default function TopPeriods({ data, onSelect }) {
   const [kind, setKind] = useState("months");
@@ -47,7 +47,7 @@ export default function TopPeriods({ data, onSelect }) {
           const content = (
             <>
               <span className="atlas-ranking__rank" aria-hidden="true">
-                {period.rank}
+                {String(period.rank).padStart(2, "0")}
               </span>
               <span className="atlas-ranking__period">
                 {label}

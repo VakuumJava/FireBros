@@ -1,50 +1,51 @@
-# Fire Atlas interface refinement
+# Simple workspace verification
 
-The second pass replaces the promotional composition with a compact research
-workspace. It removes slogans and numbered section labels, gives each active
-component one stylesheet, and moves the legacy UI shell out of the runtime CSS.
-The map editor collapses on mobile, retaining area context above the assessment.
-Calendar scrolling is bounded with an explicit full-archive control.
+The release adds bounded saved analyses, versioned sharing, WGS84 GeoJSON exchange,
+a seasonal comparison and an escaped, self-contained report. The UI uses a left selection column, a dominant map and separate History,
+Method and Export views. The repeated heading, competing inspector and history
+dock have been removed. The anomaly summary shows the count, verdict, median and
+percentile; comparison details use native disclosure.
 
-## Verified
+## Recorded checks
 
-- 60 Vitest tests across eight files. Coverage includes AOI/period request races,
-  zero versus missing observations, keyboard calendar movement, archive expansion,
-  ranking selection, shared month state, focus return after area selection,
-  dialog focus lifecycle, one-month chart markers, chart errors, CSV safety and
-  contrast over both calendar ramps.
-- Production Vite build passed. Plotly remains lazy loaded.
-- 22 actual palette foreground/background pairs passed their required floors.
-  Body text: 13.32:1 on white; secondary text: 6.28:1; primary button: 7.72:1;
-  control border: 3.61:1 on white. See `docs/design/refinement-contrast.json`.
-- Clutter checks over all eight active CSS files: zero failures, zero warnings.
-- Source slop check: zero failing rules. Retained warnings concern React event
-  handlers and semantic calendar hatching/selection outlines.
-- UI SVG audit: zero errors and warnings. Font files and licenses verified.
-- Static SEO checks: zero findings. Git whitespace checks passed.
+- 137 tests pass across ten files, including named-area selection, synchronized
+  months and ranges, keyboard calendar navigation, empty and missing data, CSV,
+  focus return, route visibility and stale-request handling.
+- New regressions cover opening the mobile map with focus and scroll, moving
+  focus on view changes, revealing the selected calendar month on activation,
+  and stopping Leaflet drawing when the map is hidden.
+- Production build passes. Plotly remains in its own deferred chunk.
+- 27 measured foreground/background token pairs meet their contrast floors.
+- UIMixes dark-mode element coverage, monochrome and custom palette checks pass.
+- Source slop, clutter and SVG checks have no failing rules. Warning review and
+  checker limitations are in `../docs/design/simple-workspace.md`.
+- Static SEO checks have no findings. Bundled font files and OFL licenses exist;
+  the brief checker's font path resolution reports them missing despite correct
+  CSS-relative URLs. Do not change those URLs to satisfy that diagnostic.
 
-## Unverified
+## Evidence limits
 
-No Chrome DevTools or Playwright MCP tools are exposed in this session. A
-request to connect Chrome DevTools was presented; no approval has arrived.
-No installation or terminal browser automation was performed. Browser layout,
-mobile reflow, rendered state contrast, gestures and Core Web Vitals remain
-INCONCLUSIVE. Mocked focus and chart tests do not establish browser acceptance.
+No Chrome DevTools or Playwright MCP is exposed. No terminal browser automation
+was used. Desktop/mobile screenshots, computed contrast, actual gesture and
+keyboard traversal, and Core Web Vitals remain unverified. Source tests do not
+establish visual acceptance. The brief records implementation decisions as agent
+choices; only the earlier dark cartographic preference was explicitly selected.
 
-The brief uses agent decisions under the user's delegated design scope.
-`ask.py gate` passes. The stricter `agree` correctly reports those assumptions
-as unconfirmed. Static brief checking now resolves palette roles but cannot
-resolve the SPA navigation or public font paths without a served snapshot.
-`verify_ui` reports missing map focus styles because its parser does not follow
-`insights.css`; the selectors exist and need rendered confirmation.
-
-Before presentation, verify 320, 375, 768, 1024, 1280 and 1440px, especially map
-expansion/recentering, internal calendar scrolling, reduced motion, export and
-modal focus. Existing pitch screenshots and video show older UI revisions and
-must not be treated as evidence for the current design.
-
-STATIC QA: source checks pass; runtime shell evidence incomplete.
+STATIC QA: source checks pass with documented checker limitations.
 RENDER QA: inconclusive — no browser MCP.
-BRIEF QA: partial — static palette checks pass, served SPA check pending.
-PRODUCT QA: 60 component/regression tests pass; browser acceptance pending.
-SEO QA: static checks pass; Lighthouse/Core Web Vitals unmeasured.
+BRIEF QA: implementation recorded; font-path diagnostic and rendered checks open.
+PRODUCT QA: 137 tests pass; visual acceptance pending.
+SEO QA: static checks pass; Core Web Vitals unmeasured.
+
+
+The real Parquet integration also passed all five API contracts for a regional,
+tiny and polygon AOI, both CSV modes and a single-month calendar. All 33 snapshot
+output hashes matched. Report generation was exercised using actual rectangle
+and polygon API responses; both retained 12 months of seasonal baselines.
+
+The current source audit found no failing UIMixes slop/clutter rules, one
+control-density advisory and no SVG errors. These remain source checks. A
+standalone npm install from the lockfile is checked before release. Python
+runtime dependencies are audited independently; online npm advisory lookup is
+also required by CI, since a cached/offline audit cannot establish current
+advisory coverage.
