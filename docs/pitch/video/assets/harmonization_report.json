@@ -1,0 +1,63 @@
+{
+  "acceptance": {
+    "raw_step_at_least_1_5": true,
+    "sensor_ratio_within_5_percent": true,
+    "temporal_step_within_5_percent": false
+  },
+  "holdout": {
+    "bias": -0.210179,
+    "coverage_95": 0.986525,
+    "harmonized_to_modis": 1.019984,
+    "mae": 0.165121,
+    "mape": 0.784578,
+    "n": 20482,
+    "n_positive_truth": 1103,
+    "raw_to_modis": 3.62949,
+    "rmse_log": 0.246316
+  },
+  "holdout_region": {
+    "bias": 0.519221,
+    "coverage_95": 1.0,
+    "mae": 45.052632,
+    "mape": 0.65236,
+    "n": 19,
+    "n_positive_truth": 19,
+    "rmse_log": 0.542268
+  },
+  "holdout_tile": {
+    "bias": 0.501019,
+    "coverage_95": 0.969925,
+    "mae": 3.383459,
+    "mape": 0.997952,
+    "n": 399,
+    "n_positive_truth": 216,
+    "rmse_log": 0.642663
+  },
+  "holdout_years": [
+    2024,
+    2025
+  ],
+  "holdout_years_present": [
+    2024,
+    2025
+  ],
+  "interpretation": "Temporal steps include real environmental variation and do not isolate sensor bias. Acceptance targets are diagnostic, never enforced by rescaling.",
+  "method_version": "harmonize-v2",
+  "overlap": {
+    "harmonized_to_modis": 1.053582,
+    "n": 172480,
+    "raw_to_modis": 3.832565
+  },
+  "sensor_ratio_definition": "sum of same-cell same-month counts / sum of paired MODIS; complete source months only",
+  "source": "parquet",
+  "status": "evaluated",
+  "step_ratio_harmonized": 0.782576,
+  "step_ratio_placebo": 0.610619,
+  "step_ratio_raw": 2.778351,
+  "temporal_step_definition": "median of knot-year monthly totals / median of same-month totals in each of three previous years; all three required",
+  "unit": "hotspot_days_1km",
+  "validation_design": "2024-2025 excluded from fitting; v1 holdout diagnostic informed the v2 sparse-count correction, so this is not an untouched final benchmark. A new prospective test is required.",
+  "warnings": [
+    "Cell estimates allocate tile predictions by VIIRS activity; cell accuracy is reported separately from tile and regional accuracy."
+  ]
+}
