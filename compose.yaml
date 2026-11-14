@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      FIREBROS_DATA_DIR: /data
+      FIREBROS_REQUIRE_DATA: "true"
+      FIREBROS_CORS: ""
+      FIREBROS_MAX_CONCURRENT_QUERIES: "8"
+    volumes:
+      - ./data/processed:/data:ro
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 2g
+    pids_limit: 128
+    restart: unless-stopped
