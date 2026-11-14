@@ -142,3 +142,10 @@ Consequence for the team: **P2 and P3 do not block P4.** The frontend runs on `c
 | `GET /api/v1/meta/health`, `/meta/region` | diagnostics and region metadata |
 
 Field-by-field reference: [`api-contract.md`](api-contract.md). Machine schemas: [`../contracts/`](../contracts).
+## Implemented v2 refinements
+
+The fitted response is the 2° tile-month total, avoiding sparse-cell median bias. Calibrated tile counts are allocated to 0.25° cells by native VIIRS activity with deterministic integer remainder allocation. Daily prefixes use the actual cumulative activity fraction and a fixed monthly allocation; no calendar-day prorating substitutes for actual observations.
+
+Raw inputs include standard-priority deduplication and NASA published missing-day exclusions. Ingestion accepts annual country archives without a key and current-year SP/NRT through the Area API. Source CSV, coverage sidecars and missing-day catalog hashes all enter the manifest.
+
+2024–2025 are excluded from parameter estimation, but their diagnostics informed the v1-to-v2 correction; the release is a research demonstration requiring prospective validation. Temporal knot and placebo ratios are descriptive, not causal acceptance guarantees. See method.md for measured error at cell, tile and region levels.

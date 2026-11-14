@@ -4,7 +4,7 @@ import csv
 import io
 from collections.abc import Iterable, Sequence
 
-FORMULA_PREFIXES = ("=", "+", "-", "@", "\t", "\r")
+FORMULA_PREFIXES = ("=", "+", "-", "@", "\t", "\r", "\n")
 
 
 def render_csv(rows: Iterable[dict[str, object]], columns: Sequence[str]) -> bytes:
@@ -23,6 +23,8 @@ def render_csv(rows: Iterable[dict[str, object]], columns: Sequence[str]) -> byt
 
 def _neutralize(value: object) -> object:
     """Stop spreadsheet formula injection on any string cell."""
-    if isinstance(value, str) and value.startswith(FORMULA_PREFIXES):
+    if isinstance(value, str) and (
+        value.startswith(FORMULA_PREFIXES) or value.lstrip().startswith(FORMULA_PREFIXES)
+    ):
         return f"'{value}"
     return value

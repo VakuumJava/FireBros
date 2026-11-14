@@ -1,0 +1,432 @@
+{
+  "files": 45,
+  "errors": 7,
+  "inconclusive": 0,
+  "warnings": 46,
+  "findings": [
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 73,
+      "rule": "state/focus",
+      "severity": "error",
+      "message": "a has no focus-visible state \u2014 keyboard users cannot see where they are",
+      "fix": "add :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 193,
+      "rule": "state/focus",
+      "severity": "error",
+      "message": "button.atlas-tool has no focus-visible state \u2014 keyboard users cannot see where they are",
+      "fix": "add :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 201,
+      "rule": "state/focus",
+      "severity": "error",
+      "message": "button.atlas-tool has no focus-visible state \u2014 keyboard users cannot see where they are",
+      "fix": "add :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 210,
+      "rule": "state/focus",
+      "severity": "error",
+      "message": "button.atlas-tool has no focus-visible state \u2014 keyboard users cannot see where they are",
+      "fix": "add :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 218,
+      "rule": "state/focus",
+      "severity": "error",
+      "message": "button.atlas-tool has no focus-visible state \u2014 keyboard users cannot see where they are",
+      "fix": "add :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 255,
+      "rule": "state/focus",
+      "severity": "error",
+      "message": "button.atlas-text-button has no focus-visible state \u2014 keyboard users cannot see where they are",
+      "fix": "add :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 275,
+      "rule": "state/focus",
+      "severity": "error",
+      "message": "button.atlas-preset has no focus-visible state \u2014 keyboard users cannot see where they are",
+      "fix": "add :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 73,
+      "rule": "state/hover",
+      "severity": "warn",
+      "message": "a has no hover state",
+      "fix": "mirror the hover treatment on :focus-visible as well"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 193,
+      "rule": "state/hover",
+      "severity": "warn",
+      "message": "button.atlas-tool has no hover state",
+      "fix": "mirror the hover treatment on :focus-visible as well"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 193,
+      "rule": "state/active",
+      "severity": "warn",
+      "message": "button.atlas-tool has no active state",
+      "fix": "add :active with a token shift, not an arbitrary color"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 201,
+      "rule": "state/hover",
+      "severity": "warn",
+      "message": "button.atlas-tool has no hover state",
+      "fix": "mirror the hover treatment on :focus-visible as well"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 201,
+      "rule": "state/active",
+      "severity": "warn",
+      "message": "button.atlas-tool has no active state",
+      "fix": "add :active with a token shift, not an arbitrary color"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 210,
+      "rule": "state/hover",
+      "severity": "warn",
+      "message": "button.atlas-tool has no hover state",
+      "fix": "mirror the hover treatment on :focus-visible as well"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 210,
+      "rule": "state/active",
+      "severity": "warn",
+      "message": "button.atlas-tool has no active state",
+      "fix": "add :active with a token shift, not an arbitrary color"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 218,
+      "rule": "state/hover",
+      "severity": "warn",
+      "message": "button.atlas-tool has no hover state",
+      "fix": "mirror the hover treatment on :focus-visible as well"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 218,
+      "rule": "state/active",
+      "severity": "warn",
+      "message": "button.atlas-tool has no active state",
+      "fix": "add :active with a token shift, not an arbitrary color"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 255,
+      "rule": "state/hover",
+      "severity": "warn",
+      "message": "button.atlas-text-button has no hover state",
+      "fix": "mirror the hover treatment on :focus-visible as well"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 255,
+      "rule": "state/active",
+      "severity": "warn",
+      "message": "button.atlas-text-button has no active state",
+      "fix": "add :active with a token shift, not an arbitrary color"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 275,
+      "rule": "state/hover",
+      "severity": "warn",
+      "message": "button.atlas-preset has no hover state",
+      "fix": "mirror the hover treatment on :focus-visible as well"
+    },
+    {
+      "file": "frontend/src/components/AoiMap.jsx",
+      "line": 275,
+      "rule": "state/active",
+      "severity": "warn",
+      "message": "button.atlas-preset has no active state",
+      "fix": "add :active with a token shift, not an arbitrary color"
+    },
+    {
+      "file": "frontend/src/components/components.css",
+      "line": 301,
+      "rule": "a11y/target-size",
+      "severity": "warn",
+      "message": "22px target is below the 24px WCAG 2.2 minimum",
+      "fix": "use min-height/min-width of 24px, and 44px for primary controls"
+    },
+    {
+      "file": "frontend/src/components/components.css",
+      "line": 302,
+      "rule": "a11y/target-size",
+      "severity": "warn",
+      "message": "8px target is below the 24px WCAG 2.2 minimum",
+      "fix": "use min-height/min-width of 24px, and 44px for primary controls"
+    },
+    {
+      "file": "frontend/src/components/export.css",
+      "line": 42,
+      "rule": "a11y/target-size",
+      "severity": "warn",
+      "message": "18px target is below the 24px WCAG 2.2 minimum",
+      "fix": "use min-height/min-width of 24px, and 44px for primary controls"
+    },
+    {
+      "file": "frontend/src/components/export.css",
+      "line": 43,
+      "rule": "a11y/target-size",
+      "severity": "warn",
+      "message": "18px target is below the 24px WCAG 2.2 minimum",
+      "fix": "use min-height/min-width of 24px, and 44px for primary controls"
+    },
+    {
+      "file": "frontend/src/components/export.css",
+      "line": 44,
+      "rule": "a11y/target-size",
+      "severity": "warn",
+      "message": "18px target is below the 24px WCAG 2.2 minimum",
+      "fix": "use min-height/min-width of 24px, and 44px for primary controls"
+    },
+    {
+      "file": "frontend/src/components/export.css",
+      "line": 61,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/export.css",
+      "line": 66,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/export.css",
+      "line": 89,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/harmonization.css",
+      "line": 12,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/harmonization.css",
+      "line": 52,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/harmonization.css",
+      "line": 82,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/harmonization.css",
+      "line": 96,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/harmonization.css",
+      "line": 111,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 86,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 99,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 110,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 198,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 218,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 249,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 261,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 281,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 287,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 357,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 383,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 397,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 410,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 422,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/components/insights.css",
+      "line": 432,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/ui/limitations.css",
+      "line": 6,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/ui/limitations.css",
+      "line": 143,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/ui/limitations.css",
+      "line": 148,
+      "rule": "type/small",
+      "severity": "warn",
+      "message": "css (13px) text is below the 14px body floor",
+      "fix": "fine for badges, avatars, column headers and timestamps; anything that is body copy should be 14px or larger"
+    },
+    {
+      "file": "frontend/src/ui/theme.css",
+      "line": 177,
+      "rule": "a11y/target-size",
+      "severity": "warn",
+      "message": "1px target is below the 24px WCAG 2.2 minimum",
+      "fix": "use min-height/min-width of 24px, and 44px for primary controls"
+    },
+    {
+      "file": "frontend/src/ui/theme.css",
+      "line": 178,
+      "rule": "a11y/target-size",
+      "severity": "warn",
+      "message": "1px target is below the 24px WCAG 2.2 minimum",
+      "fix": "use min-height/min-width of 24px, and 44px for primary controls"
+    }
+  ]
+}

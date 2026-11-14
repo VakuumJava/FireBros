@@ -1,0 +1,13 @@
+{
+  "file": "demo.mp4",
+  "duration_seconds": 90,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "bytes": 4781489,
+  "sha256": "d5b8e070a32b4e8a7b3e230aac65ea02018b8f9e4cbff679d57ae0fa1b352605",
+  "audio": "silent",
+  "render_seconds": 120.3,
+  "capture": "beginframe",
+  "gpu": "hardware"
+}

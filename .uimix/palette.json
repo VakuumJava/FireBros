@@ -1,0 +1,17 @@
+{
+  "surface": "#191c1f",
+  "surface_alt": "#222629",
+  "text": "#eef0f1",
+  "muted": "#a7afb5",
+  "primary": "#e4a476",
+  "on_primary": "#24180d",
+  "secondary": "#92b6aa",
+  "accent": "#e4a476",
+  "border": "#727d85",
+  "focus": "#f1b98d",
+  "warning": "#e9bd75",
+  "danger": "#ffaaa2",
+  "radius": "8px",
+  "theme": "dark",
+  "row": "44px"
+}

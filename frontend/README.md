@@ -1,45 +1,46 @@
-# frontend - React + Vite + Leaflet + Plotly
+# Frontend
 
-## Run
+React 18, Vite, Leaflet and Plotly. Node 22.12+ is required. The API contract lives in `../contracts`.
+
 ```bash
-cd frontend
-npm install
-cp .env.example .env     # Windows: copy .env.example .env
-npm run dev              # http://localhost:5173
-npm test                 # smoke tests on fixtures
+npm ci
+npm run dev
+npm run build
+npm run format:check
+npm test
 ```
-By default `VITE_USE_MOCK=true`: the app reads `../contracts/fixtures/*.json`, no backend needed, and a MOCK badge is shown at the top.
-Live API: set `VITE_USE_MOCK=false` in `.env` and start the backend on :8000. Vite proxies `/api` there (no CORS needed).
 
-## File map (owner -> contents)
-| Path | Owner | What |
-|---|---|---|
-| `src/api/client.js` | P4 | the **only** place with API URLs and parameters |
-| `src/api/mock.js`, `useAoiData.js`, `config.js` | P4 | mock mode, loading the 5 endpoints, constants |
-| `src/components/*` | P4 | AoiMap, CoordinateForm, PeriodSelect, CalendarHeatmap, AnomalyCard, TopPeriods, HarmonizationChart, SummaryStats, ExportPanel |
-| `src/components/components.css` | P4 | layout and structure of blocks |
-| `src/ui/*` | P5 | theme (`theme.css`), palettes, `Card`, `Footer`, chart colours, formatters |
-| `src/App.jsx`, `src/main.jsx` | P4 | page assembly, state (AOI, period, palette) |
+The default mode calls `/api/v1`; Vite proxies that prefix to `localhost:8000`.
+Copy `.env.example` to `.env` when overriding deployment settings. Set
+`VITE_USE_MOCK=true` only for a backend-free fixture preview. The preview names
+its fixed sample region explicitly and never presents fixture calibration
+metrics as measured results.
 
-Data flows one way: `App` -> `useAoiData` -> `api/client.js` -> (mock | fetch) -> components receive ready JSON as `data`.
+Draw a rectangle/polygon or enter bounds within the supported region, choose
+an inclusive month range, and select a calendar cell to compare that month
+against history. Keyboard users can navigate cells with arrows/Home/End and
+select with Enter/Space. Null cells represent unavailable observations;
+zero is an observed month without hotspots. At startup, archive health
+metadata selects its latest available month instead of inventing current data.
 
-## Contract rules already respected (do not break)
-- `null` in the calendar is drawn hatched as "no data", never as zero (there is a test).
-- The legend uses `max` from the response; the scale is never recomputed on the client.
-- The calendar works from the keyboard: Tab enters the grid, arrows/Home/End move.
-- The unit is "hotspot-days, 1 km" everywhere; mock data is flagged with a badge.
-- Incomplete month: a "month-to-date" note in the anomaly card and a yellow NRT frame in the calendar.
-- One failing endpoint does not take down the rest; identical errors (422) are merged into one banner.
-- The UI language is English only; a test fails if any Cyrillic character appears in `src/`.
-  The anomaly headline is built on the client, so the backend `label` field is not displayed.
+Panels fail independently. A changed AOI clears previous values, pending
+requests are canceled, and Retry refreshes the selection. CSV uses the active
+AOI/range, the response filename, and `X-Row-Count`. Exports can be canceled;
+limit errors are displayed without initiating a download.
 
-## TODO (P4 checklist)
-- [ ] Switch to the live API and check the fields (`npm run dev` with `VITE_USE_MOCK=false`).
-- [ ] CSV: test `kind=hotspots` on the real backend (a 413 will show in the panel).
-- [ ] Polygon: check that the backend accepts `polygon=lon,lat;...`.
-- [ ] Visually check the "AOI outside region" (422) state.
+`src/api/` owns transport and loading state. `src/components/` owns product
+controls/charts. `src/ui/` owns tokens, common presentation and limitations.
+Plotly loads lazily. The map uses OpenStreetMap tiles, which require a network
+connection; manual coordinate entry remains available independently.
 
-## Known pitfalls
-- Grey squares on the map mean `leaflet.css` is not loaded (it is imported in `AoiMap.jsx`).
-- `leaflet-draw` needs a global `L`, which is why `leafletSetup.js` is imported before it. Do not change the import order.
-- `showArea` is disabled for the rectangle and polygon: otherwise leaflet-draw 1.0.4 crashes with "type is not defined".
+Verification evidence and limitations are recorded in `QA.md`. A passing
+build/unit suite does not substitute for desktop/mobile browser inspection.
+
+`src/workspace/` validates versioned share links, WGS84 GeoJSON and bounded local
+storage. `src/analysis/` contains pure seasonal statistics and safe standalone
+report generation. `src/components/views/` owns History, Method and Export;
+App coordinates shared selection state. All imported geometry is handled locally.
+
+The seasonal baseline uses complete months and excludes the selected year. Shared
+links are reproducible selections, not frozen data: reopening a link queries the
+current data snapshot. Downloaded reports preserve the original response metadata.

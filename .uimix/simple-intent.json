@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "kind": "requirement-matrix",
+  "requirements": [
+    {
+      "id": "show.essential.counts.immediately.defer.sigma.baseline.detai",
+      "text": "Show essential counts immediately; defer sigma, baseline details and supporting charts behind disclosure.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "data",
+      "also": [],
+      "priority": "critical",
+      "verification": [
+        "data",
+        "visual"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "keep.the.user.s.dark.map.choice.while.replacing.the.crowded.",
+      "text": "Keep the user's dark-map choice while replacing the crowded dashboard composition.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "data",
+      "also": [
+        "surface"
+      ],
+      "priority": "minor",
+      "verification": [
+        "data",
+        "visual"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "mobile.puts.the.selected.place.and.result.first.with.a.clear",
+      "text": "Mobile puts the selected place and result first, with a clearly labelled map toggle.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "responsive",
+      "also": [
+        "interaction",
+        "data",
+        "state"
+      ],
+      "priority": "minor",
+      "verification": [
+        "responsive",
+        "visual",
+        "interaction",
+        "motion",
+        "data",
+        "state"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "preserve.all.data.draw.tools.named.areas.date.ranges.calenda",
+      "text": "Preserve all data, draw tools, named areas, date ranges, calendar, download and scientific limitations.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "data",
+      "also": [],
+      "priority": "minor",
+      "verification": [
+        "data",
+        "visual"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "remove.the.duplicate.history.dock.map.history.method.and.exp",
+      "text": "Remove the duplicate history dock; Map, History, Method and Export are distinct working views.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "data",
+      "also": [
+        "surface"
+      ],
+      "priority": "minor",
+      "verification": [
+        "data",
+        "visual"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "the.map.fills.the.remaining.desktop.workspace.without.compet",
+      "text": "The map fills the remaining desktop workspace without competing floating trays.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "responsive",
+      "also": [
+        "data"
+      ],
+      "priority": "minor",
+      "verification": [
+        "responsive",
+        "visual",
+        "data"
+      ],
+      "state": "REQUESTED"
+    },
+    {
+      "id": "use.one.calm.left.control.column.for.place.month.and.the.res",
+      "text": "Use one calm left control column for place, month and the resulting activity assessment.",
+      "source": "user-prompt",
+      "origin": "bullet",
+      "category": "component",
+      "also": [],
+      "priority": "minor",
+      "verification": [
+        "visual"
+      ],
+      "state": "REQUESTED"
+    }
+  ]
+}

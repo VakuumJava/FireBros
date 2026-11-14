@@ -1,20 +1,38 @@
-import { FIRST_YEAR } from '../api/config';
+import { FIRST_YEAR } from "../api/config";
 
-export default function PeriodSelect({ yearFrom, yearTo, lastYear, onChange }) {
-  const years = Array.from({ length: lastYear - FIRST_YEAR + 1 }, (_, i) => FIRST_YEAR + i);
+export default function PeriodSelect({ range, currentMonth, onChange }) {
+  const update = (key, value) => {
+    if (
+      !/^\d{4}-\d{2}$/.test(value) ||
+      value < `${FIRST_YEAR}-01` ||
+      value > currentMonth
+    )
+      return;
+    const next = { ...range, [key]: value };
+    if (next.from > next.to) next[key === "from" ? "to" : "from"] = value;
+    onChange(next);
+  };
   return (
     <div className="period">
       <label>
-        <span>From year</span>
-        <select value={yearFrom} onChange={(e) => onChange(Math.min(+e.target.value, yearTo), yearTo)}>
-          {years.map((y) => <option key={y}>{y}</option>)}
-        </select>
+        <span>From month</span>
+        <input
+          type="month"
+          value={range.from}
+          min={`${FIRST_YEAR}-01`}
+          max={currentMonth}
+          onChange={(e) => update("from", e.target.value)}
+        />
       </label>
       <label>
-        <span>To year</span>
-        <select value={yearTo} onChange={(e) => onChange(yearFrom, Math.max(+e.target.value, yearFrom))}>
-          {years.map((y) => <option key={y}>{y}</option>)}
-        </select>
+        <span>Through month</span>
+        <input
+          type="month"
+          value={range.to}
+          min={`${FIRST_YEAR}-01`}
+          max={currentMonth}
+          onChange={(e) => update("to", e.target.value)}
+        />
       </label>
     </div>
   );

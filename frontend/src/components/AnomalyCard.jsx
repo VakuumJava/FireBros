@@ -1,46 +1,174 @@
-import { fmt } from '../ui/format';
+import { fmt } from "../ui/format";
+import "./insights.css";
 
-const DIR = {
-  above: { icon: '\u25B2', text: 'above normal', color: 'var(--above)' },
-  below: { icon: '\u25BC', text: 'below normal', color: 'var(--below)' },
-  normal: { icon: '\u25CF', text: 'within normal range', color: 'var(--normal)' },
+const STATUS = {
+  above: "above normal",
+  below: "below normal",
+  normal: "within normal range",
 };
 
-// Built here instead of using data.label, so the UI language never depends on the backend text.
-const headline = (data, d) =>
-  data.direction === 'normal' ? d.text : `${Math.abs(data.robust_z).toFixed(1)}\u03C3 ${d.text}`;
+function headline(data) {
+  if (data.baseline.robust_sigma === 0) {
+    if (data.observed === data.baseline.median)
+      return "Equal to a constant historical baseline";
+    return `${data.observed > data.baseline.median ? "Above" : "Below"} a constant historical baseline; standardized score unavailable`;
+  }
+  if (!Number.isFinite(data.robust_z))
+    return "Insufficient baseline for a standardized anomaly";
+  return data.direction === "normal"
+    ? STATUS.normal
+    : `${Math.abs(data.robust_z).toFixed(1)}σ ${STATUS[data.direction] || STATUS.normal}`;
+}
 
-function Bars({ series }) {
-  const max = Math.max(...series.map((p) => p.count), 1);
-  const w = 6, gap = 2, h = 40;
+function ordinal(value) {
+  const rounded = Math.round(value);
+  const suffix =
+    rounded % 100 >= 11 && rounded % 100 <= 13
+      ? "th"
+      : { 1: "st", 2: "nd", 3: "rd" }[rounded % 10] || "th";
+  return `${rounded}${suffix}`;
+}
+
+function History({ series, year }) {
+  if (!series.length) return null;
+  const maximum = Math.max(...series.map((point) => point.count), 1);
+  const step = 12;
   return (
-    <svg className="spark" viewBox={`0 0 ${series.length * (w + gap)} ${h}`} role="img"
-      aria-label="The same month across years; the last bar is the current year">
-      {series.map((p, i) => {
-        const bh = Math.max(1, (p.count / max) * h);
-        return <rect key={p.year} x={i * (w + gap)} y={h - bh} width={w} height={bh}
-          fill={i === series.length - 1 ? 'var(--accent)' : 'var(--muted)'}><title>{`${p.year}: ${fmt(p.count)}`}</title></rect>;
-      })}
-    </svg>
+    <div className="atlas-history">
+      <div className="atlas-history__caption">
+        <span>Same month across years</span>
+        <span className="atlas-history__key">Selected year</span>
+      </div>
+      <svg
+        width="100%"
+        height="52"
+        viewBox={`0 0 ${series.length * step} 88`}
+        preserveAspectRatio="none"
+        role="img"
+        aria-label={`Monthly historical counts; ${year} is highlighted`}
+      >
+        {series.map((point, index) => (
+          <rect
+            key={point.year}
+            x={index * step + 1}
+            y={80 - (72 * point.count) / maximum}
+            width="8"
+            height={(72 * point.count) / maximum}
+            className={
+              point.year === year
+                ? "atlas-history__selected"
+                : "atlas-history__bar"
+            }
+          >
+            <title>{`${point.year}: ${fmt(point.count)} hotspot-days`}</title>
+          </rect>
+        ))}
+        <line
+          x1="0"
+          y1="81"
+          x2={series.length * step}
+          y2="81"
+          className="atlas-history__axis"
+        />
+      </svg>
+      <div className="atlas-history__years">
+        <span>{series[0].year}</span>
+        <span>{series.at(-1).year}</span>
+      </div>
+    </div>
   );
 }
 
-/** data = response of /aoi/anomaly */
 export default function AnomalyCard({ data }) {
-  const d = DIR[data.direction] || DIR.normal;
-  const b = data.baseline;
+  const baseline = data.baseline;
+  const percentile = Number.isFinite(data.percentile)
+    ? Math.min(100, Math.max(0, data.percentile * 100))
+    : null;
   return (
-    <div className="anomaly">
-      <p className="anomaly__label" style={{ color: d.color }}><span aria-hidden="true">{d.icon}</span> {headline(data, d)}</p>
-      <p className="anomaly__big">{fmt(data.observed)} <small>hotspot-days, {data.month}</small></p>
-      <dl className="stats">
-        <div><dt>Median over the years</dt><dd>{fmt(b.median)}</dd></div>
-        <div><dt>Robust sigma</dt><dd>{b.robust_sigma}</dd></div>
-        <div><dt>z-score</dt><dd>{data.robust_z}</dd></div>
-        <div><dt>Years not higher</dt><dd>{Math.round(data.percentile * 100)}%</dd></div>
-      </dl>
-      {data.partial && <p className="note">Incomplete month: compared month-to-date, through day {data.through_day} ({b.window}). Data may still grow.</p>}
-      <Bars series={data.series} />
+    <div className={`atlas-anomaly atlas-anomaly--${data.direction}`}>
+      <div className="atlas-anomaly__reading">
+        <strong>{fmt(data.observed)}</strong>
+        <span>hotspot-days</span>
+      </div>
+      <p className="atlas-anomaly__verdict">{headline(data)}</p>
+      <div className="atlas-anomaly__context">
+        <dl className="atlas-anomaly__median">
+          <div>
+            <dt>Historical median</dt>
+            <dd>{fmt(baseline.median)}</dd>
+          </div>
+        </dl>
+        <div className="atlas-percentile__heading">
+          <strong>
+            {percentile === null
+              ? "Percentile: Unavailable"
+              : `${ordinal(percentile)} percentile`}
+          </strong>
+        </div>
+      </div>
+      <div className="atlas-percentile">
+        <div
+          className="atlas-percentile__track"
+          role="img"
+          aria-label={
+            percentile === null
+              ? "Historical percentile unavailable"
+              : `${Math.round(percentile)} percent of baseline years had no higher count`
+          }
+        >
+          {[0, 50, 100].map((value) => (
+            <span
+              key={value}
+              className="atlas-percentile__tick"
+              style={{ left: `${value}%` }}
+              aria-hidden="true"
+            />
+          ))}
+          {percentile !== null && (
+            <>
+              <span
+                className="atlas-percentile__fill"
+                style={{ width: `${percentile}%` }}
+                aria-hidden="true"
+              />
+              <span
+                className="atlas-percentile__marker"
+                style={{ left: `${percentile}%` }}
+                aria-hidden="true"
+              />
+            </>
+          )}
+        </div>
+      </div>
+      {data.partial && (
+        <p className="atlas-window atlas-window--partial">
+          Incomplete month: compared month-to-date through day{" "}
+          {data.through_day}. {baseline.window}. Source data may still grow.
+        </p>
+      )}
+      <details className="atlas-comparison">
+        <summary>Comparison details</summary>
+        <dl className="atlas-baseline">
+          <div>
+            <dt>Robust sigma</dt>
+            <dd>{fmt(baseline.robust_sigma)}</dd>
+          </div>
+          <div>
+            <dt>Baseline years</dt>
+            <dd>{fmt(baseline.n_years)}</dd>
+          </div>
+          <div>
+            <dt>Standardized score</dt>
+            <dd>
+              {baseline.robust_sigma === 0 ? "Unavailable" : fmt(data.robust_z)}
+            </dd>
+          </div>
+        </dl>
+        <History series={data.series} year={Number(data.month.slice(0, 4))} />
+        {!data.partial && (
+          <p className="atlas-window">Comparison window: {baseline.window}.</p>
+        )}
+      </details>
     </div>
   );
 }

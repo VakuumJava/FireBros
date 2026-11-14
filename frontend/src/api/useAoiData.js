@@ -1,39 +1,74 @@
-import { useEffect, useState } from 'react';
-import * as api from './client';
+import { useEffect, useState } from "react";
+import * as api from "./client";
 
 const idle = { data: null, error: null, loading: false };
-const KEYS = ['summary', 'calendar', 'anomaly', 'top', 'harmonization'];
+const KEYS = ["summary", "calendar", "anomaly", "top", "harmonization"];
 
-/**
- * Loads all 5 endpoints in parallel. Each has its own {data, error, loading}, so one failing
- * block does not take down the others. Old data stays on screen while new data loads.
- */
-export function useAoiData(aoi, range, month) {
-  const [state, setState] = useState(() => Object.fromEntries(KEYS.map((k) => [k, idle])));
+export function useAoiData(aoi, range, month, revision = 0) {
+  const [state, setState] = useState(() =>
+    Object.fromEntries(KEYS.map((key) => [key, idle])),
+  );
   const aoiKey = JSON.stringify(aoi);
 
   useEffect(() => {
-    const ctrl = new AbortController();
-    const { signal } = ctrl;
+    const controller = new AbortController();
+    const { signal } = controller;
     const calls = {
       summary: () => api.getSummary(aoi, range, signal),
       calendar: () => api.getCalendar(aoi, range, signal),
-      anomaly: () => api.getAnomaly(aoi, month, signal),
       top: () => api.getTop(aoi, range, signal),
       harmonization: () => api.getHarmonization(aoi, range, signal),
     };
-    setState((prev) => Object.fromEntries(KEYS.map((k) => [k, { data: prev[k].data, error: null, loading: true }])));
-    for (const k of KEYS) {
-      calls[k]()
-        .then((data) => !signal.aborted && setState((p) => ({ ...p, [k]: { data, error: null, loading: false } })))
-        .catch((e) => {
-          if (signal.aborted || e.name === 'AbortError') return;
-          setState((p) => ({ ...p, [k]: { data: null, error: e, loading: false } }));
+    setState((previous) => ({
+      ...previous,
+      ...Object.fromEntries(
+        Object.keys(calls).map((key) => [key, { ...idle, loading: true }]),
+      ),
+    }));
+    for (const [key, call] of Object.entries(calls)) {
+      call()
+        .then((data) => {
+          if (!signal.aborted)
+            setState((previous) => ({
+              ...previous,
+              [key]: { data, error: null, loading: false },
+            }));
+        })
+        .catch((error) => {
+          if (!signal.aborted)
+            setState((previous) => ({
+              ...previous,
+              [key]: { data: null, error, loading: false },
+            }));
         });
     }
-    return () => ctrl.abort();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [aoiKey, range.from, range.to, month]);
+    return () => controller.abort();
+  }, [aoiKey, range.from, range.to, revision]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setState((previous) => ({
+      ...previous,
+      anomaly: { ...idle, loading: true },
+    }));
+    api
+      .getAnomaly(aoi, month, controller.signal)
+      .then((data) => {
+        if (!controller.signal.aborted)
+          setState((previous) => ({
+            ...previous,
+            anomaly: { data, error: null, loading: false },
+          }));
+      })
+      .catch((error) => {
+        if (!controller.signal.aborted)
+          setState((previous) => ({
+            ...previous,
+            anomaly: { data: null, error, loading: false },
+          }));
+      });
+    return () => controller.abort();
+  }, [aoiKey, month, revision]);
 
   return state;
 }

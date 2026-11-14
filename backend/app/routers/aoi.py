@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Response
 
 from .. import service
 from ..columns import HOTSPOT_COLUMNS, MONTHLY_COLUMNS
-from ..config import FIRST_MONTH, Settings
+from ..config import FIRST_MONTH, METHOD_VERSION, Settings
 from ..deps import get_settings, get_store
 from ..export import render_csv
 from ..geo import (
@@ -116,9 +116,13 @@ def read_anomaly(
 def read_top(
     aoi: Aoi = Depends(resolve_aoi),
     limit: int = Query(10, ge=1, le=50, alias="n"),
+    start: str = Query(FIRST_MONTH, alias="from", max_length=7),
+    end: str | None = Query(None, alias="to", max_length=7),
+    settings: Settings = Depends(get_settings),
     store: Store = Depends(get_store),
 ) -> TopResponse:
-    return service.top(aoi, limit, store)
+    start_ym, end_ym = resolve_period(start, end, settings)
+    return service.top(aoi, limit, store, start_ym, end_ym)
 
 
 @router.get("/aoi/harmonization", response_model=HarmonizationResponse)
@@ -167,7 +171,7 @@ def export_csv(
             "Content-Disposition": f'attachment; filename="{filename}"',
             "X-Row-Count": str(len(rows)),
             "X-Unit": unit,
-            "Cache-Control": "no-store",
-            "X-Content-Type-Options": "nosniff",
+            "X-Data-Source": store.source,
+            "X-Method-Version": METHOD_VERSION,
         },
     )

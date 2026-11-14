@@ -139,6 +139,7 @@ class TopResponse(ApiModel):
 class Jump(ApiModel):
     step_ratio_raw: float | None
     step_ratio_harmonized: float | None
+    step_ratio_modis: float | None = None
     step_ratio_placebo: float | None
     definition: str
     target: float = 1.0
@@ -149,6 +150,7 @@ class Validation(ApiModel):
     n: int
     rmse_log: float | None = None
     mape: float | None = None
+    wape: float | None = None
     bias: float | None = None
 
 

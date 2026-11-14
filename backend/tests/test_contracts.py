@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 import pytest
 
 ENDPOINTS = [
@@ -46,10 +48,22 @@ def test_calendar_rows_align_with_years(client):
 
 
 def test_harmonization_proves_the_knot_is_gone(client):
-    jump = client.get("/api/v1/aoi/harmonization").json()["jump"]
+    payload = client.get("/api/v1/aoi/harmonization").json()
+    jump = payload["jump"]
     assert jump["step_ratio_raw"] > 1.5
     assert abs(jump["step_ratio_harmonized"] - 1.0) < 0.1
     assert abs(jump["step_ratio_placebo"] - 1.0) < 0.1
+    assert jump["step_ratio_modis"] == pytest.approx(jump["step_ratio_harmonized"], abs=0.1)
+    assert payload["validation"]["wape"] is not None
+
+
+def test_anomaly_label_is_plain_english(client):
+    label = client.get("/api/v1/aoi/anomaly", params={"month": "2025-10"}).json()["label"]
+    assert re.fullmatch(
+        r"within the usual range|\d+\.\d\N{GREEK SMALL LETTER SIGMA} (above|below) the median"
+        r"|(above|below) an unvarying history",
+        label,
+    )
 
 
 def test_anomaly_of_a_partial_month_is_month_to_date(client):
