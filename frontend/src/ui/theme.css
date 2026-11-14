@@ -1,9 +1,11 @@
+@import './tokens.css';
+
 /* P5: tokens, base styles, cards, buttons. Page structure lives in components/components.css */
 :root {
   --bg: #0e1218;
   --panel: #151b23;
   --panel-2: #1b232d;
-  --border: rgba(255, 255, 255, 0.09);
+  --border: rgba(255, 255, 255, 0.14);
   --text: #e6e9ee;
   --muted: #9aa5b1;
   --accent: #5ec8ff;
@@ -23,7 +25,7 @@ a { color: var(--accent); }
 .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
 .card__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
 .card__title { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.card__hint { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.card__hint { font-size: 13px; color: var(--muted); margin-top: 2px; }
 .card__msg { color: var(--muted); }
 .card__msg--error { color: #ff8a8a; }
 .is-stale { opacity: 0.55; transition: opacity 0.15s; }
@@ -33,5 +35,8 @@ a { color: var(--accent); }
 .btn--ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
 input, select { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font: inherit; width: 100%; }
 
-.footer { padding: 12px 20px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
-.footer ul { margin: 6px 0 0; padding-left: 18px; }
+.footer { padding: 12px 20px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); }
+.footer__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.footer__modal-btn { font-size: 13px; padding: 5px 10px; }
+.footer__details summary { cursor: pointer; font-weight: 600; color: var(--text); }
+.footer ol, .footer ul { margin: 8px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
