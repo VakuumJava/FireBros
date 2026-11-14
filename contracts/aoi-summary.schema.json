@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/VakuumJava/FireBros/contracts/aoi-summary.schema.json",
+  "title": "GET /api/v1/aoi/summary",
+  "description": "Unified monthly series for an AOI. One entry per calendar month; unit is always hotspot_days_1km.",
+  "type": "object",
+  "required": ["meta", "aoi", "period", "series", "coverage", "totals"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": { "$ref": "#/definitions/meta" },
+    "aoi": {
+      "type": "object",
+      "required": ["id", "kind", "bbox", "area_km2", "cells_total", "cells_inside", "coverage_fraction"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^aoi_[0-9a-f]{8,40}$" },
+        "kind": { "enum": ["bbox", "polygon"] },
+        "bbox": { "$ref": "#/definitions/bbox" },
+        "polygon": { "type": "array", "items": { "type": "array", "items": { "type": "number" } } },
+        "area_km2": { "type": "number", "minimum": 0 },
+        "cells_total": { "type": "integer", "minimum": 0 },
+        "cells_inside": { "type": "integer", "minimum": 0 },
+        "cells_partial": { "type": "integer", "minimum": 0 },
+        "coverage_fraction": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "period": {
+      "type": "object",
+      "required": ["from", "to", "months"],
+      "properties": {
+        "from": { "$ref": "#/definitions/ym" },
+        "to": { "$ref": "#/definitions/ym" },
+        "months": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "series": { "type": "array", "items": { "$ref": "#/definitions/monthPoint" } },
+    "coverage": {
+      "type": "object",
+      "required": ["months_expected", "months_present", "gaps", "nrt_months"],
+      "properties": {
+        "months_expected": { "type": "integer" },
+        "months_present": { "type": "integer" },
+        "gaps": { "type": "array", "items": { "$ref": "#/definitions/ym" } },
+        "nrt_months": { "type": "array", "items": { "$ref": "#/definitions/ym" } }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "required": ["hotspot_days", "mean_month"],
+      "properties": {
+        "hotspot_days": { "type": "integer", "minimum": 0 },
+        "peak_year": { "type": ["integer", "null"] },
+        "peak_month": { "type": ["integer", "null"], "minimum": 1, "maximum": 12 },
+        "mean_month": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "definitions": {
+    "meta": {
+      "type": "object",
+      "required": ["source", "unit", "method_version", "generated_at"],
+      "properties": {
+        "source": { "enum": ["parquet", "mock"] },
+        "unit": { "const": "hotspot_days_1km" },
+        "method_version": { "type": "string" },
+        "region_bbox": { "$ref": "#/definitions/bbox" },
+        "generated_at": { "type": "string" }
+      }
+    },
+    "bbox": {
+      "type": "array",
+      "description": "W, S, E, N in degrees, EPSG:4326",
+      "items": { "type": "number" },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "ym": { "type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$" },
+    "monthPoint": {
+      "type": "object",
+      "required": ["year", "month", "count", "lo", "hi", "sensor", "harmonized", "days_observed", "days_in_month"],
+      "properties": {
+        "year": { "type": "integer", "minimum": 2000 },
+        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "count": { "type": "integer", "minimum": 0 },
+        "lo": { "type": "integer", "minimum": 0, "description": "95% lower bound; equals count before 2012 (MODIS is the reference scale)" },
+        "hi": { "type": "integer", "minimum": 0 },
+        "sensor": { "enum": ["MODIS", "VIIRS_SNPP", "VIIRS_NOAA20", "VIIRS_NOAA21"] },
+        "harmonized": { "type": "boolean" },
+        "days_observed": { "type": "integer", "minimum": 0, "maximum": 31 },
+        "days_in_month": { "type": "integer", "minimum": 28, "maximum": 31 }
+      }
+    }
+  }
+}

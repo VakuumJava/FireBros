@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/VakuumJava/FireBros/contracts/aoi-anomaly.schema.json",
+  "title": "GET /api/v1/aoi/anomaly",
+  "description": "Current month vs the same calendar month across all years. When the month is partial, EVERY baseline year is truncated to the same day-of-month window — otherwise the anomaly is systematically negative.",
+  "type": "object",
+  "required": ["meta", "aoi_id", "month", "partial", "through_day", "observed", "baseline", "robust_z", "percentile", "direction", "label", "series"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": { "$ref": "aoi-summary.schema.json#/definitions/meta" },
+    "aoi_id": { "type": "string" },
+    "month": { "$ref": "aoi-summary.schema.json#/definitions/ym" },
+    "partial": { "type": "boolean" },
+    "through_day": { "type": "integer", "minimum": 1, "maximum": 31 },
+    "observed": { "type": "integer", "minimum": 0 },
+    "baseline": {
+      "type": "object",
+      "required": ["median", "mad", "robust_sigma", "n_years", "window"],
+      "properties": {
+        "median": { "type": "number", "minimum": 0 },
+        "mad": { "type": "number", "minimum": 0 },
+        "robust_sigma": { "type": "number", "minimum": 0, "description": "1.4826 * MAD" },
+        "n_years": { "type": "integer", "minimum": 1 },
+        "window": { "type": "string", "description": "human readable comparison window, e.g. 'same month, days <= 14'" }
+      }
+    },
+    "robust_z": { "type": "number", "description": "(observed - median) / robust_sigma; 0 when MAD is 0" },
+    "percentile": { "type": "number", "minimum": 0, "maximum": 1 },
+    "direction": { "enum": ["above", "normal", "below"] },
+    "label": { "type": "string", "description": "ready-to-render text, e.g. 'на 2.4σ выше нормы'" },
+    "series": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["year", "count"],
+        "properties": {
+          "year": { "type": "integer" },
+          "count": { "type": "integer", "minimum": 0 },
+          "partial": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

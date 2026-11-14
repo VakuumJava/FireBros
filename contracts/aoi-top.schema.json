@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/VakuumJava/FireBros/contracts/aoi-top.schema.json",
+  "title": "GET /api/v1/aoi/top",
+  "description": "Most active months and years inside the AOI.",
+  "type": "object",
+  "required": ["meta", "aoi_id", "months", "years"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": { "$ref": "aoi-summary.schema.json#/definitions/meta" },
+    "aoi_id": { "type": "string" },
+    "months": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rank", "year", "month", "count"],
+        "properties": {
+          "rank": { "type": "integer", "minimum": 1 },
+          "year": { "type": "integer" },
+          "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+          "count": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "years": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rank", "year", "count"],
+        "properties": {
+          "rank": { "type": "integer", "minimum": 1 },
+          "year": { "type": "integer" },
+          "count": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

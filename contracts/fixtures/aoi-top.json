@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "source": "mock",
+    "unit": "hotspot_days_1km",
+    "method_version": "harmonize-v1",
+    "region_bbox": [
+      68.5,
+      38.4,
+      80.7,
+      43.7
+    ],
+    "generated_at": "2026-11-14T07:29:01+00:00"
+  },
+  "aoi_id": "aoi_145ca8037dbb",
+  "months": [
+    {
+      "rank": 1,
+      "year": 2016,
+      "month": 4,
+      "count": 4002
+    },
+    {
+      "rank": 2,
+      "year": 2026,
+      "month": 4,
+      "count": 3857
+    },
+    {
+      "rank": 3,
+      "year": 2021,
+      "month": 5,
+      "count": 3721
+    },
+    {
+      "rank": 4,
+      "year": 2021,
+      "month": 4,
+      "count": 3574
+    },
+    {
+      "rank": 5,
+      "year": 2023,
+      "month": 4,
+      "count": 3543
+    },
+    {
+      "rank": 6,
+      "year": 2014,
+      "month": 4,
+      "count": 3464
+    },
+    {
+      "rank": 7,
+      "year": 2020,
+      "month": 4,
+      "count": 3445
+    },
+    {
+      "rank": 8,
+      "year": 2008,
+      "month": 4,
+      "count": 3365
+    },
+    {
+      "rank": 9,
+      "year": 2009,
+      "month": 4,
+      "count": 3290
+    },
+    {
+      "rank": 10,
+      "year": 2019,
+      "month": 4,
+      "count": 3285
+    }
+  ],
+  "years": [
+    {
+      "rank": 1,
+      "year": 2021,
+      "count": 23416
+    },
+    {
+      "rank": 2,
+      "year": 2014,
+      "count": 20543
+    },
+    {
+      "rank": 3,
+      "year": 2016,
+      "count": 19220
+    },
+    {
+      "rank": 4,
+      "year": 2026,
+      "count": 19143
+    },
+    {
+      "rank": 5,
+      "year": 2019,
+      "count": 18829
+    },
+    {
+      "rank": 6,
+      "year": 2020,
+      "count": 18098
+    },
+    {
+      "rank": 7,
+      "year": 2024,
+      "count": 17902
+    },
+    {
+      "rank": 8,
+      "year": 2015,
+      "count": 17493
+    },
+    {
+      "rank": 9,
+      "year": 2022,
+      "count": 17243
+    },
+    {
+      "rank": 10,
+      "year": 2023,
+      "count": 17201
+    }
+  ]
+}

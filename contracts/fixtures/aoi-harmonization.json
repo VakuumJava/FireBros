@@ -1,0 +1,3265 @@
+{
+  "meta": {
+    "source": "mock",
+    "unit": "hotspot_days_1km",
+    "method_version": "harmonize-v1",
+    "region_bbox": [
+      68.5,
+      38.4,
+      80.7,
+      43.7
+    ],
+    "generated_at": "2026-11-14T07:29:01+00:00"
+  },
+  "aoi_id": "aoi_145ca8037dbb",
+  "knot_year": 2012,
+  "series": [
+    {
+      "year": 2000,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 253,
+      "harmonized": 253,
+      "lo": 253,
+      "hi": 253
+    },
+    {
+      "year": 2000,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 452,
+      "harmonized": 452,
+      "lo": 452,
+      "hi": 452
+    },
+    {
+      "year": 2000,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1632,
+      "harmonized": 1632,
+      "lo": 1632,
+      "hi": 1632
+    },
+    {
+      "year": 2000,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2961,
+      "harmonized": 2961,
+      "lo": 2961,
+      "hi": 2961
+    },
+    {
+      "year": 2000,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2002,
+      "harmonized": 2002,
+      "lo": 2002,
+      "hi": 2002
+    },
+    {
+      "year": 2000,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1150,
+      "harmonized": 1150,
+      "lo": 1150,
+      "hi": 1150
+    },
+    {
+      "year": 2000,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1772,
+      "harmonized": 1772,
+      "lo": 1772,
+      "hi": 1772
+    },
+    {
+      "year": 2000,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1332,
+      "harmonized": 1332,
+      "lo": 1332,
+      "hi": 1332
+    },
+    {
+      "year": 2000,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1516,
+      "harmonized": 1516,
+      "lo": 1516,
+      "hi": 1516
+    },
+    {
+      "year": 2000,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1905,
+      "harmonized": 1905,
+      "lo": 1905,
+      "hi": 1905
+    },
+    {
+      "year": 2000,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 567,
+      "harmonized": 567,
+      "lo": 567,
+      "hi": 567
+    },
+    {
+      "year": 2000,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 272,
+      "harmonized": 272,
+      "lo": 272,
+      "hi": 272
+    },
+    {
+      "year": 2001,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 264,
+      "harmonized": 264,
+      "lo": 264,
+      "hi": 264
+    },
+    {
+      "year": 2001,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 306,
+      "harmonized": 306,
+      "lo": 306,
+      "hi": 306
+    },
+    {
+      "year": 2001,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1279,
+      "harmonized": 1279,
+      "lo": 1279,
+      "hi": 1279
+    },
+    {
+      "year": 2001,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2611,
+      "harmonized": 2611,
+      "lo": 2611,
+      "hi": 2611
+    },
+    {
+      "year": 2001,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1472,
+      "harmonized": 1472,
+      "lo": 1472,
+      "hi": 1472
+    },
+    {
+      "year": 2001,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 923,
+      "harmonized": 923,
+      "lo": 923,
+      "hi": 923
+    },
+    {
+      "year": 2001,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1501,
+      "harmonized": 1501,
+      "lo": 1501,
+      "hi": 1501
+    },
+    {
+      "year": 2001,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1102,
+      "harmonized": 1102,
+      "lo": 1102,
+      "hi": 1102
+    },
+    {
+      "year": 2001,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1070,
+      "harmonized": 1070,
+      "lo": 1070,
+      "hi": 1070
+    },
+    {
+      "year": 2001,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1473,
+      "harmonized": 1473,
+      "lo": 1473,
+      "hi": 1473
+    },
+    {
+      "year": 2001,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 460,
+      "harmonized": 460,
+      "lo": 460,
+      "hi": 460
+    },
+    {
+      "year": 2001,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 197,
+      "harmonized": 197,
+      "lo": 197,
+      "hi": 197
+    },
+    {
+      "year": 2002,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 274,
+      "harmonized": 274,
+      "lo": 274,
+      "hi": 274
+    },
+    {
+      "year": 2002,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 494,
+      "harmonized": 494,
+      "lo": 494,
+      "hi": 494
+    },
+    {
+      "year": 2002,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1698,
+      "harmonized": 1698,
+      "lo": 1698,
+      "hi": 1698
+    },
+    {
+      "year": 2002,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 3107,
+      "harmonized": 3107,
+      "lo": 3107,
+      "hi": 3107
+    },
+    {
+      "year": 2002,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1696,
+      "harmonized": 1696,
+      "lo": 1696,
+      "hi": 1696
+    },
+    {
+      "year": 2002,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1438,
+      "harmonized": 1438,
+      "lo": 1438,
+      "hi": 1438
+    },
+    {
+      "year": 2002,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1560,
+      "harmonized": 1560,
+      "lo": 1560,
+      "hi": 1560
+    },
+    {
+      "year": 2002,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1263,
+      "harmonized": 1263,
+      "lo": 1263,
+      "hi": 1263
+    },
+    {
+      "year": 2002,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1222,
+      "harmonized": 1222,
+      "lo": 1222,
+      "hi": 1222
+    },
+    {
+      "year": 2002,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1658,
+      "harmonized": 1658,
+      "lo": 1658,
+      "hi": 1658
+    },
+    {
+      "year": 2002,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 600,
+      "harmonized": 600,
+      "lo": 600,
+      "hi": 600
+    },
+    {
+      "year": 2002,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 264,
+      "harmonized": 264,
+      "lo": 264,
+      "hi": 264
+    },
+    {
+      "year": 2003,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 273,
+      "harmonized": 273,
+      "lo": 273,
+      "hi": 273
+    },
+    {
+      "year": 2003,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 408,
+      "harmonized": 408,
+      "lo": 408,
+      "hi": 408
+    },
+    {
+      "year": 2003,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1298,
+      "harmonized": 1298,
+      "lo": 1298,
+      "hi": 1298
+    },
+    {
+      "year": 2003,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 3010,
+      "harmonized": 3010,
+      "lo": 3010,
+      "hi": 3010
+    },
+    {
+      "year": 2003,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1876,
+      "harmonized": 1876,
+      "lo": 1876,
+      "hi": 1876
+    },
+    {
+      "year": 2003,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1172,
+      "harmonized": 1172,
+      "lo": 1172,
+      "hi": 1172
+    },
+    {
+      "year": 2003,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1621,
+      "harmonized": 1621,
+      "lo": 1621,
+      "hi": 1621
+    },
+    {
+      "year": 2003,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1080,
+      "harmonized": 1080,
+      "lo": 1080,
+      "hi": 1080
+    },
+    {
+      "year": 2003,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1381,
+      "harmonized": 1381,
+      "lo": 1381,
+      "hi": 1381
+    },
+    {
+      "year": 2003,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1736,
+      "harmonized": 1736,
+      "lo": 1736,
+      "hi": 1736
+    },
+    {
+      "year": 2003,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 513,
+      "harmonized": 513,
+      "lo": 513,
+      "hi": 513
+    },
+    {
+      "year": 2003,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 229,
+      "harmonized": 229,
+      "lo": 229,
+      "hi": 229
+    },
+    {
+      "year": 2004,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 305,
+      "harmonized": 305,
+      "lo": 305,
+      "hi": 305
+    },
+    {
+      "year": 2004,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 489,
+      "harmonized": 489,
+      "lo": 489,
+      "hi": 489
+    },
+    {
+      "year": 2004,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1880,
+      "harmonized": 1880,
+      "lo": 1880,
+      "hi": 1880
+    },
+    {
+      "year": 2004,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 3128,
+      "harmonized": 3128,
+      "lo": 3128,
+      "hi": 3128
+    },
+    {
+      "year": 2004,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1941,
+      "harmonized": 1941,
+      "lo": 1941,
+      "hi": 1941
+    },
+    {
+      "year": 2004,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1273,
+      "harmonized": 1273,
+      "lo": 1273,
+      "hi": 1273
+    },
+    {
+      "year": 2004,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1562,
+      "harmonized": 1562,
+      "lo": 1562,
+      "hi": 1562
+    },
+    {
+      "year": 2004,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1141,
+      "harmonized": 1141,
+      "lo": 1141,
+      "hi": 1141
+    },
+    {
+      "year": 2004,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1453,
+      "harmonized": 1453,
+      "lo": 1453,
+      "hi": 1453
+    },
+    {
+      "year": 2004,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1669,
+      "harmonized": 1669,
+      "lo": 1669,
+      "hi": 1669
+    },
+    {
+      "year": 2004,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 641,
+      "harmonized": 641,
+      "lo": 641,
+      "hi": 641
+    },
+    {
+      "year": 2004,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 268,
+      "harmonized": 268,
+      "lo": 268,
+      "hi": 268
+    },
+    {
+      "year": 2005,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 285,
+      "harmonized": 285,
+      "lo": 285,
+      "hi": 285
+    },
+    {
+      "year": 2005,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 462,
+      "harmonized": 462,
+      "lo": 462,
+      "hi": 462
+    },
+    {
+      "year": 2005,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1434,
+      "harmonized": 1434,
+      "lo": 1434,
+      "hi": 1434
+    },
+    {
+      "year": 2005,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2196,
+      "harmonized": 2196,
+      "lo": 2196,
+      "hi": 2196
+    },
+    {
+      "year": 2005,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1649,
+      "harmonized": 1649,
+      "lo": 1649,
+      "hi": 1649
+    },
+    {
+      "year": 2005,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1268,
+      "harmonized": 1268,
+      "lo": 1268,
+      "hi": 1268
+    },
+    {
+      "year": 2005,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1623,
+      "harmonized": 1623,
+      "lo": 1623,
+      "hi": 1623
+    },
+    {
+      "year": 2005,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1120,
+      "harmonized": 1120,
+      "lo": 1120,
+      "hi": 1120
+    },
+    {
+      "year": 2005,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1379,
+      "harmonized": 1379,
+      "lo": 1379,
+      "hi": 1379
+    },
+    {
+      "year": 2005,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1599,
+      "harmonized": 1599,
+      "lo": 1599,
+      "hi": 1599
+    },
+    {
+      "year": 2005,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 545,
+      "harmonized": 545,
+      "lo": 545,
+      "hi": 545
+    },
+    {
+      "year": 2005,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 248,
+      "harmonized": 248,
+      "lo": 248,
+      "hi": 248
+    },
+    {
+      "year": 2006,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 282,
+      "harmonized": 282,
+      "lo": 282,
+      "hi": 282
+    },
+    {
+      "year": 2006,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 371,
+      "harmonized": 371,
+      "lo": 371,
+      "hi": 371
+    },
+    {
+      "year": 2006,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1215,
+      "harmonized": 1215,
+      "lo": 1215,
+      "hi": 1215
+    },
+    {
+      "year": 2006,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2749,
+      "harmonized": 2749,
+      "lo": 2749,
+      "hi": 2749
+    },
+    {
+      "year": 2006,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1365,
+      "harmonized": 1365,
+      "lo": 1365,
+      "hi": 1365
+    },
+    {
+      "year": 2006,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 918,
+      "harmonized": 918,
+      "lo": 918,
+      "hi": 918
+    },
+    {
+      "year": 2006,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1176,
+      "harmonized": 1176,
+      "lo": 1176,
+      "hi": 1176
+    },
+    {
+      "year": 2006,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1171,
+      "harmonized": 1171,
+      "lo": 1171,
+      "hi": 1171
+    },
+    {
+      "year": 2006,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1173,
+      "harmonized": 1173,
+      "lo": 1173,
+      "hi": 1173
+    },
+    {
+      "year": 2006,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1683,
+      "harmonized": 1683,
+      "lo": 1683,
+      "hi": 1683
+    },
+    {
+      "year": 2006,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 430,
+      "harmonized": 430,
+      "lo": 430,
+      "hi": 430
+    },
+    {
+      "year": 2006,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 227,
+      "harmonized": 227,
+      "lo": 227,
+      "hi": 227
+    },
+    {
+      "year": 2007,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 247,
+      "harmonized": 247,
+      "lo": 247,
+      "hi": 247
+    },
+    {
+      "year": 2007,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 441,
+      "harmonized": 441,
+      "lo": 441,
+      "hi": 441
+    },
+    {
+      "year": 2007,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1410,
+      "harmonized": 1410,
+      "lo": 1410,
+      "hi": 1410
+    },
+    {
+      "year": 2007,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2325,
+      "harmonized": 2325,
+      "lo": 2325,
+      "hi": 2325
+    },
+    {
+      "year": 2007,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1518,
+      "harmonized": 1518,
+      "lo": 1518,
+      "hi": 1518
+    },
+    {
+      "year": 2007,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1093,
+      "harmonized": 1093,
+      "lo": 1093,
+      "hi": 1093
+    },
+    {
+      "year": 2007,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1513,
+      "harmonized": 1513,
+      "lo": 1513,
+      "hi": 1513
+    },
+    {
+      "year": 2007,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 981,
+      "harmonized": 981,
+      "lo": 981,
+      "hi": 981
+    },
+    {
+      "year": 2007,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1407,
+      "harmonized": 1407,
+      "lo": 1407,
+      "hi": 1407
+    },
+    {
+      "year": 2007,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1866,
+      "harmonized": 1866,
+      "lo": 1866,
+      "hi": 1866
+    },
+    {
+      "year": 2007,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 571,
+      "harmonized": 571,
+      "lo": 571,
+      "hi": 571
+    },
+    {
+      "year": 2007,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 254,
+      "harmonized": 254,
+      "lo": 254,
+      "hi": 254
+    },
+    {
+      "year": 2008,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 323,
+      "harmonized": 323,
+      "lo": 323,
+      "hi": 323
+    },
+    {
+      "year": 2008,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 465,
+      "harmonized": 465,
+      "lo": 465,
+      "hi": 465
+    },
+    {
+      "year": 2008,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1821,
+      "harmonized": 1821,
+      "lo": 1821,
+      "hi": 1821
+    },
+    {
+      "year": 2008,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 3365,
+      "harmonized": 3365,
+      "lo": 3365,
+      "hi": 3365
+    },
+    {
+      "year": 2008,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1787,
+      "harmonized": 1787,
+      "lo": 1787,
+      "hi": 1787
+    },
+    {
+      "year": 2008,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1319,
+      "harmonized": 1319,
+      "lo": 1319,
+      "hi": 1319
+    },
+    {
+      "year": 2008,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2126,
+      "harmonized": 2126,
+      "lo": 2126,
+      "hi": 2126
+    },
+    {
+      "year": 2008,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1389,
+      "harmonized": 1389,
+      "lo": 1389,
+      "hi": 1389
+    },
+    {
+      "year": 2008,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1527,
+      "harmonized": 1527,
+      "lo": 1527,
+      "hi": 1527
+    },
+    {
+      "year": 2008,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1694,
+      "harmonized": 1694,
+      "lo": 1694,
+      "hi": 1694
+    },
+    {
+      "year": 2008,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 679,
+      "harmonized": 679,
+      "lo": 679,
+      "hi": 679
+    },
+    {
+      "year": 2008,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 302,
+      "harmonized": 302,
+      "lo": 302,
+      "hi": 302
+    },
+    {
+      "year": 2009,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 270,
+      "harmonized": 270,
+      "lo": 270,
+      "hi": 270
+    },
+    {
+      "year": 2009,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 418,
+      "harmonized": 418,
+      "lo": 418,
+      "hi": 418
+    },
+    {
+      "year": 2009,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1847,
+      "harmonized": 1847,
+      "lo": 1847,
+      "hi": 1847
+    },
+    {
+      "year": 2009,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 3290,
+      "harmonized": 3290,
+      "lo": 3290,
+      "hi": 3290
+    },
+    {
+      "year": 2009,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1841,
+      "harmonized": 1841,
+      "lo": 1841,
+      "hi": 1841
+    },
+    {
+      "year": 2009,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1588,
+      "harmonized": 1588,
+      "lo": 1588,
+      "hi": 1588
+    },
+    {
+      "year": 2009,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1697,
+      "harmonized": 1697,
+      "lo": 1697,
+      "hi": 1697
+    },
+    {
+      "year": 2009,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1352,
+      "harmonized": 1352,
+      "lo": 1352,
+      "hi": 1352
+    },
+    {
+      "year": 2009,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1775,
+      "harmonized": 1775,
+      "lo": 1775,
+      "hi": 1775
+    },
+    {
+      "year": 2009,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1742,
+      "harmonized": 1742,
+      "lo": 1742,
+      "hi": 1742
+    },
+    {
+      "year": 2009,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 676,
+      "harmonized": 676,
+      "lo": 676,
+      "hi": 676
+    },
+    {
+      "year": 2009,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 259,
+      "harmonized": 259,
+      "lo": 259,
+      "hi": 259
+    },
+    {
+      "year": 2010,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 242,
+      "harmonized": 242,
+      "lo": 242,
+      "hi": 242
+    },
+    {
+      "year": 2010,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 415,
+      "harmonized": 415,
+      "lo": 415,
+      "hi": 415
+    },
+    {
+      "year": 2010,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1529,
+      "harmonized": 1529,
+      "lo": 1529,
+      "hi": 1529
+    },
+    {
+      "year": 2010,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2432,
+      "harmonized": 2432,
+      "lo": 2432,
+      "hi": 2432
+    },
+    {
+      "year": 2010,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1726,
+      "harmonized": 1726,
+      "lo": 1726,
+      "hi": 1726
+    },
+    {
+      "year": 2010,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1149,
+      "harmonized": 1149,
+      "lo": 1149,
+      "hi": 1149
+    },
+    {
+      "year": 2010,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1646,
+      "harmonized": 1646,
+      "lo": 1646,
+      "hi": 1646
+    },
+    {
+      "year": 2010,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1385,
+      "harmonized": 1385,
+      "lo": 1385,
+      "hi": 1385
+    },
+    {
+      "year": 2010,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1282,
+      "harmonized": 1282,
+      "lo": 1282,
+      "hi": 1282
+    },
+    {
+      "year": 2010,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1572,
+      "harmonized": 1572,
+      "lo": 1572,
+      "hi": 1572
+    },
+    {
+      "year": 2010,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 673,
+      "harmonized": 673,
+      "lo": 673,
+      "hi": 673
+    },
+    {
+      "year": 2010,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 250,
+      "harmonized": 250,
+      "lo": 250,
+      "hi": 250
+    },
+    {
+      "year": 2011,
+      "month": 1,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 267,
+      "harmonized": 267,
+      "lo": 267,
+      "hi": 267
+    },
+    {
+      "year": 2011,
+      "month": 2,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 488,
+      "harmonized": 488,
+      "lo": 488,
+      "hi": 488
+    },
+    {
+      "year": 2011,
+      "month": 3,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1355,
+      "harmonized": 1355,
+      "lo": 1355,
+      "hi": 1355
+    },
+    {
+      "year": 2011,
+      "month": 4,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 3171,
+      "harmonized": 3171,
+      "lo": 3171,
+      "hi": 3171
+    },
+    {
+      "year": 2011,
+      "month": 5,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1861,
+      "harmonized": 1861,
+      "lo": 1861,
+      "hi": 1861
+    },
+    {
+      "year": 2011,
+      "month": 6,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1245,
+      "harmonized": 1245,
+      "lo": 1245,
+      "hi": 1245
+    },
+    {
+      "year": 2011,
+      "month": 7,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1546,
+      "harmonized": 1546,
+      "lo": 1546,
+      "hi": 1546
+    },
+    {
+      "year": 2011,
+      "month": 8,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1388,
+      "harmonized": 1388,
+      "lo": 1388,
+      "hi": 1388
+    },
+    {
+      "year": 2011,
+      "month": 9,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 1537,
+      "harmonized": 1537,
+      "lo": 1537,
+      "hi": 1537
+    },
+    {
+      "year": 2011,
+      "month": 10,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 2074,
+      "harmonized": 2074,
+      "lo": 2074,
+      "hi": 2074
+    },
+    {
+      "year": 2011,
+      "month": 11,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 646,
+      "harmonized": 646,
+      "lo": 646,
+      "hi": 646
+    },
+    {
+      "year": 2011,
+      "month": 12,
+      "sensor": "MODIS",
+      "modis_truth": null,
+      "raw": 268,
+      "harmonized": 268,
+      "lo": 268,
+      "hi": 268
+    },
+    {
+      "year": 2012,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 289,
+      "raw": 497,
+      "harmonized": 269,
+      "lo": 211,
+      "hi": 327
+    },
+    {
+      "year": 2012,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 424,
+      "raw": 729,
+      "harmonized": 447,
+      "lo": 351,
+      "hi": 543
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2028,
+      "raw": 3488,
+      "harmonized": 2121,
+      "lo": 1664,
+      "hi": 2578
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3213,
+      "raw": 5526,
+      "harmonized": 2853,
+      "lo": 2238,
+      "hi": 3468
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1987,
+      "raw": 3418,
+      "harmonized": 2113,
+      "lo": 1657,
+      "hi": 2569
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1282,
+      "raw": 2205,
+      "harmonized": 1342,
+      "lo": 1053,
+      "hi": 1631
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2047,
+      "raw": 3521,
+      "harmonized": 2095,
+      "lo": 1643,
+      "hi": 2547
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1249,
+      "raw": 2148,
+      "harmonized": 1183,
+      "lo": 928,
+      "hi": 1438
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1708,
+      "raw": 2938,
+      "harmonized": 1541,
+      "lo": 1209,
+      "hi": 1873
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2270,
+      "raw": 3904,
+      "harmonized": 2198,
+      "lo": 1724,
+      "hi": 2672
+    },
+    {
+      "year": 2012,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 575,
+      "raw": 989,
+      "harmonized": 610,
+      "lo": 478,
+      "hi": 742
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 281,
+      "raw": 483,
+      "harmonized": 266,
+      "lo": 209,
+      "hi": 323
+    },
+    {
+      "year": 2013,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 279,
+      "raw": 480,
+      "harmonized": 274,
+      "lo": 215,
+      "hi": 333
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 490,
+      "raw": 843,
+      "harmonized": 464,
+      "lo": 364,
+      "hi": 564
+    },
+    {
+      "year": 2013,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1678,
+      "raw": 2886,
+      "harmonized": 1664,
+      "lo": 1305,
+      "hi": 2023
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3097,
+      "raw": 5327,
+      "harmonized": 2921,
+      "lo": 2291,
+      "hi": 3551
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1772,
+      "raw": 3048,
+      "harmonized": 1866,
+      "lo": 1464,
+      "hi": 2268
+    },
+    {
+      "year": 2013,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1442,
+      "raw": 2480,
+      "harmonized": 1276,
+      "lo": 1001,
+      "hi": 1551
+    },
+    {
+      "year": 2013,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1566,
+      "raw": 2694,
+      "harmonized": 1670,
+      "lo": 1310,
+      "hi": 2030
+    },
+    {
+      "year": 2013,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1188,
+      "raw": 2043,
+      "harmonized": 1178,
+      "lo": 924,
+      "hi": 1432
+    },
+    {
+      "year": 2013,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1215,
+      "raw": 2090,
+      "harmonized": 1133,
+      "lo": 889,
+      "hi": 1377
+    },
+    {
+      "year": 2013,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2070,
+      "raw": 3560,
+      "harmonized": 2176,
+      "lo": 1707,
+      "hi": 2645
+    },
+    {
+      "year": 2013,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 545,
+      "raw": 937,
+      "harmonized": 511,
+      "lo": 401,
+      "hi": 621
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 284,
+      "raw": 488,
+      "harmonized": 276,
+      "lo": 216,
+      "hi": 336
+    },
+    {
+      "year": 2014,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 395,
+      "raw": 679,
+      "harmonized": 432,
+      "lo": 339,
+      "hi": 525
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 602,
+      "raw": 1035,
+      "harmonized": 541,
+      "lo": 424,
+      "hi": 658
+    },
+    {
+      "year": 2014,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2395,
+      "raw": 4119,
+      "harmonized": 2276,
+      "lo": 1785,
+      "hi": 2767
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3439,
+      "raw": 5915,
+      "harmonized": 3464,
+      "lo": 2717,
+      "hi": 4211
+    },
+    {
+      "year": 2014,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2566,
+      "raw": 4414,
+      "harmonized": 2821,
+      "lo": 2213,
+      "hi": 3429
+    },
+    {
+      "year": 2014,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1831,
+      "raw": 3149,
+      "harmonized": 1600,
+      "lo": 1255,
+      "hi": 1945
+    },
+    {
+      "year": 2014,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1878,
+      "raw": 3230,
+      "harmonized": 2020,
+      "lo": 1584,
+      "hi": 2456
+    },
+    {
+      "year": 2014,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1970,
+      "raw": 3388,
+      "harmonized": 1866,
+      "lo": 1464,
+      "hi": 2268
+    },
+    {
+      "year": 2014,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1651,
+      "raw": 2840,
+      "harmonized": 1793,
+      "lo": 1406,
+      "hi": 2180
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2218,
+      "raw": 3815,
+      "harmonized": 2471,
+      "lo": 1938,
+      "hi": 3004
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 817,
+      "raw": 1405,
+      "harmonized": 912,
+      "lo": 715,
+      "hi": 1109
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 390,
+      "raw": 671,
+      "harmonized": 347,
+      "lo": 272,
+      "hi": 422
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 296,
+      "raw": 509,
+      "harmonized": 262,
+      "lo": 206,
+      "hi": 318
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 476,
+      "raw": 819,
+      "harmonized": 484,
+      "lo": 380,
+      "hi": 588
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1851,
+      "raw": 3184,
+      "harmonized": 2008,
+      "lo": 1575,
+      "hi": 2441
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3074,
+      "raw": 5287,
+      "harmonized": 3190,
+      "lo": 2502,
+      "hi": 3878
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1856,
+      "raw": 3192,
+      "harmonized": 1957,
+      "lo": 1535,
+      "hi": 2379
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1257,
+      "raw": 2162,
+      "harmonized": 1305,
+      "lo": 1024,
+      "hi": 1586
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2156,
+      "raw": 3708,
+      "harmonized": 2403,
+      "lo": 1885,
+      "hi": 2921
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1386,
+      "raw": 2384,
+      "harmonized": 1469,
+      "lo": 1152,
+      "hi": 1786
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1696,
+      "raw": 2917,
+      "harmonized": 1768,
+      "lo": 1387,
+      "hi": 2149
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1610,
+      "raw": 2769,
+      "harmonized": 1773,
+      "lo": 1391,
+      "hi": 2155
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 670,
+      "raw": 1152,
+      "harmonized": 670,
+      "lo": 526,
+      "hi": 814
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 233,
+      "raw": 401,
+      "harmonized": 204,
+      "lo": 160,
+      "hi": 248
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 435,
+      "raw": 748,
+      "harmonized": 384,
+      "lo": 301,
+      "hi": 467
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 541,
+      "raw": 931,
+      "harmonized": 544,
+      "lo": 427,
+      "hi": 661
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2051,
+      "raw": 3528,
+      "harmonized": 2209,
+      "lo": 1733,
+      "hi": 2685
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 4230,
+      "raw": 7276,
+      "harmonized": 4002,
+      "lo": 3139,
+      "hi": 4865
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2583,
+      "raw": 4443,
+      "harmonized": 2408,
+      "lo": 1889,
+      "hi": 2927
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1601,
+      "raw": 2754,
+      "harmonized": 1417,
+      "lo": 1111,
+      "hi": 1723
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1780,
+      "raw": 3062,
+      "harmonized": 1866,
+      "lo": 1464,
+      "hi": 2268
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1606,
+      "raw": 2762,
+      "harmonized": 1617,
+      "lo": 1268,
+      "hi": 1966
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1676,
+      "raw": 2883,
+      "harmonized": 1702,
+      "lo": 1335,
+      "hi": 2069
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1993,
+      "raw": 3428,
+      "harmonized": 1929,
+      "lo": 1513,
+      "hi": 2345
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 765,
+      "raw": 1316,
+      "harmonized": 817,
+      "lo": 641,
+      "hi": 993
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 299,
+      "raw": 514,
+      "harmonized": 325,
+      "lo": 255,
+      "hi": 395
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 293,
+      "raw": 504,
+      "harmonized": 300,
+      "lo": 235,
+      "hi": 365
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 346,
+      "raw": 595,
+      "harmonized": 373,
+      "lo": 293,
+      "hi": 453
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1604,
+      "raw": 2759,
+      "harmonized": 1663,
+      "lo": 1304,
+      "hi": 2022
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2995,
+      "raw": 5151,
+      "harmonized": 3218,
+      "lo": 2524,
+      "hi": 3912
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1907,
+      "raw": 3280,
+      "harmonized": 1981,
+      "lo": 1554,
+      "hi": 2408
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1172,
+      "raw": 2016,
+      "harmonized": 1044,
+      "lo": 819,
+      "hi": 1269
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1568,
+      "raw": 2697,
+      "harmonized": 1426,
+      "lo": 1119,
+      "hi": 1733
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1126,
+      "raw": 1937,
+      "harmonized": 1162,
+      "lo": 911,
+      "hi": 1413
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1272,
+      "raw": 2188,
+      "harmonized": 1361,
+      "lo": 1068,
+      "hi": 1654
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1808,
+      "raw": 3110,
+      "harmonized": 1963,
+      "lo": 1540,
+      "hi": 2386
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 656,
+      "raw": 1128,
+      "harmonized": 575,
+      "lo": 451,
+      "hi": 699
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 223,
+      "raw": 384,
+      "harmonized": 194,
+      "lo": 152,
+      "hi": 236
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 338,
+      "raw": 581,
+      "harmonized": 361,
+      "lo": 283,
+      "hi": 439
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 486,
+      "raw": 836,
+      "harmonized": 450,
+      "lo": 353,
+      "hi": 547
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1711,
+      "raw": 2943,
+      "harmonized": 1764,
+      "lo": 1384,
+      "hi": 2144
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2562,
+      "raw": 4407,
+      "harmonized": 2830,
+      "lo": 2220,
+      "hi": 3440
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2037,
+      "raw": 3504,
+      "harmonized": 1888,
+      "lo": 1481,
+      "hi": 2295
+    },
+    {
+      "year": 2018,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1529,
+      "raw": 2630,
+      "harmonized": 1701,
+      "lo": 1334,
+      "hi": 2068
+    },
+    {
+      "year": 2018,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1411,
+      "raw": 2427,
+      "harmonized": 1426,
+      "lo": 1119,
+      "hi": 1733
+    },
+    {
+      "year": 2018,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1345,
+      "raw": 2313,
+      "harmonized": 1506,
+      "lo": 1181,
+      "hi": 1831
+    },
+    {
+      "year": 2018,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1292,
+      "raw": 2222,
+      "harmonized": 1322,
+      "lo": 1037,
+      "hi": 1607
+    },
+    {
+      "year": 2018,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2101,
+      "raw": 3614,
+      "harmonized": 1955,
+      "lo": 1534,
+      "hi": 2376
+    },
+    {
+      "year": 2018,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 496,
+      "raw": 853,
+      "harmonized": 458,
+      "lo": 359,
+      "hi": 557
+    },
+    {
+      "year": 2018,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 232,
+      "raw": 399,
+      "harmonized": 233,
+      "lo": 183,
+      "hi": 283
+    },
+    {
+      "year": 2019,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 287,
+      "raw": 494,
+      "harmonized": 256,
+      "lo": 201,
+      "hi": 311
+    },
+    {
+      "year": 2019,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 558,
+      "raw": 960,
+      "harmonized": 590,
+      "lo": 463,
+      "hi": 717
+    },
+    {
+      "year": 2019,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1816,
+      "raw": 3124,
+      "harmonized": 1630,
+      "lo": 1279,
+      "hi": 1981
+    },
+    {
+      "year": 2019,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2947,
+      "raw": 5069,
+      "harmonized": 3285,
+      "lo": 2577,
+      "hi": 3993
+    },
+    {
+      "year": 2019,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2395,
+      "raw": 4119,
+      "harmonized": 2650,
+      "lo": 2079,
+      "hi": 3221
+    },
+    {
+      "year": 2019,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1517,
+      "raw": 2609,
+      "harmonized": 1640,
+      "lo": 1286,
+      "hi": 1994
+    },
+    {
+      "year": 2019,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1769,
+      "raw": 3043,
+      "harmonized": 1573,
+      "lo": 1234,
+      "hi": 1912
+    },
+    {
+      "year": 2019,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1652,
+      "raw": 2841,
+      "harmonized": 1750,
+      "lo": 1373,
+      "hi": 2127
+    },
+    {
+      "year": 2019,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1868,
+      "raw": 3213,
+      "harmonized": 1958,
+      "lo": 1536,
+      "hi": 2380
+    },
+    {
+      "year": 2019,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2385,
+      "raw": 4102,
+      "harmonized": 2508,
+      "lo": 1967,
+      "hi": 3049
+    },
+    {
+      "year": 2019,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 586,
+      "raw": 1008,
+      "harmonized": 640,
+      "lo": 502,
+      "hi": 778
+    },
+    {
+      "year": 2019,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 334,
+      "raw": 574,
+      "harmonized": 349,
+      "lo": 274,
+      "hi": 424
+    },
+    {
+      "year": 2020,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 315,
+      "raw": 542,
+      "harmonized": 304,
+      "lo": 238,
+      "hi": 370
+    },
+    {
+      "year": 2020,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 596,
+      "raw": 1025,
+      "harmonized": 563,
+      "lo": 442,
+      "hi": 684
+    },
+    {
+      "year": 2020,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2037,
+      "raw": 3504,
+      "harmonized": 2027,
+      "lo": 1590,
+      "hi": 2464
+    },
+    {
+      "year": 2020,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3493,
+      "raw": 6008,
+      "harmonized": 3445,
+      "lo": 2702,
+      "hi": 4188
+    },
+    {
+      "year": 2020,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2483,
+      "raw": 4271,
+      "harmonized": 2513,
+      "lo": 1971,
+      "hi": 3055
+    },
+    {
+      "year": 2020,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1424,
+      "raw": 2449,
+      "harmonized": 1289,
+      "lo": 1011,
+      "hi": 1567
+    },
+    {
+      "year": 2020,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1990,
+      "raw": 3423,
+      "harmonized": 1900,
+      "lo": 1490,
+      "hi": 2310
+    },
+    {
+      "year": 2020,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1378,
+      "raw": 2370,
+      "harmonized": 1354,
+      "lo": 1062,
+      "hi": 1646
+    },
+    {
+      "year": 2020,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1507,
+      "raw": 2592,
+      "harmonized": 1596,
+      "lo": 1252,
+      "hi": 1940
+    },
+    {
+      "year": 2020,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2282,
+      "raw": 3925,
+      "harmonized": 2163,
+      "lo": 1697,
+      "hi": 2629
+    },
+    {
+      "year": 2020,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 645,
+      "raw": 1109,
+      "harmonized": 613,
+      "lo": 481,
+      "hi": 745
+    },
+    {
+      "year": 2020,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 324,
+      "raw": 557,
+      "harmonized": 331,
+      "lo": 260,
+      "hi": 402
+    },
+    {
+      "year": 2021,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 507,
+      "raw": 872,
+      "harmonized": 502,
+      "lo": 394,
+      "hi": 610
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 698,
+      "raw": 1201,
+      "harmonized": 692,
+      "lo": 543,
+      "hi": 841
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2341,
+      "raw": 4027,
+      "harmonized": 2557,
+      "lo": 2006,
+      "hi": 3108
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3842,
+      "raw": 6608,
+      "harmonized": 3574,
+      "lo": 2803,
+      "hi": 4345
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3358,
+      "raw": 5776,
+      "harmonized": 3721,
+      "lo": 2919,
+      "hi": 4523
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2045,
+      "raw": 3517,
+      "harmonized": 2168,
+      "lo": 1701,
+      "hi": 2635
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2493,
+      "raw": 4288,
+      "harmonized": 2443,
+      "lo": 1916,
+      "hi": 2970
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1716,
+      "raw": 2952,
+      "harmonized": 1800,
+      "lo": 1412,
+      "hi": 2188
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2021,
+      "raw": 3476,
+      "harmonized": 1821,
+      "lo": 1428,
+      "hi": 2214
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2538,
+      "raw": 4365,
+      "harmonized": 2689,
+      "lo": 2109,
+      "hi": 3269
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 923,
+      "raw": 1588,
+      "harmonized": 1026,
+      "lo": 805,
+      "hi": 1247
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 410,
+      "raw": 705,
+      "harmonized": 423,
+      "lo": 332,
+      "hi": 514
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 352,
+      "raw": 605,
+      "harmonized": 360,
+      "lo": 282,
+      "hi": 438
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 472,
+      "raw": 812,
+      "harmonized": 486,
+      "lo": 381,
+      "hi": 591
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1521,
+      "raw": 2616,
+      "harmonized": 1652,
+      "lo": 1296,
+      "hi": 2008
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2905,
+      "raw": 4997,
+      "harmonized": 2786,
+      "lo": 2185,
+      "hi": 3387
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1876,
+      "raw": 3227,
+      "harmonized": 2113,
+      "lo": 1657,
+      "hi": 2569
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1575,
+      "raw": 2709,
+      "harmonized": 1451,
+      "lo": 1138,
+      "hi": 1764
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2141,
+      "raw": 3683,
+      "harmonized": 1977,
+      "lo": 1551,
+      "hi": 2403
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1341,
+      "raw": 2307,
+      "harmonized": 1515,
+      "lo": 1188,
+      "hi": 1842
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1933,
+      "raw": 3325,
+      "harmonized": 1853,
+      "lo": 1453,
+      "hi": 2253
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1836,
+      "raw": 3158,
+      "harmonized": 1981,
+      "lo": 1554,
+      "hi": 2408
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 719,
+      "raw": 1237,
+      "harmonized": 736,
+      "lo": 577,
+      "hi": 895
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 310,
+      "raw": 533,
+      "harmonized": 333,
+      "lo": 261,
+      "hi": 405
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 308,
+      "raw": 530,
+      "harmonized": 289,
+      "lo": 227,
+      "hi": 351
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 569,
+      "raw": 979,
+      "harmonized": 560,
+      "lo": 439,
+      "hi": 681
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1815,
+      "raw": 3122,
+      "harmonized": 1840,
+      "lo": 1443,
+      "hi": 2237
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3210,
+      "raw": 5521,
+      "harmonized": 3543,
+      "lo": 2779,
+      "hi": 4307
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2242,
+      "raw": 3856,
+      "harmonized": 2041,
+      "lo": 1601,
+      "hi": 2481
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1386,
+      "raw": 2384,
+      "harmonized": 1533,
+      "lo": 1202,
+      "hi": 1864
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1743,
+      "raw": 2998,
+      "harmonized": 1699,
+      "lo": 1333,
+      "hi": 2065
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1274,
+      "raw": 2191,
+      "harmonized": 1176,
+      "lo": 922,
+      "hi": 1430
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1501,
+      "raw": 2582,
+      "harmonized": 1539,
+      "lo": 1207,
+      "hi": 1871
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2106,
+      "raw": 3622,
+      "harmonized": 1951,
+      "lo": 1530,
+      "hi": 2372
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 723,
+      "raw": 1244,
+      "harmonized": 733,
+      "lo": 575,
+      "hi": 891
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 307,
+      "raw": 528,
+      "harmonized": 297,
+      "lo": 233,
+      "hi": 361
+    },
+    {
+      "year": 2024,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 309,
+      "raw": 531,
+      "harmonized": 332,
+      "lo": 260,
+      "hi": 404
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 538,
+      "raw": 925,
+      "harmonized": 522,
+      "lo": 409,
+      "hi": 635
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1558,
+      "raw": 2680,
+      "harmonized": 1402,
+      "lo": 1100,
+      "hi": 1704
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2977,
+      "raw": 5120,
+      "harmonized": 2769,
+      "lo": 2172,
+      "hi": 3366
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2463,
+      "raw": 4236,
+      "harmonized": 2537,
+      "lo": 1990,
+      "hi": 3084
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1394,
+      "raw": 2398,
+      "harmonized": 1478,
+      "lo": 1159,
+      "hi": 1797
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2230,
+      "raw": 3836,
+      "harmonized": 2273,
+      "lo": 1783,
+      "hi": 2763
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1745,
+      "raw": 3001,
+      "harmonized": 1730,
+      "lo": 1357,
+      "hi": 2103
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1662,
+      "raw": 2859,
+      "harmonized": 1873,
+      "lo": 1469,
+      "hi": 2277
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1879,
+      "raw": 3232,
+      "harmonized": 1754,
+      "lo": 1376,
+      "hi": 2132
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 837,
+      "raw": 1440,
+      "harmonized": 927,
+      "lo": 727,
+      "hi": 1127
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 329,
+      "raw": 566,
+      "harmonized": 305,
+      "lo": 239,
+      "hi": 371
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 300,
+      "raw": 516,
+      "harmonized": 329,
+      "lo": 258,
+      "hi": 400
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 576,
+      "raw": 991,
+      "harmonized": 622,
+      "lo": 488,
+      "hi": 756
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1812,
+      "raw": 3117,
+      "harmonized": 1694,
+      "lo": 1329,
+      "hi": 2059
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3355,
+      "raw": 5771,
+      "harmonized": 3203,
+      "lo": 2512,
+      "hi": 3894
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1932,
+      "raw": 3323,
+      "harmonized": 1684,
+      "lo": 1321,
+      "hi": 2047
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1258,
+      "raw": 2164,
+      "harmonized": 1301,
+      "lo": 1021,
+      "hi": 1581
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1782,
+      "raw": 3065,
+      "harmonized": 1912,
+      "lo": 1500,
+      "hi": 2324
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1433,
+      "raw": 2465,
+      "harmonized": 1344,
+      "lo": 1054,
+      "hi": 1634
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1378,
+      "raw": 2370,
+      "harmonized": 1235,
+      "lo": 969,
+      "hi": 1501
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1698,
+      "raw": 2921,
+      "harmonized": 1673,
+      "lo": 1312,
+      "hi": 2034
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 764,
+      "raw": 1314,
+      "harmonized": 826,
+      "lo": 648,
+      "hi": 1004
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 279,
+      "raw": 480,
+      "harmonized": 293,
+      "lo": 230,
+      "hi": 356
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 373,
+      "raw": 642,
+      "harmonized": 420,
+      "lo": 329,
+      "hi": 511
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 582,
+      "raw": 1001,
+      "harmonized": 640,
+      "lo": 502,
+      "hi": 778
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1879,
+      "raw": 3232,
+      "harmonized": 1648,
+      "lo": 1293,
+      "hi": 2003
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 3882,
+      "raw": 6677,
+      "harmonized": 3857,
+      "lo": 3025,
+      "hi": 4689
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2674,
+      "raw": 4599,
+      "harmonized": 2511,
+      "lo": 1970,
+      "hi": 3052
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1942,
+      "raw": 3340,
+      "harmonized": 2004,
+      "lo": 1572,
+      "hi": 2436
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 2122,
+      "raw": 3650,
+      "harmonized": 2361,
+      "lo": 1852,
+      "hi": 2870
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1398,
+      "raw": 2405,
+      "harmonized": 1501,
+      "lo": 1177,
+      "hi": 1825
+    },
+    {
+      "year": 2026,
+      "month": 9,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1718,
+      "raw": 2955,
+      "harmonized": 1855,
+      "lo": 1455,
+      "hi": 2255
+    },
+    {
+      "year": 2026,
+      "month": 10,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 1999,
+      "raw": 3438,
+      "harmonized": 1990,
+      "lo": 1561,
+      "hi": 2419
+    },
+    {
+      "year": 2026,
+      "month": 11,
+      "sensor": "VIIRS_SNPP",
+      "modis_truth": 371,
+      "raw": 638,
+      "harmonized": 356,
+      "lo": 279,
+      "hi": 433
+    }
+  ],
+  "jump": {
+    "step_ratio_raw": 1.859,
+    "step_ratio_harmonized": 1.048,
+    "step_ratio_placebo": 0.922,
+    "definition": "median_m[ value(knot,m) / median(value(knot-3..knot-1, m)) ]",
+    "target": 1.0
+  },
+  "validation": {
+    "holdout_years": [
+      2024,
+      2025
+    ],
+    "n": 24,
+    "rmse_log": 0.074,
+    "mape": 0.067,
+    "bias": 0.003
+  }
+}

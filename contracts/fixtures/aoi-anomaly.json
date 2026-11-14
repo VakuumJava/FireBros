@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "source": "mock",
+    "unit": "hotspot_days_1km",
+    "method_version": "harmonize-v1",
+    "region_bbox": [
+      68.5,
+      38.4,
+      80.7,
+      43.7
+    ],
+    "generated_at": "2026-11-14T07:29:01+00:00"
+  },
+  "aoi_id": "aoi_145ca8037dbb",
+  "month": "2026-11",
+  "partial": true,
+  "through_day": 14,
+  "observed": 356,
+  "baseline": {
+    "median": 301.0,
+    "mad": 35.5,
+    "robust_sigma": 52.6,
+    "n_years": 26,
+    "window": "same month, days <= 14"
+  },
+  "robust_z": 1.04,
+  "percentile": 0.808,
+  "direction": "above",
+  "label": "на 1.0σ выше нормы",
+  "series": [
+    {
+      "year": 2000,
+      "count": 265
+    },
+    {
+      "year": 2001,
+      "count": 215
+    },
+    {
+      "year": 2002,
+      "count": 280
+    },
+    {
+      "year": 2003,
+      "count": 239
+    },
+    {
+      "year": 2004,
+      "count": 299
+    },
+    {
+      "year": 2005,
+      "count": 254
+    },
+    {
+      "year": 2006,
+      "count": 201
+    },
+    {
+      "year": 2007,
+      "count": 266
+    },
+    {
+      "year": 2008,
+      "count": 317
+    },
+    {
+      "year": 2009,
+      "count": 315
+    },
+    {
+      "year": 2010,
+      "count": 314
+    },
+    {
+      "year": 2011,
+      "count": 301
+    },
+    {
+      "year": 2012,
+      "count": 268
+    },
+    {
+      "year": 2013,
+      "count": 254
+    },
+    {
+      "year": 2014,
+      "count": 381
+    },
+    {
+      "year": 2015,
+      "count": 313
+    },
+    {
+      "year": 2016,
+      "count": 357
+    },
+    {
+      "year": 2017,
+      "count": 306
+    },
+    {
+      "year": 2018,
+      "count": 231
+    },
+    {
+      "year": 2019,
+      "count": 273
+    },
+    {
+      "year": 2020,
+      "count": 301
+    },
+    {
+      "year": 2021,
+      "count": 431
+    },
+    {
+      "year": 2022,
+      "count": 336
+    },
+    {
+      "year": 2023,
+      "count": 337
+    },
+    {
+      "year": 2024,
+      "count": 391
+    },
+    {
+      "year": 2025,
+      "count": 357
+    },
+    {
+      "year": 2026,
+      "count": 356
+    }
+  ]
+}

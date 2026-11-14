@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/VakuumJava/FireBros/contracts/aoi-calendar.schema.json",
+  "title": "GET /api/v1/aoi/calendar",
+  "description": "Year x month matrix for the heatmap. null = no data (gap), 0 is a real zero.",
+  "type": "object",
+  "required": ["meta", "aoi_id", "years", "months", "values", "max", "palette_default", "palettes", "unit"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": { "$ref": "aoi-summary.schema.json#/definitions/meta" },
+    "aoi_id": { "type": "string" },
+    "years": { "type": "array", "items": { "type": "integer" }, "minItems": 1 },
+    "months": { "type": "array", "items": { "type": "integer" }, "minItems": 12, "maxItems": 12 },
+    "values": {
+      "type": "array",
+      "description": "values[row] has exactly 12 entries aligned with months",
+      "items": { "type": "array", "items": { "type": ["integer", "null"], "minimum": 0 }, "minItems": 12, "maxItems": 12 }
+    },
+    "max": { "type": "integer", "minimum": 0, "description": "max over non-null cells; frontend must not recompute a different scale for the legend" },
+    "palette_default": { "enum": ["viridis", "cividis"] },
+    "palettes": { "type": "array", "items": { "enum": ["viridis", "cividis"] } },
+    "unit": { "const": "hotspot_days_1km" }
+  }
+}
