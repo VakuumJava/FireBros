@@ -1,18 +1,18 @@
-// P5: заменить текст на финальный, подключить docs/limitations.md
+// P5: replace with the final text, link docs/limitations.md
 export default function Footer() {
   return (
     <footer className="footer">
       <p>
-        Данные: NASA FIRMS, MODIS / VIIRS active fire (2000–2026).{' '}
+        Data: NASA FIRMS, MODIS / VIIRS active fire (2000-2026).{' '}
         <a href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">firms.modaps.eosdis.nasa.gov</a>
       </p>
       <details>
-        <summary>Ограничения</summary>
+        <summary>Limitations</summary>
         <ul>
-          <li>Хотспот ≠ пожар: это 1 км² «чего-то горячего», а не подтверждённое возгорание.</li>
-          <li>Облака, дым и пыль дают ложные детекции и маскируют соседние очаги.</li>
-          <li>Гармонизация — оценка, а не измерение: интервал показан на графике.</li>
-          <li>Текущий месяц неполный, сравнение идёт «месяц-к-дате». Свежие данные (NRT) могут дорасти.</li>
+          <li>A hotspot is not a fire: it is 1 km2 of "something hot", not a confirmed burn.</li>
+          <li>Clouds, smoke and dust cause false detections and can mask neighbouring fires.</li>
+          <li>Harmonization is an estimate, not a measurement: the interval is shown on the chart.</li>
+          <li>The current month is incomplete, so it is compared month-to-date. Fresh (NRT) data may still grow.</li>
         </ul>
       </details>
     </footer>

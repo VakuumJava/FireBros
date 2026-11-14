@@ -25,7 +25,7 @@ export default function App() {
   const [years, setYears] = useState([FIRST_YEAR, LAST_YEAR]);
   const [palette, setPalette] = useState('viridis');
 
-  // "to" нельзя из будущего (422), поэтому обрезаем по текущему месяцу
+  // "to" cannot be in the future (422), so clamp it to the current month
   const range = useMemo(() => {
     const to = `${years[1]}-12`;
     return { from: `${years[0]}-01`, to: to > CURRENT_MONTH ? CURRENT_MONTH : to };
@@ -45,23 +45,23 @@ export default function App() {
       <ErrorBanner states={d} />
 
       <aside className="sidebar">
-        <Card title="Область интереса" hint="Нарисуйте прямоугольник или полигон (кнопки на карте) или введите координаты">
+        <Card title="Area of interest" hint="Draw a rectangle or polygon (buttons on the map) or type coordinates">
           <AoiMap aoi={aoi} onChange={setAoi} />
           <CoordinateForm aoi={aoi} onChange={setAoi} />
         </Card>
-        <Card title="Период">
+        <Card title="Period">
           <PeriodSelect yearFrom={years[0]} yearTo={years[1]} lastYear={LAST_YEAR} onChange={(a, b) => setYears([a, b])} />
         </Card>
-        <Card title="Сводка по AOI" state={d.summary}>
+        <Card title="AOI summary" state={d.summary}>
           {d.summary.data && <SummaryStats data={d.summary.data} />}
         </Card>
-        <Card title="Скачать CSV">
+        <Card title="Download CSV">
           <ExportPanel aoi={aoi} range={range} />
         </Card>
       </aside>
 
       <main className="main">
-        <Card title="Календарь активности" hint="Хотспот-дни (1 км) по месяцам. Единый ряд MODIS + VIIRS" state={d.calendar}
+        <Card title="Activity calendar" hint="Hotspot-days (1 km) by month. One continuous MODIS + VIIRS series" state={d.calendar}
           aside={<PaletteSwitch palettes={palettes} value={palette} onChange={setPalette} />}>
           {d.calendar.data && (
             <CalendarHeatmap data={d.calendar.data} palette={palette} nrtMonths={d.summary.data?.coverage.nrt_months} />
@@ -69,15 +69,15 @@ export default function App() {
         </Card>
 
         <div className="row">
-          <Card title="Текущий месяц vs история" state={d.anomaly}>
+          <Card title="Current month vs history" state={d.anomaly}>
             {d.anomaly.data && <AnomalyCard data={d.anomaly.data} />}
           </Card>
-          <Card title="Топ-периоды" state={d.top}>
+          <Card title="Top periods" state={d.top}>
             {d.top.data && <TopPeriods data={d.top.data} />}
           </Card>
         </div>
 
-        <Card title="До и после гармонизации" hint="Сырой ряд даёт ложный скачок в 2012. Мы его убираем калибровкой на перекрытии" state={d.harmonization}>
+        <Card title="Before and after harmonization" hint="The raw series shows a false jump in 2012. We remove it by calibrating on the overlap years" state={d.harmonization}>
           {d.harmonization.data && <HarmonizationChart data={d.harmonization.data} />}
         </Card>
       </main>

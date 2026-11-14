@@ -1,4 +1,4 @@
-// Сводит одинаковые ошибки разных блоков в одну плашку (422 «вне региона» придёт сразу от пяти эндпоинтов)
+// Merges identical errors from different blocks into one banner (a 422 "outside region" arrives from all five endpoints)
 export default function ErrorBanner({ states }) {
   const msgs = [...new Set(Object.values(states).filter((s) => s.error).map((s) => s.error.detail || s.error.message))];
   if (!msgs.length) return null;

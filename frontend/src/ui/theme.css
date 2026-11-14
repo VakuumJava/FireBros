@@ -1,4 +1,4 @@
-/* P5: токены, база, карточки, кнопки. Структура страницы — в components/components.css */
+/* P5: tokens, base styles, cards, buttons. Page structure lives in components/components.css */
 :root {
   --bg: #0e1218;
   --panel: #151b23;

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'node:url';
 
-// @contracts -> ../contracts (фикстуры и схемы лежат вне frontend/)
+// @contracts -> ../contracts (fixtures and schemas live outside frontend/)
 const contracts = fileURLToPath(new URL('../contracts', import.meta.url));
 
 export default defineConfig({
@@ -11,9 +11,9 @@ export default defineConfig({
   server: {
     port: 5173,
     fs: { allow: ['..'] },
-    // Запросы /api/... уходят на FastAPI (P1), поэтому CORS не нужен
+    // /api/... requests go to FastAPI (P1), so CORS is not needed
     proxy: { '/api': { target: 'http://localhost:8000', changeOrigin: true } },
   },
-  build: { chunkSizeWarningLimit: 5000 }, // Plotly грузится лениво, он тяжёлый по природе
+  build: { chunkSizeWarningLimit: 5000 }, // Plotly is lazy-loaded and heavy by nature
   test: { environment: 'node', include: ['src/**/*.test.{js,jsx}'] },
 });

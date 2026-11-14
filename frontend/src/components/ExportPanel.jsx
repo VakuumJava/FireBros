@@ -16,7 +16,7 @@ export default function ExportPanel({ aoi, range, unit = 'hotspot_days_1km' }) {
       a.href = url; a.download = filename;
       document.body.append(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setMsg({ ok: true, text: `${filename}${rowCount != null ? ` · ${fmt(rowCount)} строк` : ''}` });
+      setMsg({ ok: true, text: `${filename}${rowCount != null ? ` - ${fmt(rowCount)} rows` : ''}` });
     } catch (e) {
       setMsg({ ok: false, text: e.detail || e.message });
     } finally { setBusy(false); }
@@ -25,10 +25,10 @@ export default function ExportPanel({ aoi, range, unit = 'hotspot_days_1km' }) {
   return (
     <div className="export">
       <label className="export__opt"><input type="radio" name="kind" checked={kind === 'monthly'} onChange={() => setKind('monthly')} />
-        <span>Сводка по месяцам <small>(то, что на графике; {unit})</small></span></label>
+        <span>Monthly summary <small>(what the chart shows; {unit})</small></span></label>
       <label className="export__opt"><input type="radio" name="kind" checked={kind === 'hotspots'} onChange={() => setKind('hotspots')} />
-        <span>Сырые детекции <small>(каждый хотспот)</small></span></label>
-      <button className="btn" onClick={download} disabled={busy}>{busy ? 'Готовим файл…' : '⬇ Скачать CSV'}</button>
+        <span>Raw detections <small>(every single hotspot)</small></span></label>
+      <button className="btn" onClick={download} disabled={busy}>{busy ? 'Preparing file...' : 'Download CSV'}</button>
       {msg && <p className={`card__msg ${msg.ok ? '' : 'card__msg--error'}`} role={msg.ok ? 'status' : 'alert'}>{msg.text}</p>}
     </div>
   );

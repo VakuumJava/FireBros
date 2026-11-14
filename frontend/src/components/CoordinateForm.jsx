@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { REGION_BBOX } from '../api/config';
 
-const FIELDS = [['w', 'Запад (W)', -180, 180], ['s', 'Юг (S)', -90, 90], ['e', 'Восток (E)', -180, 180], ['n', 'Север (N)', -90, 90]];
+const FIELDS = [['w', 'West (W)', -180, 180], ['s', 'South (S)', -90, 90], ['e', 'East (E)', -180, 180], ['n', 'North (N)', -90, 90]];
 
 const intersects = ([w, s, e, n], [rw, rs, re, rn]) => w < re && e > rw && s < rn && n > rs;
 
-/** Обязательный дубль рисования: ввод bbox руками. Полигон здесь только показывается. */
+/** Required fallback to drawing: type the bbox by hand. A polygon is only displayed here. */
 export default function CoordinateForm({ aoi, onChange }) {
   const toStrings = (a) => (a.kind === 'bbox' ? a.bbox.map(String) : ['', '', '', '']);
   const [vals, setVals] = useState(toStrings(aoi));
@@ -15,19 +15,19 @@ export default function CoordinateForm({ aoi, onChange }) {
   const apply = (ev) => {
     ev.preventDefault();
     const nums = vals.map(Number);
-    if (vals.some((v) => v.trim() === '') || nums.some(Number.isNaN)) return setErr('Заполните все четыре числа.');
+    if (vals.some((v) => v.trim() === '') || nums.some(Number.isNaN)) return setErr('Fill in all four numbers.');
     const bad = FIELDS.find(([, , lo, hi], i) => nums[i] < lo || nums[i] > hi);
-    if (bad) return setErr(`${bad[1]}: вне диапазона.`);
+    if (bad) return setErr(`${bad[1]}: out of range.`);
     const [w, s, e, n] = nums;
-    if (w >= e || s >= n) return setErr('Нужно W < E и S < N.');
-    if (!intersects(nums, REGION_BBOX)) return setErr(`Область вне региона расчёта: ${REGION_BBOX.join(', ')}.`);
+    if (w >= e || s >= n) return setErr('W must be less than E, and S less than N.');
+    if (!intersects(nums, REGION_BBOX)) return setErr(`Area is outside the computed region: ${REGION_BBOX.join(', ')}.`);
     setErr(null);
     onChange({ kind: 'bbox', bbox: nums });
   };
 
   return (
     <form className="coords" onSubmit={apply}>
-      {aoi.kind === 'polygon' && <p className="coords__note">Сейчас выбран полигон ({aoi.polygon.length} вершин). Ввод чисел заменит его прямоугольником.</p>}
+      {aoi.kind === 'polygon' && <p className="coords__note">A polygon is selected ({aoi.polygon.length} vertices). Entering numbers will replace it with a rectangle.</p>}
       <div className="coords__grid">
         {FIELDS.map(([k, label], i) => (
           <label key={k}>
@@ -38,8 +38,8 @@ export default function CoordinateForm({ aoi, onChange }) {
       </div>
       {err && <p className="card__msg card__msg--error" role="alert">{err}</p>}
       <div className="row-btns">
-        <button type="submit" className="btn">Применить</button>
-        <button type="button" className="btn btn--ghost" onClick={() => onChange({ kind: 'bbox', bbox: [...REGION_BBOX] })}>Весь регион</button>
+        <button type="submit" className="btn">Apply</button>
+        <button type="button" className="btn btn--ghost" onClick={() => onChange({ kind: 'bbox', bbox: [...REGION_BBOX] })}>Whole region</button>
       </div>
     </form>
   );

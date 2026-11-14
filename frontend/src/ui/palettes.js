@@ -1,4 +1,4 @@
-// Последовательные дальтоник-безопасные шкалы (опорные точки viridis / cividis, линейная интерполяция в RGB).
+// Sequential, colour-blind-safe scales (viridis / cividis anchor points, linear RGB interpolation).
 export const PALETTES = {
   viridis: ['#440154', '#482878', '#3e4a89', '#31688e', '#26828e', '#1f9e89', '#35b779', '#6ece58', '#fde725'],
   cividis: ['#00224e', '#123570', '#3b496c', '#575d6d', '#707173', '#8a8678', '#a59c74', '#c3b369', '#e1cc55', '#fee838'],
@@ -20,7 +20,7 @@ export function rgbAt(name, t) {
 
 export const colorAt = (name, t) => `rgb(${rgbAt(name, t).join(',')})`;
 
-/** Контрастный цвет текста поверх заливки */
+/** Readable text colour on top of a fill */
 export function textOn([r, g, b]) {
   const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
   return lum > 0.55 ? '#111' : '#fff';

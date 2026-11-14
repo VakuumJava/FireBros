@@ -5,8 +5,8 @@ const idle = { data: null, error: null, loading: false };
 const KEYS = ['summary', 'calendar', 'anomaly', 'top', 'harmonization'];
 
 /**
- * Грузит все 5 эндпоинтов параллельно. У каждого свой {data, error, loading},
- * поэтому падение одного блока не роняет остальные. Старые данные остаются на экране, пока грузятся новые.
+ * Loads all 5 endpoints in parallel. Each has its own {data, error, loading}, so one failing
+ * block does not take down the others. Old data stays on screen while new data loads.
  */
 export function useAoiData(aoi, range, month) {
   const [state, setState] = useState(() => Object.fromEntries(KEYS.map((k) => [k, idle])));

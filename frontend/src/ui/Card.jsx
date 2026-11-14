@@ -1,4 +1,4 @@
-// Обёртка блока: заголовок + состояния загрузки/ошибки. Props: state = { data, error, loading }
+// Block wrapper: title + loading/error states. Props: state = { data, error, loading }
 export default function Card({ title, hint, aside, state, className = '', children }) {
   const { data, error, loading } = state || {};
   return (
@@ -11,7 +11,7 @@ export default function Card({ title, hint, aside, state, className = '', childr
         {aside}
       </header>
       {error && <p className="card__msg card__msg--error" role="alert">{error.detail || error.message}</p>}
-      {!error && !data && <p className="card__msg">{loading ? 'Загрузка…' : 'Нет данных'}</p>}
+      {!error && !data && <p className="card__msg">{loading ? 'Loading...' : 'No data'}</p>}
       {data && <div className={loading ? 'is-stale' : ''}>{children}</div>}
     </section>
   );

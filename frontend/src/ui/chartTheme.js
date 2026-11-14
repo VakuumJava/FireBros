@@ -1,4 +1,4 @@
-// Цвета графика Plotly. P5 может менять свободно.
+// Plotly chart colours. P5 can change these freely.
 export const chartTheme = {
   text: '#e6e9ee',
   grid: 'rgba(255,255,255,0.08)',

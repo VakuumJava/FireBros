@@ -14,7 +14,7 @@ function aoiLayer(aoi) {
   return L.rectangle([[s, w], [n, e]], SHAPE);
 }
 
-/** Карта + рисование AOI (прямоугольник или полигон). onChange(aoi) — aoi в формате api/config.js */
+/** Map + AOI drawing (rectangle or polygon). onChange(aoi) receives the format from api/config.js */
 export default function AoiMap({ aoi, onChange }) {
   const el = useRef(null);
   const map = useRef(null);
@@ -22,7 +22,7 @@ export default function AoiMap({ aoi, onChange }) {
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
 
-  // один раз: создать карту
+  // once: create the map
   useEffect(() => {
     const [w, s, e, n] = REGION_BBOX;
     const m = L.map(el.current, { zoomControl: true }).fitBounds([[s, w], [n, e]]);
@@ -30,7 +30,7 @@ export default function AoiMap({ aoi, onChange }) {
       maxZoom: 18,
       attribution: '&copy; OpenStreetMap',
     }).addTo(m);
-    // регион предрасчёта — вне него API вернёт 422
+    // precomputed region - outside it the API returns 422
     L.rectangle([[s, w], [n, e]], { color: '#9aa5b1', weight: 1, dashArray: '6 6', fill: false, interactive: false }).addTo(m);
 
     const g = L.featureGroup().addTo(m);
@@ -60,7 +60,7 @@ export default function AoiMap({ aoi, onChange }) {
     return () => { ro.disconnect(); m.remove(); map.current = null; };
   }, []);
 
-  // при смене AOI (с карты или из формы) — перерисовать текущую фигуру
+  // when the AOI changes (from the map or the form), redraw the current shape
   useEffect(() => {
     const g = group.current;
     if (!g) return;
@@ -68,5 +68,5 @@ export default function AoiMap({ aoi, onChange }) {
     g.addLayer(aoiLayer(aoi));
   }, [aoi]);
 
-  return <div ref={el} className="aoi-map" role="application" aria-label="Карта: нарисуйте область интереса" />;
+  return <div ref={el} className="aoi-map" role="application" aria-label="Map: draw your area of interest" />;
 }

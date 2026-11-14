@@ -1,4 +1,4 @@
-// ЕДИНСТВЕННОЕ место, где фронт знает про URL и параметры API. Контракт: docs/api-contract.md
+// The ONLY place where the frontend knows about API URLs and parameters. Contract: docs/api-contract.md
 import { API_BASE, USE_MOCK } from './config';
 import * as mock from './mock';
 
@@ -10,7 +10,7 @@ export class ApiError extends Error {
   }
 }
 
-/** AOI -> query-параметры. bbox: "w,s,e,n"; polygon: "lon,lat;lon,lat" (порядок GeoJSON) */
+/** AOI -> query params. bbox: "w,s,e,n"; polygon: "lon,lat;lon,lat" (GeoJSON order) */
 export function aoiToParams(aoi) {
   if (aoi.kind === 'polygon') {
     return { polygon: aoi.polygon.map(([lon, lat]) => `${lon},${lat}`).join(';') };
@@ -26,7 +26,7 @@ async function readError(res) {
     const d = (await res.json()).detail;
     if (typeof d === 'string') detail = d;
     else if (Array.isArray(d)) detail = d.map((x) => x.msg).join('; ');
-  } catch { /* тело не JSON — оставляем статус */ }
+  } catch { /* body is not JSON - keep the status text */ }
   return new ApiError(res.status, detail);
 }
 
@@ -36,7 +36,7 @@ async function request(path, params, signal) {
     res = await fetch(`${API_BASE}${path}?${new URLSearchParams(params)}`, { signal });
   } catch (e) {
     if (e.name === 'AbortError') throw e;
-    throw new ApiError(0, 'Нет связи с сервером. Запущен ли backend (порт 8000)?');
+    throw new ApiError(0, 'Cannot reach the server. Is the backend running (port 8000)?');
   }
   if (!res.ok) throw await readError(res);
   return res;
@@ -64,12 +64,12 @@ function filenameFrom(res, fallback) {
   return m ? decodeURIComponent(m[1]) : fallback;
 }
 
-/** kind: 'hotspots' | 'monthly'. Возвращает { blob, filename, rowCount } */
+/** kind: 'hotspots' | 'monthly'. Returns { blob, filename, rowCount } */
 export async function exportCsv(aoi, range, kind) {
   const fallback = `firebros_${kind}_${range.from}_${range.to}.csv`;
   if (USE_MOCK) {
     if (kind === 'hotspots') {
-      throw new ApiError(501, 'В режиме mock сырые детекции недоступны. Доступна сводка «monthly».');
+      throw new ApiError(501, 'Raw detections are not available in mock mode. Use the "monthly" summary.');
     }
     const { text, rows } = mock.monthlyCsv(range);
     return { blob: new Blob(['\uFEFF', text], { type: 'text/csv;charset=utf-8' }), filename: fallback, rowCount: rows };

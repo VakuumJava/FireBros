@@ -1,5 +1,5 @@
-// Режим без бэкенда: отдаёт замороженные ответы из contracts/fixtures.
-// AOI здесь игнорируется (фикстура одна), период — фильтруется, чтобы ползунки были живыми.
+// Backend-free mode: serves frozen responses from contracts/fixtures.
+// The AOI is ignored here (there is only one fixture); the period is filtered so the year selectors still work.
 import summaryFx from '@contracts/fixtures/aoi-summary.json';
 import calendarFx from '@contracts/fixtures/aoi-calendar.json';
 import anomalyFx from '@contracts/fixtures/aoi-anomaly.json';
