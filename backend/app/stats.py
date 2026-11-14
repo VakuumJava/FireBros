@@ -48,7 +48,7 @@ def step_ratio(
     for years in by_month.values():
         current = years.get(knot)
         history = [years[year] for year in range(knot - baseline_years, knot) if year in years]
-        if current is None or current <= 0 or not history:
+        if current is None or len(history) != baseline_years:
             continue
         baseline = median(history)
         if baseline > 0:
@@ -66,6 +66,13 @@ def rmse_log(pairs: Sequence[Pair]) -> float | None:
 def mape(pairs: Sequence[Pair]) -> float | None:
     errors = [abs(estimate - truth) / truth for estimate, truth in pairs if truth]
     return sum(errors) / len(errors) if errors else None
+
+
+def wape(pairs: Sequence[Pair]) -> float | None:
+    observed = sum(truth for _, truth in pairs)
+    if not observed:
+        return None
+    return sum(abs(estimate - truth) for estimate, truth in pairs) / observed
 
 
 def mean_bias(pairs: Sequence[Pair]) -> float | None:

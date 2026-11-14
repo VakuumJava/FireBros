@@ -3,6 +3,7 @@ from __future__ import annotations
 from functools import lru_cache
 
 from ..config import Settings
+from ..errors import DataUnavailable
 from .base import MonthlyRecord, Store
 from .mock import MockStore
 from .parquet import ParquetStore
@@ -12,6 +13,8 @@ from .parquet import ParquetStore
 def _build(settings: Settings) -> Store:
     if settings.has_parquet:
         return ParquetStore(settings)
+    if settings.require_data:
+        raise DataUnavailable("validated data is not installed")
     return MockStore(settings.contracts_dir)
 
 

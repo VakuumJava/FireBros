@@ -1,6 +1,3 @@
-# GitHub rejects workflow files pushed by a token without the `workflow` scope.
-# Enable it once through the web UI: create .github/workflows/ci.yml with this
-# content, or run `gh auth refresh -s workflow` and move the file there.
 name: ci
 
 on:
@@ -23,8 +20,25 @@ jobs:
           cache: pip
           cache-dependency-path: backend/requirements-dev.txt
 
-      - run: pip install -r backend/requirements-dev.txt
+      - run: pip install -r backend/requirements-dev.txt -r pipeline/requirements.txt
 
       - run: ruff check .
       - run: ruff format --check .
       - run: pytest
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm test
+      - run: npm run build

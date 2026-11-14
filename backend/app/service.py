@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import UTC, date, datetime
 
 from .config import KNOT_YEAR, METHOD_VERSION
-from .errors import NoData
+from .errors import DataUnavailable, NoData
 from .geo import REGION, Aoi
 from .models import (
     AnomalyPoint,
@@ -36,6 +36,7 @@ from .stats import (
     robust_z,
     round_or_none,
     step_ratio,
+    wape,
 )
 from .store import Store
 
@@ -171,22 +172,40 @@ def anomaly(aoi: Aoi, month: YearMonth, store: Store, today: date | None = None)
     if not history:
         raise NoData("not enough history for an anomaly")
 
-    # Monthly aggregates cannot be truncated to the day, so baseline years are
-    # scaled by the observed fraction of the current month. Without this the
-    # anomaly of a partial month is biased downwards by construction.
-    baseline_counts = [
-        round(
-            record.count
-            * min(target.days_observed, days_in_month(record.year, record.month))
-            / days_in_month(record.year, record.month)
-        )
-        for record in history
-    ]
+    needs_prefix = partial or any(
+        days_in_month(r.year, r.month) > target.days_observed for r in history
+    )
+    if needs_prefix:
+        prefix_reader = getattr(store, "prefix_records", None)
+        if prefix_reader is None:
+            raise DataUnavailable("exact month-to-date aggregates are not installed")
+        prefixes = prefix_reader(aoi, (2000, 1), month, target.days_observed)
+        target_prefix = next((r for r in prefixes if (r.year, r.month) == month), None)
+        if target_prefix is None or target_prefix.days_observed != target.days_observed:
+            raise NoData("the current month does not have a complete observed day prefix")
+        target = target_prefix
+        history = [
+            record
+            for record in prefixes
+            if record.month == month[1]
+            and record.year < month[0]
+            and record.days_observed == target.days_observed
+        ]
+    else:
+        history = [r for r in history if r.days_observed == days_in_month(r.year, r.month)]
+    if not history:
+        raise NoData("not enough complete history for the comparison window")
+    baseline_counts = [record.count for record in history]
 
     center = median(baseline_counts)
     sigma = robust_sigma(baseline_counts, center)
     z = robust_z(target.count, center, sigma)
-    direction = "above" if z > Z_THRESHOLD else "below" if z < -Z_THRESHOLD else "normal"
+    if sigma == 0:
+        direction = (
+            "above" if target.count > center else "below" if target.count < center else "normal"
+        )
+    else:
+        direction = "above" if z > Z_THRESHOLD else "below" if z < -Z_THRESHOLD else "normal"
 
     return AnomalyResponse(
         meta=meta(store),
@@ -205,19 +224,25 @@ def anomaly(aoi: Aoi, month: YearMonth, store: Store, today: date | None = None)
         robust_z=round(z, 2),
         percentile=round(percentile_rank(baseline_counts, target.count), 3),
         direction=direction,
-        label=_label(direction, z),
+        label=_label(direction, z, sigma),
         series=[
-            AnomalyPoint(year=record.year, count=count, partial=target.days_observed < length)
+            AnomalyPoint(
+                year=record.year,
+                count=count,
+                partial=target.days_observed < days_in_month(record.year, record.month),
+            )
             for record, count in zip(history, baseline_counts, strict=True)
         ]
         + [AnomalyPoint(year=target.year, count=target.count, partial=partial)],
     )
 
 
-def top(aoi: Aoi, limit: int, store: Store) -> TopResponse:
+def top(
+    aoi: Aoi, limit: int, store: Store, start: YearMonth = (2000, 1), end: YearMonth | None = None
+) -> TopResponse:
     records = [
         record
-        for record in store.records(aoi, (2000, 1), _last_month())
+        for record in store.records(aoi, start, end or _last_month())
         if record.days_observed > 0
     ]
 
@@ -248,33 +273,34 @@ def harmonization(
     store: Store,
     holdout_years: tuple[int, ...],
 ) -> HarmonizationResponse:
-    records = store.records(aoi, start, end)
+    records = [record for record in store.records(aoi, start, end) if record.days_observed > 0]
+    complete = [r for r in records if r.days_observed == days_in_month(r.year, r.month)]
+    raw = [(r.year, r.month, r.raw) for r in complete]
+    harmonized = [(r.year, r.month, r.count) for r in complete]
+    native_modis = [(r.year, r.month, r.modis) for r in complete if r.modis is not None]
 
     jump = Jump(
-        step_ratio_raw=round_or_none(
-            step_ratio([(record.year, record.month, record.raw) for record in records], KNOT_YEAR)
-        ),
-        step_ratio_harmonized=round_or_none(
-            step_ratio([(record.year, record.month, record.count) for record in records], KNOT_YEAR)
-        ),
-        step_ratio_placebo=round_or_none(
-            step_ratio(
-                [(record.year, record.month, record.count) for record in records], PLACEBO_KNOT
-            )
-        ),
+        step_ratio_raw=round_or_none(step_ratio(raw, KNOT_YEAR)),
+        step_ratio_harmonized=round_or_none(step_ratio(harmonized, KNOT_YEAR)),
+        step_ratio_modis=round_or_none(step_ratio(native_modis, KNOT_YEAR)),
+        step_ratio_placebo=round_or_none(step_ratio(harmonized, PLACEBO_KNOT)),
         definition=JUMP_DEFINITION,
     )
 
     pairs = [
         (record.count, record.modis)
         for record in records
-        if record.modis is not None and record.year in holdout_years
+        if record.modis is not None
+        and record.year in holdout_years
+        and record.days_observed == days_in_month(record.year, record.month)
+        and record.sensor != "MODIS"
     ]
     validation = Validation(
         holdout_years=list(holdout_years),
         n=len(pairs),
         rmse_log=round_or_none(rmse_log(pairs)),
         mape=round_or_none(mape(pairs)),
+        wape=round_or_none(wape(pairs)),
         bias=round_or_none(mean_bias(pairs)),
     )
 
@@ -315,11 +341,12 @@ def _empty_point(year: int, month: int) -> MonthPoint:
     )
 
 
-def _label(direction: str, z: float) -> str:
+def _label(direction: str, z: float, sigma: float) -> str:
     if direction == "normal":
-        return "в пределах нормы"
-    side = "выше" if direction == "above" else "ниже"
-    return f"на {abs(z):.1f}σ {side} нормы"  # noqa: RUF001
+        return "within the usual range"
+    if sigma == 0:
+        return f"{direction} an unvarying history"
+    return f"{abs(z):.1f}\N{GREEK SMALL LETTER SIGMA} {direction} the median"
 
 
 def _last_month() -> YearMonth:

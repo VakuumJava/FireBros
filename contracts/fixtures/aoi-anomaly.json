@@ -26,7 +26,7 @@
   "robust_z": 1.04,
   "percentile": 0.808,
   "direction": "above",
-  "label": "на 1.0σ выше нормы",
+  "label": "1.0σ above the median",
   "series": [
     {
       "year": 2000,

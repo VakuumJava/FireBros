@@ -27,7 +27,7 @@
     "robust_z": { "type": "number", "description": "(observed - median) / robust_sigma; 0 when MAD is 0" },
     "percentile": { "type": "number", "minimum": 0, "maximum": 1 },
     "direction": { "enum": ["above", "normal", "below"] },
-    "label": { "type": "string", "description": "ready-to-render text, e.g. 'на 2.4σ выше нормы'" },
+    "label": { "type": "string", "description": "ready-to-render text, e.g. '2.4σ above the median'" },
     "series": {
       "type": "array",
       "items": {

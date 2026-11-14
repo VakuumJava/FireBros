@@ -2,54 +2,174 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/VakuumJava/FireBros/contracts/aoi-harmonization.schema.json",
   "title": "GET /api/v1/aoi/harmonization",
-  "description": "The jury argument: raw VIIRS and harmonized VIIRS against the MODIS scale across the 2012 knot, plus the numbers behind the claim.",
+  "description": "Observed native and calibrated sensor series, temporal diagnostics and independent holdout metrics.",
   "type": "object",
-  "required": ["meta", "aoi_id", "knot_year", "series", "jump", "validation"],
+  "required": [
+    "meta",
+    "aoi_id",
+    "knot_year",
+    "series",
+    "jump",
+    "validation"
+  ],
   "additionalProperties": false,
   "properties": {
-    "meta": { "$ref": "aoi-summary.schema.json#/definitions/meta" },
-    "aoi_id": { "type": "string" },
-    "knot_year": { "const": 2012 },
+    "meta": {
+      "$ref": "aoi-summary.schema.json#/definitions/meta"
+    },
+    "aoi_id": {
+      "type": "string"
+    },
+    "knot_year": {
+      "const": 2012
+    },
     "series": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["year", "month", "sensor", "raw", "harmonized", "lo", "hi"],
+        "required": [
+          "year",
+          "month",
+          "sensor",
+          "raw",
+          "harmonized",
+          "lo",
+          "hi"
+        ],
         "properties": {
-          "year": { "type": "integer" },
-          "month": { "type": "integer", "minimum": 1, "maximum": 12 },
-          "sensor": { "enum": ["MODIS", "VIIRS_SNPP", "VIIRS_NOAA20", "VIIRS_NOAA21"] },
-          "raw": { "type": "integer", "minimum": 0, "description": "sensor-native count, the 'before' line" },
-          "harmonized": { "type": "integer", "minimum": 0, "description": "MODIS-equivalent count, the 'after' line" },
-          "lo": { "type": "integer", "minimum": 0 },
-          "hi": { "type": "integer", "minimum": 0 },
+          "year": {
+            "type": "integer"
+          },
+          "month": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 12
+          },
+          "sensor": {
+            "enum": [
+              "MODIS",
+              "VIIRS_SNPP",
+              "VIIRS_NOAA20",
+              "VIIRS_NOAA21"
+            ]
+          },
+          "raw": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "sensor-native count, the 'before' line"
+          },
+          "harmonized": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "MODIS-equivalent count, the 'after' line"
+          },
+          "lo": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "hi": {
+            "type": "integer",
+            "minimum": 0
+          },
           "modis_truth": {
-            "type": ["integer", "null"],
-            "description": "actual MODIS count for the same month; present only inside the overlap, used as ground truth"
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "native MODIS count for the same month when MODIS covered every day; equals harmonized before 2012 and serves as ground truth inside the overlap"
           }
         }
       }
     },
     "jump": {
       "type": "object",
-      "required": ["step_ratio_raw", "step_ratio_harmonized", "step_ratio_placebo", "definition", "target"],
+      "required": [
+        "step_ratio_raw",
+        "step_ratio_harmonized",
+        "step_ratio_placebo",
+        "definition",
+        "target"
+      ],
       "properties": {
-        "step_ratio_raw": { "type": ["number", "null"], "description": "discontinuity at the knot before harmonization; > 1 means a false jump" },
-        "step_ratio_harmonized": { "type": ["number", "null"], "description": "same metric after harmonization; should be ~1.0" },
-        "step_ratio_placebo": { "type": ["number", "null"], "description": "same metric at a year with no sensor change; proves the metric does not smooth everything" },
-        "definition": { "type": "string" },
-        "target": { "type": "number" }
+        "step_ratio_raw": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Temporal ratio at 2012; combines sensor differences and real interannual activity."
+        },
+        "step_ratio_harmonized": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Temporal ratio after calibration; not constrained to one."
+        },
+        "step_ratio_modis": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Temporal ratio of native MODIS at 2012. MODIS kept observing through the transition, so this is the reference the calibrated ratio should track."
+        },
+        "step_ratio_placebo": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Temporal ratio at a year without a sensor transition; descriptive control, not causal proof."
+        },
+        "definition": {
+          "type": "string"
+        },
+        "target": {
+          "type": "number"
+        }
       }
     },
     "validation": {
       "type": "object",
-      "required": ["holdout_years", "n"],
+      "required": [
+        "holdout_years",
+        "n"
+      ],
       "properties": {
-        "holdout_years": { "type": "array", "items": { "type": "integer" } },
-        "n": { "type": "integer", "minimum": 0, "description": "number of held-out month comparisons" },
-        "rmse_log": { "type": ["number", "null"] },
-        "mape": { "type": ["number", "null"] },
-        "bias": { "type": ["number", "null"] }
+        "holdout_years": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "number of held-out month comparisons"
+        },
+        "rmse_log": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "mape": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "wape": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "sum of absolute errors / sum of MODIS counts; robust to sparse months"
+        },
+        "bias": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
       }
     }
   }

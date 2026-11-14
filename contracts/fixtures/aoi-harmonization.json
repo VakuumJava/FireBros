@@ -3248,6 +3248,7 @@
   "jump": {
     "step_ratio_raw": 1.859,
     "step_ratio_harmonized": 1.048,
+    "step_ratio_modis": 1.012,
     "step_ratio_placebo": 0.922,
     "definition": "median_m[ value(knot,m) / median(value(knot-3..knot-1, m)) ]",
     "target": 1.0
@@ -3260,6 +3261,7 @@
     "n": 24,
     "rmse_log": 0.074,
     "mape": 0.067,
+    "wape": 0.058,
     "bias": 0.003
   }
 }
