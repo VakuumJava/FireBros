@@ -83,14 +83,17 @@ Consequence for the team: **P2 and P3 do not block P4.** The frontend runs on `c
 
 ## Storage schema
 
-`cells_monthly.parquet` - one row per (cell, month, sensor family):
+`cells_monthly.parquet` - one row per (cell, month), already on the unified scale:
 
 | Column | Type | Meaning |
 |---|---|---|
 | `grid_row`, `grid_col` | int | 0.25 deg cell index from the region's south-west corner |
 | `year`, `month` | int | observation month |
-| `sensor_family` | str | `MODIS` / `VIIRS_SNPP` / `VIIRS_NOAA20` / `VIIRS_NOAA21` |
-| `hotspot_days` | int | **the product unit**: sum over days of unique 1-km cells |
+| `sensor` | str | sensor behind the unified series: `MODIS`, `VIIRS_SNPP`, ... |
+| `hotspot_days` | int | **the product unit**: harmonized count in MODIS scale |
+| `hotspot_days_lo`, `hotspot_days_hi` | int | 95% band; equal to `hotspot_days` for MODIS |
+| `hotspot_days_raw` | int | sensor-native count, drives the before/after chart |
+| `hotspot_days_modis` | int, null | native MODIS count when the month has one; the validation truth |
 | `days_observed` | int | how many days of the month actually exist in the data |
 | `n_detections` | int | raw detections - diagnostics only, **never** plotted |
 
