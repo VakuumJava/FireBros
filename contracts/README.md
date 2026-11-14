@@ -43,4 +43,4 @@ contracts/
 
 ## Что ещё живёт здесь
 
-`GET /api/v1/aoi/export.csv?kind=hotspots|monthly` возвращает `text/csv`, не JSON, поэтому схемы у него нет — колонки описаны в [`docs/api-contract.md`](../docs/api-contract.md#csv).
+`GET /api/v1/aoi/export.csv?kind=hotspots|monthly` возвращает `text/csv`, не JSON, поэтому схемы у него нет — колонки описаны в [`docs/api-contract.md`](../docs/api-contract.md).
